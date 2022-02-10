@@ -7,4 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Dish extends Model
 {
     //
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function orders() {
+        return $this->belongsTo('App\Models\Order');
+    }
 }
