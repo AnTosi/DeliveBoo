@@ -139,7 +139,8 @@
                                 <label for="tags" class="col-md-4 col-form-label text-md-right">{{ __('Tags') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="selectpicker" multiple data-live-search="true" name="tags[]" id="tags">
+                                    <select class="selectpicker @error('tags') is-invalid @enderror" multiple
+                                        data-live-search="true" name="tags[]" id="tags">
                                         @foreach ($tags as $tag)
                                             <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                                         @endforeach

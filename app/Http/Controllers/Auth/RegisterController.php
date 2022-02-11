@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:255'],
             'piva' => ['required', 'string', 'max:255'],
-            'tags' => ['nullable'],
+            'tags' => ['required'],
         ]);
        
     }
