@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Tag;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -59,6 +60,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:255'],
             'piva' => ['required', 'string', 'max:255'],
+            'tags' => ['nullable'],
         ]);
        
     }
@@ -90,6 +92,10 @@ class RegisterController extends Controller
             request()->file('logo')->storeAs('restaurant_logo', $user->id . '/' . $logo);
             $user->update(['logo' => $logo]);
         }
+
+        // ddd($data['tags']);
+        
+        $user->tags()->attach($data['tags']);
 
         return $user;
     }
