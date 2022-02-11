@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function users(Tag $tag)
     {
-        //
     }
 
     /**
@@ -41,10 +40,10 @@ class MenuController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Menu  $menu
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show(Tag $tag)
     {
         //
     }
@@ -52,10 +51,10 @@ class MenuController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Menu  $menu
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -64,10 +63,10 @@ class MenuController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Menu  $menu
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -75,10 +74,10 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Menu  $menu
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu)
+    public function destroy(Tag $tag)
     {
         //
     }

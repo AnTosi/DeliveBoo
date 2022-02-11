@@ -21,7 +21,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/orders.scss', 'public/css')
     .sass('resources/sass/create.scss', 'public/css')
     .sass('resources/sass/statistics.scss', 'public/css')
-    .option({
+    .options({
         processCssUrls: false    
     });
 

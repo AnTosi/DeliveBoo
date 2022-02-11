@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DishController extends Controller
 {
@@ -15,7 +17,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        //
+        $dish = Auth::user()->dishes()->orderByDesc('id')->paginate(9);
     }
 
     /**
@@ -25,7 +27,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.dishes.create');
     }
 
     /**
@@ -45,10 +47,6 @@ class DishController extends Controller
      * @param  \App\Models\Dish  $dish
      * @return \Illuminate\Http\Response
      */
-    public function show(Dish $dish)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
