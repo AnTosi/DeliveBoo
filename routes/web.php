@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
 
 Route::get('/checkout', function () {
     return view('checkout')->name('checkout');
@@ -43,5 +42,4 @@ Route::get('/register', function () {
 
     $tags = Tag::all();
     return view('auth.register', compact('tags'));
-
 })->name('register');
