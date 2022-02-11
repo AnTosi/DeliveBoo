@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest.welcome');
+});
+
+Route::resource('menu', MenuController::class)->only(['index', 'show']);
+
+Route::get('/checkout', function () {
+    return view('checkout')->name('checkout');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
+
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::resource('dishes', DishController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('tags', TagController::class);
+    Route::get('/statistics', function () {
+        return view('statistics')->name('statistics');
+    });
+});
