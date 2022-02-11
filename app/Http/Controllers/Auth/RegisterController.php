@@ -55,14 +55,13 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'image' => ['nullable', 'image', 'max:500'],
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['unique:users', 'required', 'string', 'email', 'max:255'],
             'logo' => ['nullable', 'image', 'max:500'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:255'],
-            'piva' => ['required', 'string', 'max:255'],
+            'piva' => ['required', 'integer', 'digits:11'],
             'tags' => ['required'],
         ]);
-       
     }
 
     /**
@@ -73,6 +72,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -93,8 +93,6 @@ class RegisterController extends Controller
             $user->update(['logo' => $logo]);
         }
 
-        // ddd($data['tags']);
-        
         $user->tags()->attach($data['tags']);
 
         return $user;
