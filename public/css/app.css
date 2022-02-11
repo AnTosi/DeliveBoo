@@ -11247,3 +11247,9 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.navbar {
+  background-color: #FFBC42;
+}
+.navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
+  color: #D81159;
+}
