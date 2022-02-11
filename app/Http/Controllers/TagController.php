@@ -12,8 +12,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function users(Tag $tag)
+    public function index()
     {
+        //
     }
 
     /**

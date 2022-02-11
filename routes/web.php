@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
         return view('statistics')->name('statistics');
     });
 });
+
+
+Route::get('/register', function () {
+
+    $tags = Tag::all();
+    return view('auth.register', compact('tags'));
+
+})->name('register');
