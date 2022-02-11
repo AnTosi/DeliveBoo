@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -53609,10 +53609,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/js/admin.js":
+/*!*******************************!*\
+  !*** ./resources/js/admin.js ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53761,110 +53761,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/admin.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/admin.scss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/create.scss":
-/*!************************************!*\
-  !*** ./resources/sass/create.scss ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/dashboard.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/dashboard.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/dishes.scss":
-/*!************************************!*\
-  !*** ./resources/sass/dishes.scss ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/home.scss":
-/*!**********************************!*\
-  !*** ./resources/sass/home.scss ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/orders.scss":
-/*!************************************!*\
-  !*** ./resources/sass/orders.scss ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./resources/sass/statistics.scss":
-/*!****************************************!*\
-  !*** ./resources/sass/statistics.scss ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/home.scss ./resources/sass/dashboard.scss ./resources/sass/dishes.scss ./resources/sass/orders.scss ./resources/sass/create.scss ./resources/sass/statistics.scss ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************/
+/***/ 1:
+/*!*************************************!*\
+  !*** multi ./resources/js/admin.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
-module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
+module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\admin.js */"./resources/js/admin.js");
 
 
 /***/ })
