@@ -34,7 +34,7 @@
                         <td class="text-center">{{ $dish->name }}</td>
 
                         <td class="text-center"><img width="100" height="80"
-                                src="{{ asset('storage/restaurant_logo/' . $dish->id . '/' . $dish->logo) }}" alt=""></td>
+                                src="{{ asset('storage/' . $dish->image) }}" alt=""></td>
 
                         <td class="text-center">{{ $dish->ingredients }}</td>
 
