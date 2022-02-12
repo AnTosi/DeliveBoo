@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +16,8 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dish = Auth::user()->dishes()->orderByDesc('id')->paginate(9);
+        $dishes = Dish::orderByDesc('id')->paginate(12);
+        return view('admin.dishes.index', compact('dishes'));
     }
 
     /**
