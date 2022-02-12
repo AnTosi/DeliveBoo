@@ -13,49 +13,52 @@
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Ingredients</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Is Visible</th>
-                    <th scope="col">Option </th>
-                    <th scope="col"> </th>
-                    <th scope="col"> </th>
+                    <th class="text-center" scope="col">ID</th>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Image</th>
+                    <th class="text-center" scope="col">Ingredients</th>
+                    <th class="text-center" scope="col">Description</th>
+                    <th class="text-center" scope="col">Price</th>
+                    <th class="text-center" scope="col">Visible</th>
+                    <th class="text-center" scope="col">Created At</th>
+                    <th class="text-center" scope="col">Updated At</th>
+                    <th class="text-center" scope="col">Option </th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($dishes as $dish)
                     <tr>
-                        <td>{{ $dish->id }}</td>
-                        <td>{{ $dish->name }}</td>
-                        <td><img width="100" height="80"
+                        <td class="text-center">{{ $dish->id }}</td>
+
+                        <td class="text-center">{{ $dish->name }}</td>
+
+                        <td class="text-center"><img width="100" height="80"
                                 src="{{ asset('storage/restaurant_logo/' . $dish->id . '/' . $dish->logo) }}" alt=""></td>
-                        <td>{{ $dish->ingredients }}</td>
-                        <td>{{ $dish->description }}</td>
-                        <td>{{ $dish->price }}</td>
-                        <td>
-                            @if ($dish->visiblitity == 0)
-                                True
+
+                        <td class="text-center">{{ $dish->ingredients }}</td>
+
+                        <td class="text-center">{{ $dish->description }}</td>
+
+                        <td class="text-center">{{ $dish->price }}</td>
+
+                        <td class="text-center">
+                            @if ($dish->visibility === 1)
+                                <p>True</p>
                             @else
-                                False
+                                <p>False</p>
                             @endif
-
-                        </td>
-                        <td>{{ $dish->created_at }}</td>
-                        <td>{{ $dish->updated_at }}</td>
-
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('dishs.show', $dish->id) }}" role="button">View</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary" href="{{ route('admin.dishs.edit', $dish->id) }}"
-                                role="button">Edit</a>
                         </td>
 
-                        <td>
+                        <td class="text-center">{{ $dish->created_at }}</td>
+
+                        <td class="text-center">{{ $dish->updated_at }}</td>
+
+                        <td class="text-center"> <a class="btn btn-primary" href="#" role="button">View</a></td>
+
+                        <td class="text-center"><a class="btn btn-primary" href="#" role="button">Edit</a></td>
+
+                        <td class="text-center">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger " data-bs-toggle="modal"
                                 data-bs-target="#delete{{ $dish->id }}">
@@ -79,7 +82,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <form action="{{ route('admin.dishs.destroy', $dish->id) }}" method="dish">
+                                            <form action="#" method="dish">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -91,8 +94,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </td>
 
 
