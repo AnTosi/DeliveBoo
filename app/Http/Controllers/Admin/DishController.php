@@ -47,17 +47,28 @@ class DishController extends Controller
     {
         //
         $val_data = $request->validate([
-            'name' => ['required'],
+            'name' => ['required', 'unique'],
             'ingredients' => ['nullable', 'max:255'],
             'description' => ['nullable', 'max:1000'],
             'image' => ['nullable', 'image', 'max:500'],
             'price' => ['nullable', 'numeric', 'min:0'],
             'visibility' => ['nullable']
         ]);
+
+       
         
         if ($request->file('image')) {
             $image_path = $request->file('image')->store('dish_image');
             $val_data['image'] = $image_path;
+        }
+
+        if($request->input('visibility') == null) {
+            $val_data['visibility'] = 0;
+
+        }
+        else {
+            $val_data['visibility'] = 1;
+
         }
 
         $val_data['slug'] = Str::slug($val_data['name']);
