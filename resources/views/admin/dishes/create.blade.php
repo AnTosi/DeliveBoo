@@ -38,7 +38,7 @@
                     placeholder="Ingredients">{{ old('ingredients') }}</textarea>
                 <small id="ingredientsHelper" class="form-text text-muted">Write your dish' ingredients</small>
 
-                @error('image')
+                @error('ingredients')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -50,7 +50,7 @@
                     placeholder="Description">{{ old('description') }}</textarea>
                 <small id="descriptionHelper" class="form-text text-muted">Describe your dish</small>
     
-                @error('image')
+                @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -61,13 +61,13 @@
                 class="form-control" name="price" id="price" aria-describedby="priceHelper" step="0.01" value="{{ old('price') }}">
                 <small id="priceHelper" class="form-text text-muted">Write your dish' price</small>
 
-                @error('image')
+                @error('price')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="visibility" id="visibility" value="1" checked>
+                <input type="checkbox" class="form-check-input" name="visibility" id="visibility" value="" checked>
                 <label class="form-check-label" for="visibility">
                     Dish availability
                 </label>
