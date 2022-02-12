@@ -89,7 +89,7 @@
 
                             <div class="form-group row py-2">
                                 <label for="piva"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('P. IVA') }}</label>
+                                    class="col-md-4 col-form-label text-md-right">{{ __('VAT') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="piva" type="text" class="form-control @error('piva') is-invalid @enderror"
@@ -109,7 +109,7 @@
 
                                 <div class="col-md-6">
                                     <input id="image" type="file" class="form-control @error('image') is-invalid @enderror"
-                                        name="image" autofocus accept="images/*">
+                                        name="image" autofocus accept=".jpg,.png" required>
 
                                     @error('image')
                                         <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
 
                                 <div class="col-md-6">
                                     <input id="logo" type="file" class="form-control @error('logo') is-invalid @enderror"
-                                        name="logo" autofocus accept="images/*">
+                                        name="logo" autofocus accept=".jpg,.png" required>
 
                                     @error('logo')
                                         <span class="invalid-feedback" role="alert">
