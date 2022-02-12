@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 class DishController extends Controller
 {
@@ -46,8 +48,9 @@ class DishController extends Controller
     public function store(Request $request, User $user)
     {
         //
+
         $val_data = $request->validate([
-            'name' => ['required', 'unique'],
+            'name' => ['required', Rule::unique('dishes', 'name')->where('user_id', Auth::user()->id)],
             'ingredients' => ['nullable', 'max:255'],
             'description' => ['nullable', 'max:1000'],
             'image' => ['nullable', 'image', 'max:500'],
@@ -55,23 +58,14 @@ class DishController extends Controller
             'visibility' => ['nullable']
         ]);
 
-       
         
         if ($request->file('image')) {
             $image_path = $request->file('image')->store('dish_image');
             $val_data['image'] = $image_path;
         }
 
-        if($request->input('visibility') == null) {
-            $val_data['visibility'] = 0;
 
-        }
-        else {
-            $val_data['visibility'] = 1;
-
-        }
-
-        $val_data['slug'] = Str::slug($val_data['name']);
+        $val_data['slug'] = Str::slug($val_data['name'] . ' ' . Auth::user()->id);
         $val_data['user_id'] = Auth::id();
 
         Dish::create($val_data);
