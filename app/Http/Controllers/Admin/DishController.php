@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class DishController extends Controller
 {
@@ -16,7 +18,12 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dish::orderByDesc('id')->paginate(12);
+        $user = User::find(Auth::id());
+        // $user = Auth::user();
+
+        // ddd($user->dishes);
+
+        $dishes = $user->dishes()->orderByDesc('id')->paginate(12);
         return view('admin.dishes.index', compact('dishes'));
     }
 
@@ -36,9 +43,29 @@ class DishController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         //
+        $val_data = $request->validate([
+            'name' => ['required'],
+            'ingredients' => ['nullable', 'max:255'],
+            'description' => ['nullable', 'max:1000'],
+            'image' => ['nullable', 'image', 'max:500'],
+            'price' => ['nullable', 'numeric', 'min:0'],
+            'visibility' => ['nullable']
+        ]);
+        
+        if ($request->file('image')) {
+            $image_path = $request->file('image')->store('dish_image');
+            $val_data['image'] = $image_path;
+        }
+
+        $val_data['slug'] = Str::slug($val_data['name']);
+        $val_data['user_id'] = Auth::id();
+
+        Dish::create($val_data);
+        
+        return redirect()->route('admin.dishes.index')->with('message', 'Dish succesfully created');
     }
 
     /**
