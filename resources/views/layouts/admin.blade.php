@@ -63,6 +63,15 @@
                                     Dashboard
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('admin.dishes.index') }}">
+                                    <i class="fas fa-tachometer-alt fa-lg fa-fw text-black"></i>
+                                    Dishes
+                                </a>
+                            </li>
+
                         </ul>
 
                     </div>

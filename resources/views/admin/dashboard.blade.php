@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('custom-css')
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
 @endsection
 
 @section('content')
