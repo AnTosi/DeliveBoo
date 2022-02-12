@@ -8,7 +8,8 @@
                 <div class="col">
                     <a href="#" class="text-decoration-none text-black">
                         <div class="card" aria-hidden="true">
-                            <img class="card-img-top" src="{{ $user->image }}" alt="">
+                            <img class="card-img-top"
+                                src="{{ asset('storage/restaurant_logo/' . $user->id . '/' . $user->logo) }}" alt="">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <span>{{ $user->name }}</span>
