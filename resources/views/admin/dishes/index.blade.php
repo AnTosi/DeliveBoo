@@ -56,7 +56,7 @@
 
                         <td class="text-center"> <a class="btn btn-primary" href="#" role="button">View</a></td>
 
-                        <td class="text-center"><a class="btn btn-primary" href="#" role="button">Edit</a></td>
+                        <td class="text-center"><a class="btn btn-primary" href="{{route('admin.dishes.edit', $dish->slug)}}" role="button">Edit</a></td>
 
                         <td class="text-center">
                             <!-- Button trigger modal -->
