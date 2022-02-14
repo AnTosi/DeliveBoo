@@ -67,8 +67,9 @@
             </div>
 
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="visibility" id="visibility" value="" checked>
-                <label class="form-check-label" for="visibility">
+                <input type="hidden" class="form-check-input" name="visibility" id="visibility" value="0">
+                <input type="checkbox" class="form-check-input" name="visibility" id="visibility" value="1">
+                <label name="visibility" class="form-check-label" for="visibility">
                     Dish availability
                 </label>
             </div>
