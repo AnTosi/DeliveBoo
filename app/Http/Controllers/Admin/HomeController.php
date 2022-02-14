@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Tag;
-use App\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
     /**
      * Show the application dashboard.
      *
@@ -15,8 +15,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::orderByDesc('id')->paginate(9);
-        $tags = Tag::get();
-        return view('guest.welcome', compact('users', 'tags'));
+        return view('admin.dashboard');
     }
 }

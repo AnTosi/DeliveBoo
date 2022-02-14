@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'HomeController@index')->name('home');
+
+
+Route::get('/checkout', function () {
+    return view('checkout')->name('checkout');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
+    Route::get('/', 'HomeController@index')->name('dashboard');
+
+    Route::resource('dishes', DishController::class)->parameter('dishes', 'dish:slug');
+
+    Route::resource('orders', OrderController::class);
+
+    Route::get('/statistics', function () {
+        return view('statistics')->name('statistics');
+    });
+});
+
+
+Route::get('/register', function () {
+
+    $tags = Tag::all();
+    return view('auth.register', compact('tags'));
+})->name('register');
