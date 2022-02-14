@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Models\Tag;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+
 
 class User extends Authenticatable
 {
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'image', 'name', 'email', 'logo', 'password', 'address', 'piva',
     ];
 
     /**
@@ -36,4 +38,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tags() {
+        return $this->belongsToMany('App\Models\Tag');
+    }
+
+    public function dishes() {
+        return $this->hasMany('App\Models\Dish');
+    }
+
+    public function orders() {
+        return $this->hasMany('App\Models\Order');
+    }
 }
