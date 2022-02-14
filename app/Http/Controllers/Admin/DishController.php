@@ -108,7 +108,7 @@ class DishController extends Controller
     public function update(Request $request, Dish $dish)
     {
         $val_data = $request->validate([
-            'name' => ['required', Rule::unique('dishes', 'name')->where('user_id', Auth::user()->id)],
+            'name' => ['required', Rule::unique('dishes')->ignore($dish->id)->where('user_id', Auth::user()->id)],
             'ingredients' => ['nullable', 'max:255'],
             'description' => ['nullable', 'max:1000'],
             'image' => ['nullable', 'image', 'max:500'],
@@ -127,7 +127,7 @@ class DishController extends Controller
 
         $dish->update($val_data);
 
-        return redirect()->route('admin.dishes.index');
+        return redirect()->route('admin.dishes.index')->with('message','Dish succesfully edited !');
     }
 
     /**
@@ -140,6 +140,6 @@ class DishController extends Controller
     {
         Storage::delete($dish->image);
         $dish->delete();
-        return redirect()->route('admin.dishes.index')->with('message','Hai cancellato questo piatto con successo!');
+        return redirect()->route('admin.dishes.index')->with('message','Dish succesfully deleted');
     }
 }

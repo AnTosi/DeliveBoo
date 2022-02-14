@@ -77,7 +77,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            Attenzione stai eliminando un dish definitivamente ⚠️
+                                            WARNING! You are permanently deleting "{{$dish->name}}" from your menu ⚠️
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"

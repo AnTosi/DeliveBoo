@@ -35,7 +35,7 @@
                     </div>
                     <div class="col">
                         <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image"
-                        aria-describedby="imageHelper" accept=".png, .jpg" required>
+                        aria-describedby="imageHelper" accept=".png, .jpg">
                         <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file below 500 kB are accepted</small>
                     </div>
 
