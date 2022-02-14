@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 
 class DishController extends Controller
@@ -80,6 +81,11 @@ class DishController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function show(Dish $dish)
+    {
+        return view('guest.dishes.show', compact('dish'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -101,7 +107,27 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        //
+        $val_data = $request->validate([
+            'name' => ['required', Rule::unique('dishes', 'name')->where('user_id', Auth::user()->id)],
+            'ingredients' => ['nullable', 'max:255'],
+            'description' => ['nullable', 'max:1000'],
+            'image' => ['nullable', 'image', 'max:500'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'visibility' => ['nullable']
+            ]
+        );
+
+        if ($request->file('image')) {
+
+            Storage::delete($dish->image);
+            $cover_path = Storage::put('dish_images', $request->file('image'));
+            $val_data['image'] = $cover_path;
+        }
+
+
+        $dish->update($val_data);
+
+        return redirect()->route('admin.dishes.index');
     }
 
     /**
@@ -112,6 +138,8 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        //
+        Storage::delete($dish->image);
+        $dish->delete();
+        return redirect()->route('admin.dishes.index')->with('message','Hai cancellato questo piatto con successo!');
     }
 }

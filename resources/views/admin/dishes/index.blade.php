@@ -54,20 +54,20 @@
 
                         <td class="text-center">{{ $dish->updated_at }}</td>
 
-                        <td class="text-center"> <a class="btn btn-primary" href="#" role="button">View</a></td>
+                        <td class="text-center"> <a class="btn btn-primary" href="{{route('admin.dishes.show', $dish->slug)}}" role="button">View</a></td>
 
                         <td class="text-center"><a class="btn btn-primary" href="{{route('admin.dishes.edit', $dish->slug)}}" role="button">Edit</a></td>
 
                         <td class="text-center">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger " data-bs-toggle="modal"
-                                data-bs-target="#delete{{ $dish->id }}">
+                                data-bs-target="#delete{{ $dish->slug }}">
                                 Delete
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="delete{{ $dish->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="{{ $dish->id }}" aria-hidden="true">
+                            <div class="modal fade" id="delete{{ $dish->slug }}" tabindex="-1" role="dialog"
+                                aria-labelledby="{{ $dish->slug }}" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -82,7 +82,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <form action="#" method="dish">
+                                            <form action="{{route('admin.dishes.destroy', $dish->slug)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
 
