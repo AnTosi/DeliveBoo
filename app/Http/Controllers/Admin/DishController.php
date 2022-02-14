@@ -54,7 +54,7 @@ class DishController extends Controller
             'ingredients' => ['nullable', 'max:255'],
             'description' => ['nullable', 'max:1000'],
             'image' => ['nullable', 'image', 'max:500'],
-            'price' => ['nullable', 'numeric', 'min:0'],
+            'price' => ['required', 'numeric', 'min:0'],
             'visibility' => ['nullable']
         ]);
 
@@ -89,6 +89,7 @@ class DishController extends Controller
     public function edit(Dish $dish)
     {
         //
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
