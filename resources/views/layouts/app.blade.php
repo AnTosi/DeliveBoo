@@ -21,24 +21,29 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     @yield('custom-css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <object data="{{asset('img/logo-deliveboo.svg')}}" width="200"></object>
+                    <object data="{{ asset('img/logo-deliveboo.svg') }}" width="200"></object>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <input type="text" placeholder="Search">
@@ -49,34 +54,40 @@
                     <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
-                        <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 text-white me-4" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link btn rounded-pill px-3 text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
+                            <li class="nav-item">
+                                <a class="nav-link btn rounded-pill px-3 text-white me-4"
+                                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn rounded-pill px-3 text-white"
+                                        href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                    Dashboard
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                                                             document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link btn rounded-pill px-3 text-white dropdown-toggle"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        Dashboard
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
                 </div>

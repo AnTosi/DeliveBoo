@@ -16,3 +16,7 @@
 .tags-container .tags_link span {
   color: #4F009E;
 }
+
+svg {
+  margin-top: -5px;
+}

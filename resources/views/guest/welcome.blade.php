@@ -7,13 +7,13 @@
 @section('content')
     <div class="tags-container">
         <div
-            class="row row-cols-1 row-cols-md-2 row-cols-lg-4 w-50 mx-auto container my-auto pt-5  justify-content-center flex-wrap g-3">
+            class="row row-cols-1 row-cols-md-2 row-cols-lg-4 w-50 mx-auto container my-auto pt-3  justify-content-center flex-wrap g-3">
             @foreach ($tags as $tag)
                 <div class="col justify-content-center d-flex ">
                     <a href="#" class="tags_link text-black text-decoration-none text-center">
                         <div class="card rounded-pill">
                             <div class="card-body">
-                                <h5 class="card-title">
+                                <h5 class="card-title mb-0">
                                     <span>{{ $tag->name }}</span>
                                 </h5>
                             </div>
@@ -23,18 +23,19 @@
             @endforeach
         </div>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-        <path fill="#ffc144" fill-opacity="1"
-            d="M0,160L34.3,170.7C68.6,181,137,203,206,192C274.3,181,343,139,411,112C480,85,549,75,617,69.3C685.7,64,754,64,823,74.7C891.4,85,960,107,1029,138.7C1097.1,171,1166,213,1234,224C1302.9,235,1371,213,1406,202.7L1440,192L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
-        </path>
+    <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+        y="0px" viewBox="0 0 1431.5 113.39" style="enable-background:new 0 0 1431.5 113.39;" xml:space="preserve">
+        <path class="st0" fill="#FCC045" fill-opacity="1" d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95
+                                                 c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0
+                                                 s-192,0-240,0H-8.5z" />
     </svg>
 
     <div class="container mb-5">
-        <h3>Ristoranti</h3>
-        <div class="row row-cols-3 justify-content-between g-5">
+        <h2 class="my-5">Restaurants</h2>
+        <div class="row row-cols-3 g-5">
             @foreach ($users as $user)
                 <div class="col">
-                    <a href="#" class="text-decoration-none text-black">
+                    <a href="{{ route('restaurant.show', $user->slug) }}" class="text-decoration-none text-black">
                         <div class="card" aria-hidden="true">
                             <img class="card-img-top"
                                 src="{{ asset('storage/restaurant_logo/' . $user->id . '/' . $user->logo) }}" alt="">
@@ -47,10 +48,11 @@
                                 </p>
                                 @if ($user->tags)
                                     @foreach ($user->tags as $tag)
-                                        <span>
-                                            {{ $tag->name }},
-                                        </span>
-                                        @if ($loop->last)
+                                        @if (!$loop->last)
+                                            <span>
+                                                {{ $tag->name }},
+                                            </span>
+                                        @else
                                             <span>
                                                 {{ $tag->name }}
                                             </span>

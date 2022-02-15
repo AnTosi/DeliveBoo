@@ -11271,6 +11271,10 @@ textarea.form-control-lg {
   margin: auto;
   padding: 10px;
 }
-.navbar .navbar-nav {
+.navbar .collapse .navbar-nav {
   width: 200px;
+}
+.navbar .collapse .navbar-nav .dropdown-item {
+  background-color: white !important;
+  color: #4F009E !important;
 }

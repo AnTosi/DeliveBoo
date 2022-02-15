@@ -33,9 +33,16 @@
             margin: auto;
             padding: 10px;
         }
-    }
-    .navbar-nav {
-        width: 200px;
+        .navbar-nav {
+            width: 200px;
+
+            .dropdown-item{
+                background-color: white !important;
+                color: $brand-color-secondary !important;
+                
+                
+            }
+        }
     }
 }
 
