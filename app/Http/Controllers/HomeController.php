@@ -19,4 +19,15 @@ class HomeController extends Controller
         $tags = Tag::get();
         return view('guest.welcome', compact('users', 'tags'));
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Tag  $tag
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        return view('guest.restaurant.show', compact('user'));
+    }
 }

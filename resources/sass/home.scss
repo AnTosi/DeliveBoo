@@ -4,8 +4,6 @@
 // Variables
 @import "_variables";
 
-// Bootstrap
-@import "~bootstrap/scss/bootstrap";
 
 
 
@@ -19,4 +17,11 @@
     .card {
         min-width: max-content;
     }
+    .tags_link {
+        width: 100%!important;
+        span{
+            color: $brand-color-secondary;
+        }
+    }
+
 }
