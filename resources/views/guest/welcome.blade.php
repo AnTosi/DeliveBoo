@@ -66,4 +66,12 @@
             @endforeach
         </div>
     </div>
+
+
+
+
+
+    <a href="{{ route('restaurant.show', $user->slug) }}">
+        <restaurant-component> </restaurant-component>
+    </a>
 @endsection
