@@ -7,6 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Common
+@import 'common';
+
 
 
 .navbar{
@@ -31,4 +34,9 @@
             padding: 10px;
         }
     }
+    .navbar-nav {
+        width: 200px;
+    }
 }
+
+

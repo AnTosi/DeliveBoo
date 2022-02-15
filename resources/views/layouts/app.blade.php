@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <object data="{{asset('img/001_Deliveboo.svg')}}" type=""></object>
+                    <object data="{{asset('img/logo-deliveboo.svg')}}" width="200"></object>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -50,11 +50,11 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill text-white me-1" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link btn rounded-pill px-3 text-white me-4" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link btn rounded-pill text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link btn rounded-pill px-3 text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
                         @else
