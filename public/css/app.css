@@ -11248,8 +11248,18 @@ textarea.form-control-lg {
   }
 }
 .navbar {
-  background-color: #FFBC42;
+  background-color: #ffc144;
 }
 .navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
-  color: #D81159;
+  color: #4F009E;
+}
+.navbar .nav-item a {
+  background-color: #4F009E;
+}
+.navbar .collapse input {
+  width: 50%;
+  border-radius: 25px;
+  border: none;
+  margin: auto;
+  padding: 10px;
 }

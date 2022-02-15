@@ -8,5 +8,7 @@
     "/css/dishes.css": "/css/dishes.css",
     "/css/orders.css": "/css/orders.css",
     "/css/create.css": "/css/create.css",
+    "/css/register.css": "/css/register.css",
+    "/css/login.css": "/css/login.css",
     "/css/statistics.css": "/css/statistics.css"
 }

@@ -11247,15 +11247,14 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-.tags-container {
-  background-color: #ffc144;
-  width: 100%;
+body .password-field {
+  position: relative;
 }
-.tags-container svg {
-  margin-top: 93px;
-}
-.tags-container .card {
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+
+body .password-field #toggler {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
 }

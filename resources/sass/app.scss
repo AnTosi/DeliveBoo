@@ -11,9 +11,24 @@
 
 .navbar{
     background-color: $brand-color-primary;
+
     .navbar-brand{
         h1{
             color: $brand-color-secondary;
+        }
+    }
+    .nav-item {
+        a {
+            background-color: $brand-color-secondary;
+        }
+    }
+    .collapse {
+        input {
+            width: 50%;
+            border-radius: 25px;
+            border: none;
+            margin: auto;
+            padding: 10px;
         }
     }
 }
