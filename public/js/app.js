@@ -53644,6 +53644,20 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+var password = document.getElementById('password');
+var toggler = document.getElementById('toggler');
+
+showHidePassword = function showHidePassword() {
+  if (password.type == 'password') {
+    password.setAttribute('type', 'text');
+    toggler.classList.add('fa-eye-slash');
+  } else {
+    toggler.classList.remove('fa-eye-slash');
+    password.setAttribute('type', 'password');
+  }
+};
+
+toggler.addEventListener('click', showHidePassword);
 
 /***/ }),
 
@@ -53783,6 +53797,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/common.scss":
+/*!************************************!*\
+  !*** ./resources/sass/common.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/create.scss":
 /*!************************************!*\
   !*** ./resources/sass/create.scss ***!
@@ -53827,10 +53852,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/login.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/login.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/orders.scss":
 /*!************************************!*\
   !*** ./resources/sass/orders.scss ***!
   \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/register.scss":
+/*!**************************************!*\
+  !*** ./resources/sass/register.scss ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -53850,21 +53897,24 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/home.scss ./resources/sass/dashboard.scss ./resources/sass/dishes.scss ./resources/sass/orders.scss ./resources/sass/create.scss ./resources/sass/statistics.scss ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/common.scss ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/home.scss ./resources/sass/dashboard.scss ./resources/sass/dishes.scss ./resources/sass/orders.scss ./resources/sass/create.scss ./resources/sass/register.scss ./resources/sass/login.scss ./resources/sass/statistics.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })
