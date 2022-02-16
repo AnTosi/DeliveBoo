@@ -1,25 +1,34 @@
 <template>
-  <div class="prova">
-        <div v-for="restaurant in restaurants" :key="restaurant.id" class="col">
-           
-                <div class="card" aria-hidden="true">
-                    <img style="width: 200px; height: 200px; object-fit: cover" class="card-img-top"
-                        :src="'/storage/restaurant_image' + '/' + restaurant.id + '/' + restaurant.image " alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <span class="capitalize">{{ restaurant.name }}</span>
-                        </h5>
-                        <p>
-                            {{ restaurant.address }}
-                        </p>
-                        <span v-for="tag in restaurant.tags" :key="tag.id">
-                            {{ tag.name }}
-                        </span>
+    <div class="prova container">
+        <div v-if="restaurants.length > 0" class="row row-cols-3 g-5">
+
+            <div v-for="restaurant in restaurants" :key="restaurant.id" class="col">
+                    <div class="card" aria-hidden="true">
+                        <img style="width: 200px; height: 200px; object-fit: cover" class="card-img-top"
+                            :src="'/storage/restaurant_image' + '/' + restaurant.id + '/' + restaurant.image " alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <span class="capitalize">{{ restaurant.name }}</span>
+                            </h5>
+                            <p>
+                                {{ restaurant.address }}
+                            </p>
+                            <span v-for="tag in restaurant.tags" :key="tag.id">
+                                {{ tag.name }}
+                            </span>
+                        </div>
                     </div>
-                </div>
-           
+            </div>
+
         </div>
-  </div>
+        <!-- / row ristoranti vue -->
+
+        <div v-else>
+            <p>
+                no restaurants here
+            </p>
+        </div>
+    </div>
 </template>
 
 <script>

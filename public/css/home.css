@@ -16,6 +16,40 @@
 .tags-container .tags_link span {
   color: #4F009E;
 }
+.tags-container .card.rounded-pill {
+  -webkit-animation-name: prova;
+          animation-name: prova;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+@-webkit-keyframes prova {
+  0% {
+    display: block;
+    transform: scale(0);
+  }
+  50% {
+    display: block;
+    transform: scale(1.09);
+  }
+  100% {
+    display: block;
+    transform: scale(1);
+  }
+}
+@keyframes prova {
+  0% {
+    display: block;
+    transform: scale(0);
+  }
+  50% {
+    display: block;
+    transform: scale(1.09);
+  }
+  100% {
+    display: block;
+    transform: scale(1);
+  }
+}
 
 svg {
   margin-top: -5px;

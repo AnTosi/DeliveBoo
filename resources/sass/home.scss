@@ -24,6 +24,17 @@
         }
     }
 
+    .card.rounded-pill {
+        animation-name: prova;
+        animation-duration: 1s;
+    }
+
+    @keyframes prova {
+        0% {display: block; transform: scale(0.0);}
+        50% {display: block; transform: scale(1.09);}
+        100% {display: block; transform: scale(1);}
+    }
+
 }
 svg{
     margin-top: -5px;

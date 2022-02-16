@@ -5155,6 +5155,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41464,65 +41473,75 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "prova" },
-    _vm._l(_vm.restaurants, function (restaurant) {
-      return _c("div", { key: restaurant.id, staticClass: "col" }, [
-        _c("div", { staticClass: "card", attrs: { "aria-hidden": "true" } }, [
-          _c("img", {
-            staticClass: "card-img-top",
-            staticStyle: {
-              width: "200px",
-              height: "200px",
-              "object-fit": "cover",
-            },
-            attrs: {
-              src:
-                "/storage/restaurant_image" +
-                "/" +
-                restaurant.id +
-                "/" +
-                restaurant.image,
-              alt: "",
-            },
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "card-body" },
-            [
-              _c("h5", { staticClass: "card-title" }, [
-                _c("span", { staticClass: "capitalize" }, [
-                  _vm._v(_vm._s(restaurant.name)),
-                ]),
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                          " +
-                    _vm._s(restaurant.address) +
-                    "\n                      "
-                ),
-              ]),
-              _vm._v(" "),
-              _vm._l(restaurant.tags, function (tag) {
-                return _c("span", { key: tag.id }, [
-                  _vm._v(
-                    "\n                          " +
-                      _vm._s(tag.name) +
-                      "\n                      "
+  return _c("div", { staticClass: "prova container" }, [
+    _vm.restaurants.length > 0
+      ? _c(
+          "div",
+          { staticClass: "row row-cols-3 g-5" },
+          _vm._l(_vm.restaurants, function (restaurant) {
+            return _c("div", { key: restaurant.id, staticClass: "col" }, [
+              _c(
+                "div",
+                { staticClass: "card", attrs: { "aria-hidden": "true" } },
+                [
+                  _c("img", {
+                    staticClass: "card-img-top",
+                    staticStyle: {
+                      width: "200px",
+                      height: "200px",
+                      "object-fit": "cover",
+                    },
+                    attrs: {
+                      src:
+                        "/storage/restaurant_image" +
+                        "/" +
+                        restaurant.id +
+                        "/" +
+                        restaurant.image,
+                      alt: "",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "card-body" },
+                    [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _c("span", { staticClass: "capitalize" }, [
+                          _vm._v(_vm._s(restaurant.name)),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(restaurant.address) +
+                            "\n                        "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(restaurant.tags, function (tag) {
+                        return _c("span", { key: tag.id }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(tag.name) +
+                              "\n                        "
+                          ),
+                        ])
+                      }),
+                    ],
+                    2
                   ),
-                ])
-              }),
-            ],
-            2
-          ),
+                ]
+              ),
+            ])
+          }),
+          0
+        )
+      : _c("div", [
+          _c("p", [_vm._v("\n            no restaurants here\n        ")]),
         ]),
-      ])
-    }),
-    0
-  )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

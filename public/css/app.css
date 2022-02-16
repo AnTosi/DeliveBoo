@@ -11257,9 +11257,32 @@ textarea.form-control-lg {
 
 .navbar {
   background-color: #ffc144;
+  height: 109.09px;
+}
+.navbar .navbar-brand {
+  -webkit-animation-name: prova_logo;
+          animation-name: prova_logo;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
 }
 .navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
   color: #4F009E;
+}
+@-webkit-keyframes prova_logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes prova_logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .navbar .nav-item a {
   background-color: #4F009E;
