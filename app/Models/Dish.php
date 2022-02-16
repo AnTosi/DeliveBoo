@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dish extends Model
 {
+    protected $fillable = ['name', 'slug', 'image', 'ingredients', 'description', 'price', 'visibility', 'user_id'];
+
     public function getRouteKeyName()
     {
         return 'slug';

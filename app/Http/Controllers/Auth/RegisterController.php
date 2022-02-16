@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -54,12 +56,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'image' => ['required', 'image', 'max:500'],
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'unique:users', 'string', 'max:255'],
             'email' => ['unique:users', 'required', 'string', 'email', 'max:255'],
             'logo' => ['required', 'image', 'max:500'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:255'],
-            'piva' => ['unique:users', 'required', 'integer', 'digits:11'],
+            'piva' => ['unique:users', 'required'],
             'tags' => ['required'],
         ]);
     }
@@ -75,6 +77,7 @@ class RegisterController extends Controller
 
         $user = User::create([
             'name' => $data['name'],
+            'slug' => Str::slug($data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],

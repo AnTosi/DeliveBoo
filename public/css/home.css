@@ -1,0 +1,22 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);.tags-container {
+  background-color: #ffc144;
+  width: 100%;
+}
+.tags-container svg {
+  margin-top: 93px;
+}
+.tags-container .card {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+.tags-container .tags_link {
+  width: 100% !important;
+}
+.tags-container .tags_link span {
+  color: #4F009E;
+}
+
+svg {
+  margin-top: -5px;
+}

@@ -29,5 +29,19 @@
  
  const app = new Vue({
      el: '#app',
+     data() {
+        return {
+          
+        }
+
+    },
+
+    methods: {
+        change(event) {
+         let thumb_file = event.target.files
+
+         thumb.src = URL.createObjectURL(thumb_file[0]);
+        }
+    }
  });
  
