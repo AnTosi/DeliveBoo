@@ -28,30 +28,33 @@
 
             <div class="mb-3">
                 <div class="flex-wrap row align-items-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
-                    
+
                     <div class="col">
                         <label for="old_image" class="form-label">
                             Your old image:
                         </label>
                         <div class="old_image">
-                            <img height="200"src="{{asset('storage/' . $dish->image)}}" alt="">
+                            <img height="200" src="{{ asset('storage/' . $dish->image) }}" alt="" class="img-fluid">
                         </div>
                     </div>
 
-                
+
                     <div class="col">
                         <label for="thumbnail" class="form-label">
                             Your new image:
                         </label>
                         <div class="thumbnail">
-                            <img style="width: 200px" src="http://www.fotopettine.it/wp-content/themes/panama/assets/img/empty/600x600.png" id="thumb" alt="New image">
+                            <img style="width: 200px"
+                                src="http://www.fotopettine.it/wp-content/themes/panama/assets/img/empty/600x600.png"
+                                id="thumb" alt="New image" class="img-fluid">
                         </div>
                     </div>
 
                     <div class="col">
-                        <input type="file" v-on:change="change" class="form-control @error('image') is-invalid @enderror" name="image" id="my_image"
-                        aria-describedby="imageHelper" accept=".png, .jpg" required>
-                        <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file below 500 kB are accepted</small>
+                        <input type="file" v-on:change="change" class="form-control @error('image') is-invalid @enderror"
+                            name="image" id="my_image" aria-describedby="imageHelper" accept=".png, .jpg" required>
+                        <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file
+                            below 500 kB are accepted</small>
                     </div>
 
 
@@ -69,8 +72,8 @@
             <div class="mb-3">
                 <label for="ingredients" class="form-label">Ingredients*:</label>
                 <textarea type="textarea" rows="3" class="form-control @error('ingredients') is-invalid @enderror"
-                    name="ingredients" id="ingredients" aria-describedby="ingredientsHelper"
-                    placeholder="Ingredients" required>{{ $dish->ingredients }}</textarea>
+                    name="ingredients" id="ingredients" aria-describedby="ingredientsHelper" placeholder="Ingredients"
+                    required>{{ $dish->ingredients }}</textarea>
                 <small id="ingredientsHelper" class="form-text text-muted">Write your dish' ingredients</small>
 
                 @error('ingredients')
@@ -85,10 +88,10 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Description*:</label>
                 <textarea type="textarea" rows="5" class="form-control @error('description') is-invalid @enderror"
-                    name="description" id="description" aria-describedby="descriptionHelper"
-                    placeholder="Description" required>{{ $dish->description }}</textarea>
+                    name="description" id="description" aria-describedby="descriptionHelper" placeholder="Description"
+                    required>{{ $dish->description }}</textarea>
                 <small id="descriptionHelper" class="form-text text-muted">Describe your dish</small>
-    
+
                 @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -100,8 +103,8 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Price in €*:</label>
-                <input type="number"
-                class="form-control" name="price" id="price" aria-describedby="priceHelper" step="0.01" value="{{ $dish->price }}" required placeholder="€">
+                <input type="number" class="form-control" name="price" id="price" aria-describedby="priceHelper"
+                    step="0.01" value="{{ $dish->price }}" required placeholder="€">
                 <small id="priceHelper" class="form-text text-muted">Write your dish' price in €</small>
 
                 @error('price')
