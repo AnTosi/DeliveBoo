@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'logo' => ['required', 'image', 'max:500'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'address' => ['required', 'string', 'max:255'],
-            'piva' => ['unique:users', 'required', 'integer', 'digits:11'],
+            'piva' => ['unique:users', 'required'],
             'tags' => ['required'],
         ]);
     }

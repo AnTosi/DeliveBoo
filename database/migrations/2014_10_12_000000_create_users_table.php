@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('logo')->nullable();
             $table->string('password');
             $table->string('address')->nullable();
-            $table->string('piva')->nullable();
+            $table->char('piva', '11')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
