@@ -38,25 +38,34 @@ const app = new Vue({
            users: null,
            tag: '',
 
-           tags: [],
+           filterTags: [],
        }
     },
 
     methods: {
-        tag(e) {
+        tagHandler(e) {
             //console.log(e.target);
             this.tag = e.target.innerHTML
           
-            if(!this.tags.includes(this.tag)) {
+            if(!this.filterTags.includes(this.tag)) {
 
-                this.tags.push(this.tag);
+                this.filterTags.push(this.tag);
 
-                console.log(this.tags);
+                console.log(this.tag);
+                console.log(this.filterTags);
             }
             else {
-                this.tags.splice(this.tag, 1)
-                console.log(this.tags);
+                let index = this.filterTags.indexOf(this.tag) 
+
+                if(index > -1) {
+
+                    this.filterTags.splice(index, 1);
+                    console.log(this.filterTags);
+                }
+
             }
+
+            //console.log(this.filteredUsers);
         }
     },
 
@@ -67,6 +76,16 @@ const app = new Vue({
             this.users = r.data.data
         })
 
+    },
+
+    computed: {
+        filteredUsers() {
+            this.users.filter((r) => {
+              if(this.filterTags.includes(r.tags)) {
+                  return r
+              }
+           })
+        }
     }
 });
 

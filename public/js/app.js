@@ -53650,21 +53650,27 @@ var app = new Vue({
     return {
       users: null,
       tag: '',
-      tags: []
+      filterTags: []
     };
   },
   methods: {
-    tag: function tag(e) {
+    tagHandler: function tagHandler(e) {
       //console.log(e.target);
       this.tag = e.target.innerHTML;
 
-      if (!this.tags.includes(this.tag)) {
-        this.tags.push(this.tag);
-        console.log(this.tags);
+      if (!this.filterTags.includes(this.tag)) {
+        this.filterTags.push(this.tag);
+        console.log(this.tag);
+        console.log(this.filterTags);
       } else {
-        this.tags.splice(this.tag, 1);
-        console.log(this.tags);
-      }
+        var index = this.filterTags.indexOf(this.tag);
+
+        if (index > -1) {
+          this.filterTags.splice(index, 1);
+          console.log(this.filterTags);
+        }
+      } //console.log(this.filteredUsers);
+
     }
   },
   mounted: function mounted() {
@@ -53674,6 +53680,17 @@ var app = new Vue({
       //console.log(r.data.data);
       _this.users = r.data.data;
     });
+  },
+  computed: {
+    filteredUsers: function filteredUsers() {
+      var _this2 = this;
+
+      this.users.filter(function (r) {
+        if (_this2.filterTags.includes(r.tags)) {
+          return r;
+        }
+      });
+    }
   }
 });
 var password = document.getElementById('password');
