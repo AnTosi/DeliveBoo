@@ -13,7 +13,7 @@
                 <div class="card rounded-pill">
                     <div class="card-body">
                         <h5 class="card-title mb-0">
-                            <span>{{ $tag->name }}</span>
+                            <span v-on:click="tag($event)">{{ $tag->name }}</span>
                         </h5>
                     </div>
                 </div>
@@ -52,6 +52,10 @@
         </div>
       </div>
     </div>
+
+    <p>
+        @{{ word }}
+    </p>
 </div>
 
 

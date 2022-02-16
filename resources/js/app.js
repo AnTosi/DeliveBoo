@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+const { words } = require('lodash');
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -33,8 +35,22 @@ const app = new Vue({
 
     data() {
        return{
-           users: null
+           users: null,
+           word: '',
+
+           words: [],
        }
+    },
+
+    methods: {
+        tag(e) {
+            //console.log(e.target);
+            this.word = e.target.innerHTML
+            console.log(this.word);
+
+            this.words.push(this.word);
+            console.log(this.words);
+        }
     },
 
     mounted() {

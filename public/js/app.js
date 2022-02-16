@@ -53621,6 +53621,9 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    words = _require.words;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -53645,8 +53648,19 @@ var app = new Vue({
   el: '#app',
   data: function data() {
     return {
-      users: null
+      users: null,
+      word: '',
+      words: []
     };
+  },
+  methods: {
+    tag: function tag(e) {
+      //console.log(e.target);
+      this.word = e.target.innerHTML;
+      console.log(this.word);
+      this.words.push(this.word);
+      console.log(this.words);
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -53916,18 +53930,18 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })
