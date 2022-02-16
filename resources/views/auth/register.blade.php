@@ -113,25 +113,28 @@
 
                             {{-- //address --}}
 
-                            {{-- vat - piva --}}
+                            {{-- vat - vat --}}
 
                             <div class="form-group row py-2">
-                                <label for="piva"
+                                <label for="vat"
                                     class="col-md-4 col-form-label text-md-right">{{ __('VAT*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="piva" type="text" class="form-control @error('piva') is-invalid @enderror"
-                                        name="piva" value="{{ old('piva') }}" required pattern="[0-9]{11}"  autocomplete="piva" autofocus>
+                                    <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror"
+                                        name="vat" value="{{ old('vat') }}" pattern="[0-9]{11}"
+                                        oninvalid="this.setCustomValidity('VAT field require 11 digits')"
+                                        oninput="this.setCustomValidity('')" autocomplete="vat" autofocus
+                                    >
 
-                                    @error('piva')
+                                    @error('vat')
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
+                                            <strong> {{$message}}</strong>
                                         </span>
                                     @enderror
                                 </div>
                             </div>
 
-                            {{-- //vat - piva --}}
+                            {{-- //vat - vat --}}
 
                             {{-- image --}}
 
