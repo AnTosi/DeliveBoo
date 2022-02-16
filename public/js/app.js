@@ -53649,17 +53649,22 @@ var app = new Vue({
   data: function data() {
     return {
       users: null,
-      word: '',
-      words: []
+      tag: '',
+      tags: []
     };
   },
   methods: {
     tag: function tag(e) {
       //console.log(e.target);
-      this.word = e.target.innerHTML;
-      console.log(this.word);
-      this.words.push(this.word);
-      console.log(this.words);
+      this.tag = e.target.innerHTML;
+
+      if (!this.tags.includes(this.tag)) {
+        this.tags.push(this.tag);
+        console.log(this.tags);
+      } else {
+        this.tags.splice(this.tag, 1);
+        console.log(this.tags);
+      }
     }
   },
   mounted: function mounted() {

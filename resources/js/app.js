@@ -36,20 +36,27 @@ const app = new Vue({
     data() {
        return{
            users: null,
-           word: '',
+           tag: '',
 
-           words: [],
+           tags: [],
        }
     },
 
     methods: {
         tag(e) {
             //console.log(e.target);
-            this.word = e.target.innerHTML
-            console.log(this.word);
+            this.tag = e.target.innerHTML
+          
+            if(!this.tags.includes(this.tag)) {
 
-            this.words.push(this.word);
-            console.log(this.words);
+                this.tags.push(this.tag);
+
+                console.log(this.tags);
+            }
+            else {
+                this.tags.splice(this.tag, 1)
+                console.log(this.tags);
+            }
         }
     },
 
