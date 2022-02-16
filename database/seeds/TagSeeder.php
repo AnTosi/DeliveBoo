@@ -13,14 +13,13 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        $tags = ['Italiano','Colazione', 'Vegetariano','Pizza', 'Indiano','Sushi','Cinese','Giapponese','Thailandese'];
-        
+        $tags = ['Italian', 'Breakfast', 'Vegetarian', 'Pizza', 'Indian', 'Sushi', 'Chinese', 'Japanese', 'Thai'];
+
         foreach ($tags as $tag) {
             $_tag = new Tag();
             $_tag->name = $tag;
             $_tag->slug = Str::slug($_tag->name);
             $_tag->save();
-
         }
     }
 }
