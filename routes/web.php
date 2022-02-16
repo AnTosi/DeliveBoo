@@ -43,3 +43,6 @@ Route::get('/register', function () {
     $tags = Tag::all();
     return view('auth.register', compact('tags'));
 })->name('register');
+
+
+Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');

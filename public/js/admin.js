@@ -53642,7 +53642,16 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {};
+  },
+  methods: {
+    change: function change(event) {
+      var thumb_file = event.target.files;
+      thumb.src = URL.createObjectURL(thumb_file[0]);
+    }
+  }
 });
 
 /***/ }),
@@ -53768,7 +53777,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\admin.js */"./resources/js/admin.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/js/admin.js */"./resources/js/admin.js");
 
 
 /***/ })

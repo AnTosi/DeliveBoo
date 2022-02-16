@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('custom-css')
+<link rel="stylesheet" href="{{asset('css/register.css')}}">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -47,10 +51,11 @@
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 password-field">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
+                                        <span><i id="toggler" class="far fa-eye toggler"></i></span>
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -157,7 +162,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn bg_secondary text-white">
                                         {{ __('Register') }}
                                     </button>
                                 </div>

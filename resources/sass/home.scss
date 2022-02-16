@@ -1,0 +1,30 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "_variables";
+
+
+
+
+
+.tags-container {
+    background-color: $brand-color-primary;
+    width: 100%;
+    svg {
+        margin-top: 93px;
+    }
+    .card {
+        min-width: max-content;
+    }
+    .tags_link {
+        width: 100%!important;
+        span{
+            color: $brand-color-secondary;
+        }
+    }
+
+}
+svg{
+    margin-top: -5px;
+}

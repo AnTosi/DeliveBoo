@@ -27,17 +27,33 @@
             {{-- image --}}
 
             <div class="mb-3">
-                <label for="image" class="form-label">Image*:</label>
-                <div class="row">
+                <div class="flex-wrap row align-items-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                    
+                    <div class="col">
+                        <label for="old_image" class="form-label">
+                            Your old image:
+                        </label>
+                        <div class="old_image">
+                            <img height="200"src="{{asset('storage/' . $dish->image)}}" alt="">
+                        </div>
+                    </div>
+
+                
+                    <div class="col">
+                        <label for="thumbnail" class="form-label">
+                            Your new image:
+                        </label>
+                        <div class="thumbnail">
+                            <img style="width: 200px" src="http://www.fotopettine.it/wp-content/themes/panama/assets/img/empty/600x600.png" id="thumb" alt="New image">
+                        </div>
+                    </div>
 
                     <div class="col">
-                        <img height="200"src="{{asset('storage/' . $dish->image)}}" alt="">
-                    </div>
-                    <div class="col">
-                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image"
-                        aria-describedby="imageHelper" accept=".png, .jpg">
+                        <input type="file" v-on:change="change" class="form-control @error('image') is-invalid @enderror" name="image" id="my_image"
+                        aria-describedby="imageHelper" accept=".png, .jpg" required>
                         <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file below 500 kB are accepted</small>
                     </div>
+
 
                 </div>
 
