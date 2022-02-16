@@ -20,7 +20,6 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('restaurant-component', require('./components/restaurants.vue').default);
 
 
 /**
@@ -31,6 +30,21 @@ Vue.component('restaurant-component', require('./components/restaurants.vue').de
 
 const app = new Vue({
     el: '#app',
+
+    data() {
+       return{
+           users: null
+       }
+    },
+
+    mounted() {
+        axios.get('/api/users')
+        .then((r) => {
+            //console.log(r.data.data);
+            this.users = r.data.data
+        })
+
+    }
 });
 
 var password = document.getElementById('password');
@@ -45,3 +59,6 @@ password.setAttribute('type', 'password');
 }
 };
 toggler.addEventListener('click', showHidePassword);
+
+
+

@@ -93,14 +93,14 @@
                             </div>
 
                             <div class="form-group row py-2">
-                                <label for="piva"
+                                <label for="vat"
                                     class="col-md-4 col-form-label text-md-right">{{ __('VAT') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="piva" type="text" class="form-control @error('piva') is-invalid @enderror"
-                                        name="piva" value="{{ old('piva') }}" required autocomplete="piva" autofocus>
+                                    <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror"
+                                        name="vat" value="{{ old('vat') }}" required autocomplete="vat" autofocus>
 
-                                    @error('piva')
+                                    @error('vat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

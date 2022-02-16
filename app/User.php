@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'image', 'name', 'slug', 'email', 'logo', 'password', 'address', 'piva',
+        'image', 'name', 'slug', 'email', 'logo', 'password', 'address', 'vat',
     ];
 
     public function getRouteKeyName()

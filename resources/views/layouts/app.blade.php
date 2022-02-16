@@ -100,12 +100,4 @@
     </div>
 </body>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        $('select').selectpicker();
-
-    });
-</script>
-
 </html>
