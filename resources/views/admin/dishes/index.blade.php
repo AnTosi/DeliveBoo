@@ -44,9 +44,9 @@
 
                         <td class="text-center">
                             @if ($dish->visibility === 1)
-                                <p>True</p>
+                                <p><i class="fas fa-check" style="color: green;"></i></p>
                             @else
-                                <p>False</p>
+                                <p><i class="fas fa-times" style="color: red;"></i></p>
                             @endif
                         </td>
 
@@ -54,9 +54,11 @@
 
                         <td class="text-center">{{ $dish->updated_at }}</td>
 
-                        <td class="text-center"> <a class="btn btn-primary" href="{{route('admin.dishes.show', $dish->slug)}}" role="button">View</a></td>
+                        <td class="text-center"> <a class="btn btn-primary"
+                                href="{{ route('admin.dishes.show', $dish->slug) }}" role="button">View</a></td>
 
-                        <td class="text-center"><a class="btn btn-primary" href="{{route('admin.dishes.edit', $dish->slug)}}" role="button">Edit</a></td>
+                        <td class="text-center"><a class="btn btn-primary"
+                                href="{{ route('admin.dishes.edit', $dish->slug) }}" role="button">Edit</a></td>
 
                         <td class="text-center">
                             <!-- Button trigger modal -->
@@ -77,18 +79,15 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            WARNING! You are permanently deleting "{{$dish->name}}" from your menu ⚠️
+                                            WARNING! You are permanently deleting "{{ $dish->name }}" from your menu ⚠️
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <form action="{{route('admin.dishes.destroy', $dish->slug)}}" method="post">
+                                            <form action="{{ route('admin.dishes.destroy', $dish->slug) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-
                                                 <button class="btn btn-danger" type="submit">Delete</button>
-
-
                                             </form>
                                         </div>
                                     </div>
@@ -108,5 +107,4 @@
     <div>
         {{ $dishes->links() }}
     </div>
-
 @endsection
