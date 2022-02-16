@@ -5,3 +5,7 @@
 .text_primary {
   color: #ffc144;
 }
+
+.wave {
+  margin-top: -1px;
+}

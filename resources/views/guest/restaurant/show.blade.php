@@ -2,6 +2,9 @@
 
 
 @section('content')
+
+    @include('partials.wave')
+    
     <div class="container">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
@@ -19,7 +22,8 @@
                         <p class="card-text">
                             {{ $user->address }}
                         </p>
-                        <p class="card-text"><small class="text-muted">
+                        <p class="card-text">
+                            <small class="text-muted">
                                 @if ($user->tags)
                                     @foreach ($user->tags as $tag)
                                         @if (!$loop->last)
@@ -33,7 +37,8 @@
                                         @endif
                                     @endforeach
                                 @endif
-                            </small></p>
+                            </small>
+                        </p>
                     </div>
                 </div>
             </div>
