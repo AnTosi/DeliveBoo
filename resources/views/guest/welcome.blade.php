@@ -53,9 +53,9 @@
       </div>
     </div>
     
-    <p>
-       
-    </p>
+  <p>
+      @{{filteredUsers}}
+  </p>
 </div>
 
 

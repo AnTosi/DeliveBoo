@@ -53622,7 +53622,8 @@ module.exports = function(module) {
  * building robust, powerful web applications using Vue and Laravel.
  */
 var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
-    words = _require.words;
+    words = _require.words,
+    forEach = _require.forEach;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -53660,17 +53661,18 @@ var app = new Vue({
 
       if (!this.filterTags.includes(this.tag)) {
         this.filterTags.push(this.tag);
-        console.log(this.tag);
-        console.log(this.filterTags);
+        /* console.log(this.tag);
+        console.log(this.filterTags); */
       } else {
         var index = this.filterTags.indexOf(this.tag);
 
         if (index > -1) {
           this.filterTags.splice(index, 1);
-          console.log(this.filterTags);
+          /* console.log(this.filterTags); */
         }
-      } //console.log(this.filteredUsers);
+      }
 
+      console.log(this.filteredUsers);
     }
   },
   mounted: function mounted() {
@@ -53681,15 +53683,24 @@ var app = new Vue({
       _this.users = r.data.data;
     });
   },
+
+  /* clothes = clothes.filter(function (element) {
+  // includes checks if the element exist on the array it was called on
+  return clothesFilters.includes(element);
+  }); */
   computed: {
     filteredUsers: function filteredUsers() {
       var _this2 = this;
 
-      this.users.filter(function (r) {
-        if (_this2.filterTags.includes(r.tags)) {
-          return r;
-        }
+      var ristoranti = [];
+      this.users.forEach(function (rest) {
+        rest.tags.forEach(function (tag) {
+          if (_this2.filterTags.includes(tag.name)) {
+            ristoranti.push(rest);
+          }
+        });
       });
+      return ristoranti;
     }
   }
 });

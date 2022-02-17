@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-const { words } = require('lodash');
+const { words, forEach } = require('lodash');
 
 require('./bootstrap');
 
@@ -51,8 +51,8 @@ const app = new Vue({
 
                 this.filterTags.push(this.tag);
 
-                console.log(this.tag);
-                console.log(this.filterTags);
+                /* console.log(this.tag);
+                console.log(this.filterTags); */
             }
             else {
                 let index = this.filterTags.indexOf(this.tag) 
@@ -60,13 +60,15 @@ const app = new Vue({
                 if(index > -1) {
 
                     this.filterTags.splice(index, 1);
-                    console.log(this.filterTags);
+                    /* console.log(this.filterTags); */
                 }
 
             }
 
-            //console.log(this.filteredUsers);
-        }
+            console.log(this.filteredUsers);
+
+        },
+
     },
 
     mounted() {
@@ -78,13 +80,26 @@ const app = new Vue({
 
     },
 
+    /* clothes = clothes.filter(function (element) {
+  // includes checks if the element exist on the array it was called on
+  return clothesFilters.includes(element);
+}); */
     computed: {
         filteredUsers() {
-            this.users.filter((r) => {
-              if(this.filterTags.includes(r.tags)) {
-                  return r
-              }
-           })
+          
+            let ristoranti = []
+
+                this.users.forEach((rest) => {
+                    rest.tags.forEach((tag) => {
+                        if(this.filterTags.includes(tag.name)) {
+                            ristoranti.push(rest)
+                        }
+                    })
+                })
+
+
+            return ristoranti
+
         }
     }
 });
