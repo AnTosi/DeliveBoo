@@ -22,8 +22,8 @@ window.Vue = require('vue')
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component(
-    'example-component',
-    require('./components/ExampleComponent.vue').default,
+  'example-component',
+  require('./components/ExampleComponent.vue').default,
 )
 
 /**
@@ -33,103 +33,103 @@ Vue.component(
  */
 
 const app = new Vue({
-    el: '#app',
+  el: '#app',
 
-    data() {
-        return {
-            users: null,
+  data() {
+    return {
+      users: null,
 
-            tag: '',
+      tag: '',
 
-            filterTags: [],
+      filterTags: [],
 
-            tags: null,
+      tags: null,
 
-            searchInput: '',
+      searchInput: '',
+    }
+  },
+
+  methods: {
+    tagHandler(tag) {
+      this.tag = tag
+
+      if (!this.filterTags.includes(tag)) {
+        this.filterTags.push(tag)
+      } else {
+        let index = this.filterTags.indexOf(tag)
+
+        if (index > -1) {
+          this.filterTags.splice(index, 1)
         }
+      }
     },
+  },
 
-    methods: {
-        tagHandler(tag) {
-            this.tag = tag
+  mounted() {
+    axios.get('/api/users').then((r) => {
+      this.users = r.data.data
+    })
+    axios.get('/api/tags').then((r2) => {
+      this.tags = r2.data.data
+      console.log(this.tags)
+    })
+  },
 
-            if (!this.filterTags.includes(tag)) {
-                this.filterTags.push(tag)
-            } else {
-                let index = this.filterTags.indexOf(tag)
+  computed: {
+    filteredUsers() {
+      let restaurants = []
+      if (this.users) {
+        restaurants = this.users
+      }
+      let filters = this.filterTags
 
-                if (index > -1) {
-                    this.filterTags.splice(index, 1)
-                }
+      filteredRestaurants = []
+
+      if (restaurants) {
+        filters.forEach((filter) => {
+          for (let i = 0; i < restaurants.length; i++) {
+            const restaurant = restaurants[i]
+
+            if (restaurant.tags.some((rest) => rest.name === filter)) {
+              if (!filteredRestaurants.includes(restaurant))
+                filteredRestaurants.push(restaurant)
+            } else if (
+              !restaurant.tags.some((rest) => rest.name === filter) &&
+              filteredRestaurants.includes(restaurant)
+            ) {
+              filteredRestaurants.splice(i, 1)
             }
-        },
-    },
-
-    mounted() {
-        axios.get('/api/users').then((r) => {
-            this.users = r.data.data
+          }
         })
-        axios.get('/api/tags').then((r2) => {
-            this.tags = r2.data.data
-            console.log(this.tags)
+      }
+
+      // console.log(restaurants);
+
+      return filteredRestaurants
+    },
+
+    // console.log(restaurants);
+    filteredList() {
+      if (this.users) {
+        return this.users.filter((user) => {
+          return user.name
+            .toLowerCase()
+            .includes(this.searchInput.trim().toLowerCase())
         })
+      }
     },
-
-    computed: {
-        filteredUsers() {
-            let restaurants = []
-            if (this.users) {
-                restaurants = this.users
-            }
-            let filters = this.filterTags
-
-            filteredRestaurants = []
-
-            if (restaurants) {
-                filters.forEach((filter) => {
-                    for (let i = 0; i < restaurants.length; i++) {
-                        const restaurant = restaurants[i]
-
-                        if (restaurant.tags.some((rest) => rest.name === filter)) {
-                            if (!filteredRestaurants.includes(restaurant))
-                                filteredRestaurants.push(restaurant)
-                        } else if (
-                            !restaurant.tags.some((rest) => rest.name === filter) &&
-                            filteredRestaurants.includes(restaurant)
-                        ) {
-                            filteredRestaurants.splice(i, 1)
-                        }
-                    }
-                })
-            }
-
-            // console.log(restaurants);
-
-            return filteredRestaurants
-        },
-
-        // console.log(restaurants);
-        filteredList() {
-            if (this.users) {
-                return this.users.filter((user) => {
-                    return user.name
-                        .toLowerCase()
-                        .includes(this.searchInput.trim().toLowerCase())
-                })
-            }
-        },
-    },
+  },
 })
 
 var password = document.getElementById('password')
 var toggler = document.getElementById('toggler')
 showHidePassword = () => {
-    if (password.type == 'password') {
-        password.setAttribute('type', 'text')
-        toggler.classList.add('fa-eye-slash')
-    } else {
-        toggler.classList.remove('fa-eye-slash')
-        password.setAttribute('type', 'password')
-    }
+  if (password.type == 'password') {
+    password.setAttribute('type', 'text')
+    toggler.classList.add('fa-eye-slash')
+  } else {
+    toggler.classList.remove('fa-eye-slash')
+    password.setAttribute('type', 'password')
+  }
 }
 toggler.addEventListener('click', showHidePassword)
