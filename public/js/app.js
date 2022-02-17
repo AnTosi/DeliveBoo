@@ -53686,29 +53686,49 @@ var app = new Vue({
       }
 
       var filters = this.filterTags;
-      filteredRestaurants = [];
+      var checkedFilters = [];
+      var filteredRestaurants = [];
 
       if (restaurants) {
         filters.forEach(function (filter) {
-          for (var i = 0; i < restaurants.length; i++) {
+          var _loop = function _loop(i) {
             var restaurant = restaurants[i];
-            console.log(restaurant.tags);
 
-            if (restaurant.tags.some(function (rest) {
-              return rest.name === filter;
+            if (!checkedFilters.includes(filter)) {
+              checkedFilters.push(filter);
+              console.log(checkedFilters);
+            } // console.log(restaurant.tags);
+            // if (!restaurant.tags.some(rest => rest.name === filter)) {
+            //     restaurants.splice(i, 1)
+            // }
+
+
+            if (restaurant.tags.some(function (tag) {
+              return tag.name === filter;
             })) {
               console.log('inside');
-              if (!filteredRestaurants.includes(restaurant)) filteredRestaurants.push(restaurant);
-              console.log(filteredRestaurants);
+              console.log(checkedFilters);
+              checkedFilters.forEach(function (checkedFilter) {
+                if (!restaurant.tags.some(function (tag) {
+                  return tag.name === checkedFilter;
+                }) && !filteredRestaurants.includes(restaurant)) {
+                  filteredRestaurants.push(restaurant);
+                }
+              }); // console.log(filteredRestaurants);
             } else if (!restaurant.tags.some(function (rest) {
               return rest.name === filter;
             }) && filteredRestaurants.includes(restaurant)) {
-              console.log(i);
+              // console.log(i);
               filteredRestaurants.splice(i, 1);
             }
+          };
+
+          for (var i = 0; i < restaurants.length; i++) {
+            _loop(i);
           }
         });
       } // console.log(restaurants);
+      // console.log(filteredRestaurants);
 
 
       return filteredRestaurants;

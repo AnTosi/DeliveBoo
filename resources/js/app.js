@@ -84,35 +84,46 @@ const app = new Vue({
             }
             let filters = this.filterTags;
 
-            filteredRestaurants = [];
+            let checkedFilters = [];
+
+            let filteredRestaurants = [];
+
 
             if (restaurants) {
                 filters.forEach((filter) => {
                     for (let i = 0; i < restaurants.length; i++) {
 
                         const restaurant = restaurants[i];
-
-                        console.log(restaurant.tags);
-
-
-                        if (restaurant.tags.some(rest => rest.name === filter)) {
-                            console.log('inside');
-
-                            if (!filteredRestaurants.includes(restaurant))
-                                filteredRestaurants.push(restaurant);
-                            console.log(filteredRestaurants);
+                        if (!checkedFilters.includes(filter)) {
+                            checkedFilters.push(filter);
+                            console.log(checkedFilters);
                         }
-                        else if (!restaurant.tags.some(rest => rest.name === filter) && filteredRestaurants.includes(restaurant)) {
-                            console.log(i);
+
+                        // console.log(restaurant.tags);
+
+                        // if (!restaurant.tags.some(rest => rest.name === filter)) {
+                        //     restaurants.splice(i, 1)
+                        // }
+                        if (restaurant.tags.some(tag => tag.name === filter)) {
+                            console.log('inside');
+                            console.log(checkedFilters);
+                            checkedFilters.forEach((checkedFilter) => {
+                                if (!restaurant.tags.some(tag => tag.name === checkedFilter) && !filteredRestaurants.includes(restaurant)) {
+                                    filteredRestaurants.push(restaurant);
+                                }
+                            })
+                            // console.log(filteredRestaurants);
+                        } else if (!restaurant.tags.some(rest => rest.name === filter) && filteredRestaurants.includes(restaurant)) {
+                            // console.log(i);
                             filteredRestaurants.splice(i, 1)
                         }
                     }
-
                 })
 
             }
 
             // console.log(restaurants);
+            // console.log(filteredRestaurants);
 
             return filteredRestaurants;
 
