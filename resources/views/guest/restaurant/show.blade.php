@@ -40,11 +40,18 @@
                 </div>
 
                 <div class="row row-cols-2">
-                    <div class="col">
-                        @foreach ($user->dishes as $dish)
-                            <p>Dish</p>
-                        @endforeach
-                    </div>
+                    @foreach ($user->dishes as $dish)
+                        <div class="col">
+                            <div class="restaurant_info pt-5 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
+                                <h1 class="fs-3 fw-bold">{{ $dish->name }}</h1>
+
+                                <img width="100" height="80" src="{{ asset('storage/dish_images' . $dish->image) }}"
+                                    alt="">
+
+
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
