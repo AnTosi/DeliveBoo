@@ -53653,7 +53653,8 @@ var app = new Vue({
       users: null,
       tag: '',
       filterTags: [],
-      tags: null
+      tags: null,
+      searchInput: ''
     };
   },
   methods: {
@@ -53713,8 +53714,17 @@ var app = new Vue({
 
 
       return filteredRestaurants;
-    } // console.log(restaurants);
+    },
+    // console.log(restaurants);
+    filteredList: function filteredList() {
+      var _this2 = this;
 
+      if (this.users) {
+        return this.users.filter(function (user) {
+          return user.name.toLowerCase().includes(_this2.searchInput.trim().toLowerCase());
+        });
+      }
+    }
   }
 });
 var password = document.getElementById('password');

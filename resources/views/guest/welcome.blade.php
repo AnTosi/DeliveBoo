@@ -34,8 +34,60 @@
 
     <div class="container mb-5">
         <h2 class="my-5">Restaurants</h2>
-        <div class="row row-cols-3 g-5">
+        <div v-if="filteredUsers.length > 0" class="row row-cols-3 g-5">
             <div class="prova" v-for="user in filteredUsers" :key="user.id">
+                <div class="col">
+                    <a :href="user.slug">
+                        <div class="card" aria-hidden="true">
+                            <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
+                                alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="capitalize text-decoration-none">@{{ user.name }}</span>
+                                </h5>
+                                <p class="text-decoration-none">
+                                    @{{ user.address }}
+                                </p>
+                                <span v-for="tag in user.tags" :key="tag.id">
+                                    @{{ tag.name }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+         <div v-else-if="filteredList" class="row row-cols-3 g-5">
+            <div class="prova" v-for="user in filteredList" :key="user.id">
+                <div class="col">
+                    <a :href="user.slug">
+                        <div class="card" aria-hidden="true">
+                            <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
+                                alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <span class="capitalize text-decoration-none">@{{ user.name }}</span>
+                                </h5>
+                                <p class="text-decoration-none">
+                                    @{{ user.address }}
+                                </p>
+                                <span v-for="tag in user.tags" :key="tag.id">
+                                    @{{ tag.name }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+         <div v-else class="row row-cols-3 g-5">
+            <div class="prova" v-for="user in users" :key="user.id">
                 <div class="col">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
