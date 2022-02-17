@@ -53693,13 +53693,17 @@ var app = new Vue({
       var _this2 = this;
 
       var ristoranti = [];
-      this.users.forEach(function (rest) {
-        rest.tags.forEach(function (tag) {
-          if (_this2.filterTags.includes(tag.name)) {
-            ristoranti.push(rest);
-          }
+
+      if (this.filterTags.length > 0) {
+        this.users.forEach(function (rest) {
+          rest.tags.forEach(function (tag) {
+            if (_this2.filterTags.includes(tag.name)) {
+              ristoranti.push(rest);
+            }
+          });
         });
-      });
+      }
+
       return ristoranti;
     }
   }

@@ -89,6 +89,8 @@ const app = new Vue({
           
             let ristoranti = []
 
+            if(this.filterTags.length > 0) {
+
                 this.users.forEach((rest) => {
                     rest.tags.forEach((tag) => {
                         if(this.filterTags.includes(tag.name)) {
@@ -96,6 +98,9 @@ const app = new Vue({
                         }
                     })
                 })
+
+            }
+
 
 
             return ristoranti
