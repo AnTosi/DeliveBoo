@@ -1,0 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);.info_cart {
+  max-width: 1600px !important;
+  position: relative;
+  bottom: 60px;
+}
+.info_cart .restaurant_aside .restaurant_info {
+  border-radius: 30px;
+}

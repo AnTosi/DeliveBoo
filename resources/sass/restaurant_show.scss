@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "_variables";
+
+.info_cart {
+    max-width: 1600px !important;
+    position: relative;
+    bottom: 60px;
+    .restaurant_aside {
+        .restaurant_info {
+            border-radius: 30px;
+        }
+    }
+}
