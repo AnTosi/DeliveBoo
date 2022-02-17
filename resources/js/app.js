@@ -36,24 +36,29 @@ const app = new Vue({
     data() {
         return {
             users: null,
+            
             tag: '',
 
             filterTags: [],
+
+            tags: null,
+
         }
     },
 
     methods: {
-        tagHandler(e) {
+        tagHandler(tag) {
 
-            this.tag = e.target.innerHTML
+            this.tag = tag
 
-            if (!this.filterTags.includes(this.tag)) {
+            if (!this.filterTags.includes(tag)) {
 
-                this.filterTags.push(this.tag);
+                this.filterTags.push(tag);
 
+                
             }
             else {
-                let index = this.filterTags.indexOf(this.tag)
+                let index = this.filterTags.indexOf(tag)
 
                 if (index > -1) {
 
@@ -63,6 +68,7 @@ const app = new Vue({
 
             }
 
+
         },
 
     },
@@ -71,6 +77,11 @@ const app = new Vue({
         axios.get('/api/users')
             .then((r) => {
                 this.users = r.data.data
+            })
+        axios.get('/api/tags')
+            .then((r2) => {
+                this.tags = r2.data.data
+                console.log(this.tags);
             })
 
     },
@@ -92,18 +103,18 @@ const app = new Vue({
 
                         const restaurant = restaurants[i];
 
-                        console.log(restaurant.tags);
+                        
 
 
                         if (restaurant.tags.some(rest => rest.name === filter)) {
-                            console.log('inside');
+                            
 
                             if (!filteredRestaurants.includes(restaurant))
                                 filteredRestaurants.push(restaurant);
-                            console.log(filteredRestaurants);
+                            
                         }
                         else if (!restaurant.tags.some(rest => rest.name === filter) && filteredRestaurants.includes(restaurant)) {
-                            console.log(i);
+                            
                             filteredRestaurants.splice(i, 1)
                         }
                     }

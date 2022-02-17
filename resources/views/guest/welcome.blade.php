@@ -8,19 +8,21 @@
     <div class="tags-container">
         <div
             class="row row-cols-1 row-cols-md-2 row-cols-lg-4 w-50 mx-auto container my-auto pt-3  justify-content-center flex-wrap g-3">
-            @foreach ($tags as $tag)
-                <div class="col justify-content-center d-flex ">
+           {{--  @foreach ($tags as $tag) --}}
+                <div v-for="tag in tags" :key="tag.id" class="col justify-content-center d-flex ">
                     <a href="#" class="tags_link text-black text-decoration-none text-center">
-                        <div class="card rounded-pill">
+                        <div class="card rounded-pill" v-on:click="tagHandler(tag.name)"
+                         :class=" filterTags.includes(tag.name) ? 'active' : '' "
+                        >
                             <div class="card-body">
                                 <h5 class="card-title mb-0">
-                                    <span v-on:click="tagHandler($event)">{{ $tag->name }}</span>
+                                    <span> @{{ tag.name }}</span>
                                 </h5>
                             </div>
                         </div>
                     </a>
                 </div>
-            @endforeach
+           {{--  @endforeach --}}
         </div>
     </div>
     <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
@@ -56,8 +58,5 @@
             </div>
         </div>
 
-        <p>
-            @{{ filteredUsers }}
-        </p>
     </div>
 @endsection

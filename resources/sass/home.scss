@@ -1,41 +1,54 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Nunito");
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import "_variables";
-
-
-
-
+@import '_variables';
 
 .tags-container {
-    background-color: $brand-color-primary;
-    width: 100%;
-    svg {
-        margin-top: 93px;
-    }
-    .card {
-        min-width: max-content;
-    }
-    .tags_link {
-        width: 100%!important;
-        span{
-            color: $brand-color-secondary;
-        }
-    }
+  background-color: $brand-color-primary;
+  width: 100%;
+  svg {
+    margin-top: 93px;
+  }
+  .card {
+    min-width: max-content;
 
-    .card.rounded-pill {
-        animation-name: prova;
-        animation-duration: 1s;
-    }
+    &.active {
+      background-color: $brand-color-secondary;
 
-    @keyframes prova {
-        0% {display: block; transform: scale(0.0);}
-        50% {display: block; transform: scale(1.09);}
-        100% {display: block; transform: scale(1);}
+      span {
+        color: white;
+        font-weight: bold;
+      }
     }
+  }
+  .tags_link {
+    width: 100% !important;
+    span {
+      color: $brand-color-secondary;
+    }
+  }
 
+  .card.rounded-pill {
+    animation-name: prova;
+    animation-duration: 1s;
+  }
+
+  @keyframes prova {
+    0% {
+      display: block;
+      transform: scale(0);
+    }
+    50% {
+      display: block;
+      transform: scale(1.09);
+    }
+    100% {
+      display: block;
+      transform: scale(1);
+    }
+  }
 }
-svg{
-    margin-top: -5px;
+svg {
+  margin-top: -5px;
 }
