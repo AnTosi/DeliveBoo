@@ -94,7 +94,10 @@ const app = new Vue({
                 this.users.forEach((rest) => {
                     rest.tags.forEach((tag) => {
                         if(this.filterTags.includes(tag.name)) {
-                            ristoranti.push(rest)
+                            if(!ristoranti.includes(rest)) {
+
+                                ristoranti.push(rest)
+                            }
                         }
                     })
                 })

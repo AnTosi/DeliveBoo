@@ -53698,7 +53698,9 @@ var app = new Vue({
         this.users.forEach(function (rest) {
           rest.tags.forEach(function (tag) {
             if (_this2.filterTags.includes(tag.name)) {
-              ristoranti.push(rest);
+              if (!ristoranti.includes(rest)) {
+                ristoranti.push(rest);
+              }
             }
           });
         });
