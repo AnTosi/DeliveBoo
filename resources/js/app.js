@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-const { words, forEach, indexOf } = require('lodash');
+const { words, forEach, indexOf } = require('lodash')
 
-require('./bootstrap');
+require('./bootstrap')
 
-window.Vue = require('vue');
+window.Vue = require('vue')
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,8 +21,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component(
+    'example-component',
+    require('./components/ExampleComponent.vue').default,
+)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,117 +38,98 @@ const app = new Vue({
     data() {
         return {
             users: null,
+
             tag: '',
 
             filterTags: [],
+
+            tags: null,
+
+            searchInput: '',
         }
     },
 
     methods: {
-        tagHandler(e) {
+        tagHandler(tag) {
+            this.tag = tag
 
-            this.tag = e.target.innerHTML
-
-            if (!this.filterTags.includes(this.tag)) {
-
-                this.filterTags.push(this.tag);
-
-            }
-            else {
-                let index = this.filterTags.indexOf(this.tag)
+            if (!this.filterTags.includes(tag)) {
+                this.filterTags.push(tag)
+            } else {
+                let index = this.filterTags.indexOf(tag)
 
                 if (index > -1) {
-
-                    this.filterTags.splice(index, 1);
-
+                    this.filterTags.splice(index, 1)
                 }
-
             }
-
         },
-
     },
 
     mounted() {
-        axios.get('/api/users')
-            .then((r) => {
-                this.users = r.data.data
-            })
-
+        axios.get('/api/users').then((r) => {
+            this.users = r.data.data
+        })
+        axios.get('/api/tags').then((r2) => {
+            this.tags = r2.data.data
+            console.log(this.tags)
+        })
     },
 
     computed: {
         filteredUsers() {
-
-            let restaurants = [];
+            let restaurants = []
             if (this.users) {
                 restaurants = this.users
             }
-            let filters = this.filterTags;
+            let filters = this.filterTags
 
-            let checkedFilters = [];
-
-            let filteredRestaurants = [];
-
+            filteredRestaurants = []
 
             if (restaurants) {
                 filters.forEach((filter) => {
                     for (let i = 0; i < restaurants.length; i++) {
+                        const restaurant = restaurants[i]
 
-                        const restaurant = restaurants[i];
-                        if (!checkedFilters.includes(filter)) {
-                            checkedFilters.push(filter);
-                            console.log(checkedFilters);
-                        }
-
-                        // console.log(restaurant.tags);
-
-                        // if (!restaurant.tags.some(rest => rest.name === filter)) {
-                        //     restaurants.splice(i, 1)
-                        // }
-                        if (restaurant.tags.some(tag => tag.name === filter)) {
-                            console.log('inside');
-                            console.log(checkedFilters);
-                            checkedFilters.forEach((checkedFilter) => {
-                                if (!restaurant.tags.some(tag => tag.name === checkedFilter) && !filteredRestaurants.includes(restaurant)) {
-                                    filteredRestaurants.push(restaurant);
-                                }
-                            })
-                            // console.log(filteredRestaurants);
-                        } else if (!restaurant.tags.some(rest => rest.name === filter) && filteredRestaurants.includes(restaurant)) {
-                            // console.log(i);
+                        if (restaurant.tags.some((rest) => rest.name === filter)) {
+                            if (!filteredRestaurants.includes(restaurant))
+                                filteredRestaurants.push(restaurant)
+                        } else if (
+                            !restaurant.tags.some((rest) => rest.name === filter) &&
+                            filteredRestaurants.includes(restaurant)
+                        ) {
                             filteredRestaurants.splice(i, 1)
                         }
                     }
                 })
-
             }
 
             // console.log(restaurants);
-            // console.log(filteredRestaurants);
 
-            return filteredRestaurants;
-
-        }
-
+            return filteredRestaurants
+        },
 
         // console.log(restaurants);
+        filteredList() {
+            if (this.users) {
+                return this.users.filter((user) => {
+                    return user.name
+                        .toLowerCase()
+                        .includes(this.searchInput.trim().toLowerCase())
+                })
+            }
+        },
+    },
+})
 
-    }
-});
-
-var password = document.getElementById('password');
-var toggler = document.getElementById('toggler');
+var password = document.getElementById('password')
+var toggler = document.getElementById('toggler')
 showHidePassword = () => {
     if (password.type == 'password') {
-        password.setAttribute('type', 'text');
-        toggler.classList.add('fa-eye-slash');
+        password.setAttribute('type', 'text')
+        toggler.classList.add('fa-eye-slash')
     } else {
-        toggler.classList.remove('fa-eye-slash');
-        password.setAttribute('type', 'password');
+        toggler.classList.remove('fa-eye-slash')
+        password.setAttribute('type', 'password')
     }
-};
-toggler.addEventListener('click', showHidePassword);
-
-
-
+}
+toggler.addEventListener('click', showHidePassword)

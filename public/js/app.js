@@ -53652,17 +53652,19 @@ var app = new Vue({
     return {
       users: null,
       tag: '',
-      filterTags: []
+      filterTags: [],
+      tags: null,
+      searchInput: ''
     };
   },
   methods: {
-    tagHandler: function tagHandler(e) {
-      this.tag = e.target.innerHTML;
+    tagHandler: function tagHandler(tag) {
+      this.tag = tag;
 
-      if (!this.filterTags.includes(this.tag)) {
-        this.filterTags.push(this.tag);
+      if (!this.filterTags.includes(tag)) {
+        this.filterTags.push(tag);
       } else {
-        var index = this.filterTags.indexOf(this.tag);
+        var index = this.filterTags.indexOf(tag);
 
         if (index > -1) {
           this.filterTags.splice(index, 1);
@@ -53676,6 +53678,10 @@ var app = new Vue({
     axios.get('/api/users').then(function (r) {
       _this.users = r.data.data;
     });
+    axios.get('/api/tags').then(function (r2) {
+      _this.tags = r2.data.data;
+      console.log(_this.tags);
+    });
   },
   computed: {
     filteredUsers: function filteredUsers() {
@@ -53686,54 +53692,39 @@ var app = new Vue({
       }
 
       var filters = this.filterTags;
-      var checkedFilters = [];
-      var filteredRestaurants = [];
+      filteredRestaurants = [];
 
       if (restaurants) {
         filters.forEach(function (filter) {
-          var _loop = function _loop(i) {
+          for (var i = 0; i < restaurants.length; i++) {
             var restaurant = restaurants[i];
 
-            if (!checkedFilters.includes(filter)) {
-              checkedFilters.push(filter);
-              console.log(checkedFilters);
-            } // console.log(restaurant.tags);
-            // if (!restaurant.tags.some(rest => rest.name === filter)) {
-            //     restaurants.splice(i, 1)
-            // }
-
-
-            if (restaurant.tags.some(function (tag) {
-              return tag.name === filter;
+            if (restaurant.tags.some(function (rest) {
+              return rest.name === filter;
             })) {
-              console.log('inside');
-              console.log(checkedFilters);
-              checkedFilters.forEach(function (checkedFilter) {
-                if (!restaurant.tags.some(function (tag) {
-                  return tag.name === checkedFilter;
-                }) && !filteredRestaurants.includes(restaurant)) {
-                  filteredRestaurants.push(restaurant);
-                }
-              }); // console.log(filteredRestaurants);
+              if (!filteredRestaurants.includes(restaurant)) filteredRestaurants.push(restaurant);
             } else if (!restaurant.tags.some(function (rest) {
               return rest.name === filter;
             }) && filteredRestaurants.includes(restaurant)) {
-              // console.log(i);
               filteredRestaurants.splice(i, 1);
             }
-          };
-
-          for (var i = 0; i < restaurants.length; i++) {
-            _loop(i);
           }
         });
       } // console.log(restaurants);
-      // console.log(filteredRestaurants);
 
 
       return filteredRestaurants;
-    } // console.log(restaurants);
+    },
+    // console.log(restaurants);
+    filteredList: function filteredList() {
+      var _this2 = this;
 
+      if (this.users) {
+        return this.users.filter(function (user) {
+          return user.name.toLowerCase().includes(_this2.searchInput.trim().toLowerCase());
+        });
+      }
+    }
   }
 });
 var password = document.getElementById('password');
