@@ -53623,7 +53623,8 @@ module.exports = function(module) {
  */
 var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
     words = _require.words,
-    forEach = _require.forEach;
+    forEach = _require.forEach,
+    indexOf = _require.indexOf;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -53656,58 +53657,63 @@ var app = new Vue({
   },
   methods: {
     tagHandler: function tagHandler(e) {
-      //console.log(e.target);
       this.tag = e.target.innerHTML;
 
       if (!this.filterTags.includes(this.tag)) {
         this.filterTags.push(this.tag);
-        /* console.log(this.tag);
-        console.log(this.filterTags); */
       } else {
         var index = this.filterTags.indexOf(this.tag);
 
         if (index > -1) {
           this.filterTags.splice(index, 1);
-          /* console.log(this.filterTags); */
         }
       }
-
-      console.log(this.filteredUsers);
     }
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('/api/users').then(function (r) {
-      //console.log(r.data.data);
       _this.users = r.data.data;
     });
   },
-
-  /* clothes = clothes.filter(function (element) {
-  // includes checks if the element exist on the array it was called on
-  return clothesFilters.includes(element);
-  }); */
   computed: {
     filteredUsers: function filteredUsers() {
-      var _this2 = this;
+      var restaurants = [];
 
-      var ristoranti = [];
-
-      if (this.filterTags.length > 0) {
-        this.users.forEach(function (rest) {
-          rest.tags.forEach(function (tag) {
-            if (_this2.filterTags.includes(tag.name)) {
-              if (!ristoranti.includes(rest)) {
-                ristoranti.push(rest);
-              }
-            }
-          });
-        });
+      if (this.users) {
+        restaurants = this.users;
       }
 
-      return ristoranti;
-    }
+      var filters = this.filterTags;
+      filteredRestaurants = [];
+
+      if (restaurants) {
+        filters.forEach(function (filter) {
+          for (var i = 0; i < restaurants.length; i++) {
+            var restaurant = restaurants[i];
+            console.log(restaurant.tags);
+
+            if (restaurant.tags.some(function (rest) {
+              return rest.name === filter;
+            })) {
+              console.log('inside');
+              if (!filteredRestaurants.includes(restaurant)) filteredRestaurants.push(restaurant);
+              console.log(filteredRestaurants);
+            } else if (!restaurant.tags.some(function (rest) {
+              return rest.name === filter;
+            }) && filteredRestaurants.includes(restaurant)) {
+              console.log(i);
+              filteredRestaurants.splice(i, 1);
+            }
+          }
+        });
+      } // console.log(restaurants);
+
+
+      return filteredRestaurants;
+    } // console.log(restaurants);
+
   }
 });
 var password = document.getElementById('password');
@@ -53969,18 +53975,18 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })

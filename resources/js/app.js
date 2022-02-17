@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-const { words, forEach } = require('lodash');
+const { words, forEach, indexOf } = require('lodash');
 
 require('./bootstrap');
 
@@ -34,38 +34,34 @@ const app = new Vue({
     el: '#app',
 
     data() {
-       return{
-           users: null,
-           tag: '',
+        return {
+            users: null,
+            tag: '',
 
-           filterTags: [],
-       }
+            filterTags: [],
+        }
     },
 
     methods: {
         tagHandler(e) {
-            //console.log(e.target);
+
             this.tag = e.target.innerHTML
-          
-            if(!this.filterTags.includes(this.tag)) {
+
+            if (!this.filterTags.includes(this.tag)) {
 
                 this.filterTags.push(this.tag);
 
-                /* console.log(this.tag);
-                console.log(this.filterTags); */
             }
             else {
-                let index = this.filterTags.indexOf(this.tag) 
+                let index = this.filterTags.indexOf(this.tag)
 
-                if(index > -1) {
+                if (index > -1) {
 
                     this.filterTags.splice(index, 1);
-                    /* console.log(this.filterTags); */
+
                 }
 
             }
-
-            console.log(this.filteredUsers);
 
         },
 
@@ -73,55 +69,71 @@ const app = new Vue({
 
     mounted() {
         axios.get('/api/users')
-        .then((r) => {
-            //console.log(r.data.data);
-            this.users = r.data.data
-        })
+            .then((r) => {
+                this.users = r.data.data
+            })
 
     },
 
-    /* clothes = clothes.filter(function (element) {
-  // includes checks if the element exist on the array it was called on
-  return clothesFilters.includes(element);
-}); */
     computed: {
         filteredUsers() {
-          
-            let ristoranti = []
 
-            if(this.filterTags.length > 0) {
+            let restaurants = [];
+            if (this.users) {
+                restaurants = this.users
+            }
+            let filters = this.filterTags;
 
-                this.users.forEach((rest) => {
-                    rest.tags.forEach((tag) => {
-                        if(this.filterTags.includes(tag.name)) {
-                            if(!ristoranti.includes(rest)) {
+            filteredRestaurants = [];
 
-                                ristoranti.push(rest)
-                            }
+            if (restaurants) {
+                filters.forEach((filter) => {
+                    for (let i = 0; i < restaurants.length; i++) {
+
+                        const restaurant = restaurants[i];
+
+                        console.log(restaurant.tags);
+
+
+                        if (restaurant.tags.some(rest => rest.name === filter)) {
+                            console.log('inside');
+
+                            if (!filteredRestaurants.includes(restaurant))
+                                filteredRestaurants.push(restaurant);
+                            console.log(filteredRestaurants);
                         }
-                    })
+                        else if (!restaurant.tags.some(rest => rest.name === filter) && filteredRestaurants.includes(restaurant)) {
+                            console.log(i);
+                            filteredRestaurants.splice(i, 1)
+                        }
+                    }
+
                 })
 
             }
 
+            // console.log(restaurants);
 
-
-            return ristoranti
+            return filteredRestaurants;
 
         }
+
+
+        // console.log(restaurants);
+
     }
 });
 
 var password = document.getElementById('password');
 var toggler = document.getElementById('toggler');
 showHidePassword = () => {
-if (password.type == 'password') {
-password.setAttribute('type', 'text');
-toggler.classList.add('fa-eye-slash');
-} else {
-toggler.classList.remove('fa-eye-slash');
-password.setAttribute('type', 'password');
-}
+    if (password.type == 'password') {
+        password.setAttribute('type', 'text');
+        toggler.classList.add('fa-eye-slash');
+    } else {
+        toggler.classList.remove('fa-eye-slash');
+        password.setAttribute('type', 'password');
+    }
 };
 toggler.addEventListener('click', showHidePassword);
 
