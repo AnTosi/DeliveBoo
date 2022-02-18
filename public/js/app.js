@@ -53642,7 +53642,108 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {
+      users: null,
+      tag: '',
+      filterTags: [],
+      tags: null,
+      searchInput: ''
+    };
+  },
+  methods: {
+    tagHandler: function tagHandler(tag) {
+      this.tag = tag;
+
+      if (!this.filterTags.includes(tag)) {
+        this.filterTags.push(tag);
+      } else {
+        var index = this.filterTags.indexOf(tag);
+
+        if (index > -1) {
+          this.filterTags.splice(index, 1);
+        }
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/users').then(function (r) {
+      _this.users = r.data.data;
+    });
+    axios.get('/api/tags').then(function (r2) {
+      _this.tags = r2.data.data;
+    });
+  },
+  computed: {
+    filteredUsers: function filteredUsers() {
+      var restaurants = [];
+
+      if (this.users) {
+        restaurants = this.users;
+      }
+
+      var filters = this.filterTags;
+      filteredRestaurants = [];
+      checkedFilters = [];
+
+      if (restaurants) {
+        filters.forEach(function (filter) {
+          for (var i = 0; i < restaurants.length; i++) {
+            var restaurant = restaurants[i];
+
+            if (restaurant.tags.some(function (tag) {
+              return tag.name === filter;
+            })) {
+              if (!filteredRestaurants.includes(restaurant)) {
+                filteredRestaurants.push(restaurant);
+              }
+            }
+          }
+        });
+        filters.forEach(function (filter) {
+          for (var i = 0; i < filteredRestaurants.length; i++) {
+            var filteredRestaurant = filteredRestaurants[i];
+
+            if (!filteredRestaurant.tags.some(function (tag) {
+              return tag.name === filter;
+            })) {
+              filteredRestaurants.splice(i, 1);
+            }
+          }
+        });
+
+        var _loop = function _loop(i) {
+          var filteredRestaurant = filteredRestaurants[i];
+          filters.forEach(function (filter) {
+            if (!filteredRestaurant.tags.some(function (tag) {
+              return tag.name === filter;
+            })) {
+              filteredRestaurants.splice(i, 1);
+            }
+          });
+        };
+
+        for (var i = 0; i < filteredRestaurants.length; i++) {
+          _loop(i);
+        }
+
+        console.log(filters);
+        return filteredRestaurants;
+      }
+    },
+    filteredList: function filteredList() {
+      var _this2 = this;
+
+      if (this.users) {
+        return this.users.filter(function (user) {
+          return user.name.toLowerCase().includes(_this2.searchInput.trim().toLowerCase());
+        });
+      }
+    }
+  }
 });
 var password = document.getElementById('password');
 var toggler = document.getElementById('toggler');
@@ -53914,19 +54015,19 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/restaurant_show.scss */"./resources/sass/restaurant_show.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/Laravel/DeliveBoo/resources/sass/statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })

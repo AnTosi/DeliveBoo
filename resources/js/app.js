@@ -28,18 +28,125 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app',
-});
+  el: '#app',
 
-var password = document.getElementById('password');
-var toggler = document.getElementById('toggler');
+  data() {
+    return {
+      users: null,
+
+      tag: '',
+
+      filterTags: [],
+
+      tags: null,
+
+      searchInput: '',
+
+    }
+  },
+
+  methods: {
+    tagHandler(tag) {
+      this.tag = tag
+
+      if (!this.filterTags.includes(tag)) {
+        this.filterTags.push(tag)
+      } else {
+        let index = this.filterTags.indexOf(tag)
+
+        if (index > -1) {
+          this.filterTags.splice(index, 1)
+        }
+      }
+    },
+  },
+
+  mounted() {
+    axios.get('/api/users').then((r) => {
+      this.users = r.data.data
+    })
+    axios.get('/api/tags').then((r2) => {
+      this.tags = r2.data.data
+    })
+  },
+
+  computed: {
+    filteredUsers() {
+      let restaurants = []
+      if (this.users) {
+        restaurants = this.users
+      }
+      let filters = this.filterTags
+
+      filteredRestaurants = []
+
+      checkedFilters = [];
+
+      if (restaurants) {
+        filters.forEach((filter) => {
+          for (let i = 0; i < restaurants.length; i++) {
+            const restaurant = restaurants[i]
+
+            if (restaurant.tags.some((tag) => tag.name === filter)) {
+              if (!filteredRestaurants.includes(restaurant)) {
+                filteredRestaurants.push(restaurant)
+              }
+            }
+          }
+        })
+
+
+        filters.forEach((filter) => {
+          for (let i = 0; i < filteredRestaurants.length; i++) {
+
+            const filteredRestaurant = filteredRestaurants[i];
+
+            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
+              filteredRestaurants.splice(i, 1)
+            }
+
+          }
+        })
+
+        for (let i = 0; i < filteredRestaurants.length; i++) {
+          const filteredRestaurant = filteredRestaurants[i];
+
+          filters.forEach((filter) => {
+            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
+              filteredRestaurants.splice(i, 1)
+            }
+          })
+        }
+
+
+
+
+        console.log(filters);
+        return filteredRestaurants
+      }
+    },
+
+    filteredList() {
+      if (this.users) {
+        return this.users.filter((user) => {
+          return user.name
+            .toLowerCase()
+            .includes(this.searchInput.trim().toLowerCase())
+        })
+      }
+    },
+  },
+})
+
+var password = document.getElementById('password')
+var toggler = document.getElementById('toggler')
 showHidePassword = () => {
-if (password.type == 'password') {
-password.setAttribute('type', 'text');
-toggler.classList.add('fa-eye-slash');
-} else {
-toggler.classList.remove('fa-eye-slash');
-password.setAttribute('type', 'password');
+  if (password.type == 'password') {
+    password.setAttribute('type', 'text')
+    toggler.classList.add('fa-eye-slash')
+  } else {
+    toggler.classList.remove('fa-eye-slash')
+    password.setAttribute('type', 'password')
+  }
 }
-};
-toggler.addEventListener('click', showHidePassword);
+toggler.addEventListener('click', showHidePassword)
