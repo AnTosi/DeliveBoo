@@ -10,7 +10,9 @@
     .restaurant_aside {
         .info_wrap {
             border-radius: 30px;
-            height: 90%;
+        }
+        .restaurant_info {
+            height: fit-content;
         }
         .add_to_cart {
             border-radius: 50%;

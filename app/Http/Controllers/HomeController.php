@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dish;
 use App\Models\Tag;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class HomeController extends Controller
      */
     public function show(User $user)
     {
+        $dishes = Dish::orderByDesc('id')->paginate(8);
         return view('guest.restaurant.show', compact('user'));
     }
 }
