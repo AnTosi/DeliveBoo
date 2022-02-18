@@ -8,8 +8,16 @@
     position: relative;
     bottom: 60px;
     .restaurant_aside {
-        .restaurant_info {
+        .info_wrap {
             border-radius: 30px;
+            height: 90%;
+        }
+        .add_to_cart {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background-color: rgb(202, 143, 202);
         }
     }
 }

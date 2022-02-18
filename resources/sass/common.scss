@@ -1,11 +1,8 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import '_variables';
-
-
-
+@import "_variables";
 
 .bg_secondary {
     background-color: $brand-color-secondary;
@@ -13,6 +10,10 @@
 
 .text_primary {
     color: $brand-color-primary;
+}
+
+.text_secondary {
+    color: $brand-color-secondary;
 }
 
 .wave {

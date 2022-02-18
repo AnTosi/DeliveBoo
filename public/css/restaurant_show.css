@@ -3,6 +3,14 @@
   position: relative;
   bottom: 60px;
 }
-.info_cart .restaurant_aside .restaurant_info {
+.info_cart .restaurant_aside .info_wrap {
   border-radius: 30px;
+  height: 90%;
+}
+.info_cart .restaurant_aside .add_to_cart {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #ca8fca;
 }

@@ -11255,6 +11255,10 @@ textarea.form-control-lg {
   color: #ffc144;
 }
 
+.text_secondary {
+  color: #4F009E;
+}
+
 .wave {
   margin-top: -1px;
 }
