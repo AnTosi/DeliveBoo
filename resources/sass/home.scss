@@ -52,3 +52,58 @@
 svg {
     margin-top: -5px;
 }
+
+$offset: 100;
+$duration: 1s;
+
+.spinner {
+    animation: rotator $duration linear infinite;
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.path {
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation: dash $duration ease-in-out infinite, colors ($duration * 5) ease-in-out infinite;
+}
+
+@keyframes colors {
+    0% {
+        stroke: $brand-color-secondary;
+    }
+    25% {
+        stroke: $brand-color-secondary;
+    }
+    50% {
+        stroke: $brand-color-secondary;
+    }
+    75% {
+        stroke: $brand-color-secondary;
+    }
+    100% {
+        stroke: $brand-color-secondary;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: $offset;
+    }
+    50% {
+        stroke-dashoffset: $offset;
+        transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: $offset;
+        transform: rotate(450deg);
+    }
+}

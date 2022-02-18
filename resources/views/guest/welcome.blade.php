@@ -29,8 +29,8 @@
         y="0px" viewBox="0 0 1431.5 113.39" style="enable-background:new 0 0 1431.5 113.39;" xml:space="preserve">
         <path class="st0" fill="#FCC045" fill-opacity="1"
             d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95
-                                                                                                     c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0
-                                                                                                     s-192,0-240,0H-8.5z" />
+                                                                                                                                                                 c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0
+                                                                                                                                                                 s-192,0-240,0H-8.5z" />
     </svg>
 
     <div class="container mb-5">
@@ -84,13 +84,15 @@
             </div>
         </div>
 
-        <div v-else class="row row-cols-3 g-5">
+        <div v-else-if="users" class="row row-cols-3 g-5">
             <div v-for="user in users" :key="user.id">
                 <div class="col">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
+
                             <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
                                 alt="">
+
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <span class="capitalize text-decoration-none">@{{ user.name }}</span>
@@ -108,5 +110,16 @@
             </div>
         </div>
 
-    </div>
-@endsection
+        <div v-else>
+            <div class="text-center mt-5">
+
+                <p class="fs-1">Loading</p>
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33"
+                        r="30"></circle>
+                </svg>
+            </div>
+
+        </div>
+    @endsection
