@@ -10,11 +10,52 @@
   min-width: -moz-max-content;
   min-width: max-content;
 }
+.tags-container .card.active {
+  background-color: #4f009e;
+}
+.tags-container .card.active span {
+  color: white;
+  font-weight: bold;
+}
 .tags-container .tags_link {
   width: 100% !important;
 }
 .tags-container .tags_link span {
   color: #4f009e;
+}
+.tags-container .card.rounded-pill {
+  -webkit-animation-name: popup;
+          animation-name: popup;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+@-webkit-keyframes popup {
+  0% {
+    display: block;
+    transform: scale(0);
+  }
+  50% {
+    display: block;
+    transform: scale(1.09);
+  }
+  100% {
+    display: block;
+    transform: scale(1);
+  }
+}
+@keyframes popup {
+  0% {
+    display: block;
+    transform: scale(0);
+  }
+  50% {
+    display: block;
+    transform: scale(1.09);
+  }
+  100% {
+    display: block;
+    transform: scale(1);
+  }
 }
 
 svg {

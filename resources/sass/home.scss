@@ -12,11 +12,40 @@
     }
     .card {
         min-width: max-content;
+
+        &.active {
+            background-color: $brand-color-secondary;
+
+            span {
+                color: white;
+                font-weight: bold;
+            }
+        }
     }
     .tags_link {
         width: 100% !important;
         span {
             color: $brand-color-secondary;
+        }
+    }
+
+    .card.rounded-pill {
+        animation-name: popup;
+        animation-duration: 1s;
+    }
+
+    @keyframes popup {
+        0% {
+            display: block;
+            transform: scale(0);
+        }
+        50% {
+            display: block;
+            transform: scale(1.09);
+        }
+        100% {
+            display: block;
+            transform: scale(1);
         }
     }
 }

@@ -32,10 +32,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <object data="{{ asset('img/logo-deliveboo.svg') }}" width="200"></object>
+                    <img src="{{ asset('img/logo-deliveboo.svg') }}" width="200">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,7 +46,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <input type="text" placeholder="Search">
+                    <input v-model='searchInput' type="text" placeholder="Search">
                     <!-- Left Side Of Navbar -->
 
 
@@ -78,7 +78,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -99,13 +99,5 @@
         </main>
     </div>
 </body>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        $('select').selectpicker();
-
-    });
-</script>
 
 </html>

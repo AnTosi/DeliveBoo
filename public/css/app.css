@@ -11265,9 +11265,33 @@ textarea.form-control-lg {
 
 .navbar {
   background-color: #ffc144;
+  height: 109.09px;
+  z-index: 10;
+}
+.navbar .navbar-brand {
+  -webkit-animation-name: logo;
+          animation-name: logo;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
 }
 .navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
   color: #4f009e;
+}
+@-webkit-keyframes logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .navbar .nav-item a {
   background-color: #4f009e;

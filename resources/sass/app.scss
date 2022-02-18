@@ -1,23 +1,34 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import '_variables';
+@import "_variables";
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 // Common
-@import 'common';
+@import "common";
 
-
-
-.navbar{
+.navbar {
     background-color: $brand-color-primary;
+    height: 109.09px;
+    z-index: 10;
 
-    .navbar-brand{
-        h1{
+    .navbar-brand {
+        h1 {
             color: $brand-color-secondary;
+        }
+        animation-name: logo;
+        animation-duration: 3s;
+
+        @keyframes logo {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
         }
     }
     .nav-item {
@@ -36,14 +47,10 @@
         .navbar-nav {
             width: 200px;
 
-            .dropdown-item{
+            .dropdown-item {
                 background-color: white !important;
                 color: $brand-color-secondary !important;
-                
-                
             }
         }
     }
 }
-
-
