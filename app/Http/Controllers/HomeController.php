@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function show(User $user)
     {
-        $dishes = Dish::orderByDesc('id')->paginate(8);
-        return view('guest.restaurant.show', compact('user'));
+        $dishes = $user->dishes()->paginate(6);
+        return view('guest.restaurant.show', compact('user', 'dishes'));
     }
 }

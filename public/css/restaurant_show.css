@@ -11,10 +11,22 @@
   height: -moz-fit-content;
   height: fit-content;
 }
-.info_cart .restaurant_aside .add_to_cart {
+.info_cart .restaurant_aside .dish {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+.info_cart .restaurant_aside .dish .add_to_cart {
   border-radius: 50%;
   width: 30px;
   height: 30px;
   border: none;
   background-color: #ca8fca;
+}
+.info_cart .page-item.active .page-link {
+  z-index: 3;
+  color: #4f009e;
+  font-weight: bold;
+  background-color: #ca8fca;
+  border: none;
 }

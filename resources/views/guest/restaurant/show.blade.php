@@ -40,11 +40,10 @@
                 </div>
 
                 <div class="row row-cols-2 g-3">
-                    @foreach ($user->dishes as $dish)
+                    @foreach ($dishes as $dish)
                         @if ($dish->visibility == true)
-                            <div class="col">
+                            <div class="col dish">
                                 <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
-
                                     <div class="row row-cols-2">
                                         <div class="col-3"><img src="{{ asset('storage/' . $dish->image) }}"
                                                 class="img-fluid rounded-circle" height="100" width="100" alt="">
@@ -68,6 +67,9 @@
                             </div>
                         @endif
                     @endforeach
+                </div>
+                <div class="mx-auto d-flex justify-content-center">
+                    {{ $dishes->links() }}
                 </div>
             </div>
 
