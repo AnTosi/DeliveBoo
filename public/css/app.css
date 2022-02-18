@@ -11248,11 +11248,15 @@ textarea.form-control-lg {
   }
 }
 .bg_secondary {
-  background-color: #4F009E;
+  background-color: #4f009e;
 }
 
 .text_primary {
   color: #ffc144;
+}
+
+.text_secondary {
+  color: #4f009e;
 }
 
 .wave {
@@ -11263,10 +11267,10 @@ textarea.form-control-lg {
   background-color: #ffc144;
 }
 .navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
-  color: #4F009E;
+  color: #4f009e;
 }
 .navbar .nav-item a {
-  background-color: #4F009E;
+  background-color: #4f009e;
 }
 .navbar .collapse input {
   width: 50%;
@@ -11280,5 +11284,5 @@ textarea.form-control-lg {
 }
 .navbar .collapse .navbar-nav .dropdown-item {
   background-color: white !important;
-  color: #4F009E !important;
+  color: #4f009e !important;
 }

@@ -4,10 +4,6 @@
 // Variables
 @import "_variables";
 
-
-
-
-
 .tags-container {
     background-color: $brand-color-primary;
     width: 100%;
@@ -18,13 +14,12 @@
         min-width: max-content;
     }
     .tags_link {
-        width: 100%!important;
-        span{
+        width: 100% !important;
+        span {
             color: $brand-color-secondary;
         }
     }
-
 }
-svg{
+svg {
     margin-top: -5px;
 }
