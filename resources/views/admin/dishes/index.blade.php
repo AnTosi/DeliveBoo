@@ -6,65 +6,87 @@
             {{ session('message') }}
         </div>
     @endif
-    <h1 class="mt-5">Dishes</h1>
 
-    <div class="table-responsive">
-        <a class="btn btn-dark mt-4 mb-4" href="{{ route('admin.dishes.create') }}" role="button">Add dish</a>
-        <table class="table table-striped table-sm">
-            <thead>
+    <div class="d-flex justify-content-between pt-4">
+        <div class="col-6">
+            <h1>Dishes</h1>
+        </div>
+        <div class="col-6 text-end">
+            <a name="" id="" class="btn btn-dark" href="{{ route('admin.dishes.create') }}" role="button">
+                Add dish
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-responsive-md table-striped">
+        <thead>
+            <tr>
+                <th class="text-center" scope="col">ID</th>
+                <th class="text-center" scope="col">Name</th>
+                <th class="text-center" scope="col">Image</th>
+                <th class="text-center" scope="col">Price</th>
+                <th class="text-center" scope="col">Visible</th>
+                <th class="text-center" scope="col">Created At</th>
+                <th class="text-center" scope="col">Updated At</th>
+                <th class="text-center" scope="col">Option </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach ($dishes as $dish)
                 <tr>
-                    <th class="text-center" scope="col">ID</th>
-                    <th class="text-center" scope="col">Name</th>
-                    <th class="text-center" scope="col">Image</th>
-                    <th class="text-center" scope="col">Ingredients</th>
-                    <th class="text-center" scope="col">Description</th>
-                    <th class="text-center" scope="col">Price</th>
-                    <th class="text-center" scope="col">Visible</th>
-                    <th class="text-center" scope="col">Created At</th>
-                    <th class="text-center" scope="col">Updated At</th>
-                    <th class="text-center" scope="col">Option </th>
-                </tr>
-            </thead>
-            <tbody>
+                    <td class="text-center align-middle">{{ $dish->id }}</td>
 
-                @foreach ($dishes as $dish)
-                    <tr>
-                        <td class="text-center">{{ $dish->id }}</td>
+                    <td class="text-center align-middle">{{ $dish->name }}</td>
 
-                        <td class="text-center">{{ $dish->name }}</td>
+                    <td class="text-center align-middle"><img height="60" src="{{ asset('storage/' . $dish->image) }}"
+                            alt=""></td>
 
-                        <td class="text-center"><img width="100" height="80"
-                                src="{{ asset('storage/' . $dish->image) }}" alt=""></td>
+                    <td class="text-center align-middle">{{ $dish->price }}</td>
 
-                        <td class="text-center">{{ $dish->ingredients }}</td>
+                    <td class="text-center align-middle">
+                        @if ($dish->visibility === 1)
+                            <i class="fas fa-check" style="color: green;"></i>
+                        @else
+                            <i class="fas fa-times" style="color: red;"></i>
+                        @endif
+                    </td>
 
-                        <td class="text-center">{{ $dish->description }}</td>
+                    <td class="text-center align-middle">{{ $dish->created_at }}</td>
 
-                        <td class="text-center">{{ $dish->price }}</td>
+                    <td class="text-center align-middle">{{ $dish->updated_at }}</td>
 
-                        <td class="text-center">
-                            @if ($dish->visibility === 1)
-                                <p><i class="fas fa-check" style="color: green;"></i></p>
-                            @else
-                                <p><i class="fas fa-times" style="color: red;"></i></p>
-                            @endif
-                        </td>
+                    {{-- <td id="index_option_collapse" class="text-center align-middle d-md-none collapsed"
+                        data-bs-toggle="collapse" data-bs-target=".multi-collapse" role="button" aria-expanded="false"
+                        aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">
 
-                        <td class="text-center">{{ $dish->created_at }}</td>
+                        <button class="btn btn-warning d-md-none">
+                            <i class="fas fa-wrench fa-lg fa-fw"></i>
+                        </button>
+                    </td>
 
-                        <td class="text-center">{{ $dish->updated_at }}</td>
 
-                        <td class="text-center"> <a class="btn btn-primary"
-                                href="{{ route('admin.dishes.show', $dish->slug) }}" role="button">View</a></td>
+                    <div class="col-md-3 col-lg-2 bg-light">
+                        <td id="multiCollapseExample1"
+                            class="index_option_collapsed text-center align-middle collapse multi-collapse"> <a
+                                class="btn btn-primary text-white" href="{{ route('admin.dishes.show', $dish->slug) }}"
+                                role="button">
+                                <i class="fas fa-eye fa-lg fa-fw"></i>
+                            </a></td>
 
-                        <td class="text-center"><a class="btn btn-primary"
-                                href="{{ route('admin.dishes.edit', $dish->slug) }}" role="button">Edit</a></td>
+                        <td id="multiCollapseExample2"
+                            class="index_option_collapsed text-center align-middle collapse multi-collapse"><a
+                                class="btn btn-secondary text-white" href="{{ route('admin.dishes.edit', $dish->slug) }}"
+                                role="button">
+                                <i class="fas fa-pencil-alt fa-lg fa-fw"></i>
+                            </a></td>
 
-                        <td class="text-center">
+                        <td id="multiCollapseExample3"
+                            class="index_option_collapsed text-center align-middle collapse multi-collapse">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-danger " data-bs-toggle="modal"
+                            <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal"
                                 data-bs-target="#delete{{ $dish->slug }}">
-                                Delete
+                                <i class="fas fa-trash-alt fa-lg fa-fw"></i>
                             </button>
 
                             <!-- Modal -->
@@ -84,7 +106,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <form action="{{ route('admin.dishes.destroy', $dish->slug) }}" method="post">
+                                            <form action="{{ route('admin.dishes.destroy', $dish->slug) }}"
+                                                method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" type="submit">Delete</button>
@@ -94,14 +117,66 @@
                                 </div>
                             </div>
                         </td>
+                    </div> --}}
+
+                    <td class="text-center align-middle">
+                        <div class="dropdown">
+                            <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-wrench fa-lg fa-fw"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item"
+                                        href="{{ route('admin.dishes.show', $dish->slug) }}">View</a></li>
+                                <li><a class="dropdown-item"
+                                        href="{{ route('admin.dishes.edit', $dish->slug) }}">Edit</a></li>
+
+
+                                <!-- trigger modal -->
+                                <li><button class="dropdown-item" type="button"
+                                        data-bs-target="#delete{{ $dish->slug }}" data-bs-toggle="modal">Delete</button>
+                                </li>
+
+
+                            </ul>
+                            <!-- Modal -->
+                            <div class="modal fade" id="delete{{ $dish->slug }}" tabindex="-1" role="dialog"
+                                aria-labelledby="{{ $dish->slug }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete {{ $dish->name }}?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            WARNING! You are permanently deleting "{{ $dish->name }}" from your menu
+                                            ⚠️
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <form action="{{ route('admin.dishes.destroy', $dish->slug) }}"
+                                                method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger text-white" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
 
 
 
-                    </tr>
-                @endforeach
+                </tr>
+            @endforeach
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
     </div>
 
     <div>
