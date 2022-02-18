@@ -29,7 +29,9 @@ class HomeController extends Controller
      */
     public function show(User $user)
     {
-        $dishes = $user->dishes()->paginate(6);
+
+        $dishes = $user->dishes()->where('visibility', '=', true)->paginate(6);
+
         return view('guest.restaurant.show', compact('user', 'dishes'));
     }
 }

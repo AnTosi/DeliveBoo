@@ -6,7 +6,6 @@
 
 
 @section('content')
-
     <div class="container-fliud">
         <img width="100%" height="200" style="filter: blur(20px)"
             src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}" alt="...">
@@ -65,6 +64,8 @@
                                     {{-- Price and Add to cart --}}
                                 </div>
                             </div>
+                        @else
+                            <p>Gesù malefico</p>
                         @endif
                     @endforeach
                 </div>
@@ -72,14 +73,10 @@
                     {{ $dishes->links() }}
                 </div>
             </div>
-
-            <div class="col">
-                cart
-            </div>
-
         </div>
-
     </div>
 
-
+    <div class="col">
+        cart
+    </div>
 @endsection
