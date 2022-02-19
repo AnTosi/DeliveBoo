@@ -6,7 +6,6 @@
 
 
 @section('content')
-
     <div class="container-fliud">
         <img width="100%" height="200" style="filter: blur(20px); object-fit:cover"
             src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}" alt="...">
@@ -39,49 +38,52 @@
                     <p class="text-muted">Free delivery for orders of 25 € or more.</p>
                 </div>
 
-                <div v-if="user.dishes.length > 0" class="row row-cols-2 g-3">
 
+                <div class="row row-cols-2 g-3">
+                    @foreach ($dishes as $dish)
+                        @if ($dish->visibility == true)
+                            <div class="col dish">
 
-                    <div v-for="dish in displayedDishes" :key="dish.id" class="col dish">
+                                <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
+                                    <div class="row row-cols-2 align-items-center">
+                                        <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
+                                                class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
+                                                alt="">
+                                        </div>
+                                        <div class="col">
+                                            <h1 class="fs-3 fw-bold"> {{ $dish->name }}</h1>
+                                        </div>
+                                    </div>
+                                    {{-- Image and dish name --}}
 
-                        <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
-                            <div class="row row-cols-2 align-items-center">
-                                <div class="col-4"><img :src="'storage/' + dish.image " class="rounded-circle"
-                                        style="object-fit:cover; width:75px; height:75px" alt="">
-                                </div>
-                                <div class="col">
-                                    <h1 class="fs-3 fw-bold"> @{{ dish.name }}</h1>
+                                    <div class="row row-cols-2 justify-content-between align-items-center">
+                                        <div class="col mt-4">
+                                            <h4> {{ $dish->price }} €</h4>
+                                        </div>
+                                        <div v-on:click="addToCart({{ json_encode($dish) }})"
+                                            class="col-9 d-flex justify-content-center align-items-center add_to_cart">
+                                            <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                        </div>
+                                    </div>
+                                    {{-- Price and Add to cart --}}
                                 </div>
                             </div>
-                            {{-- Image and dish name --}}
+                        @else
+                            <div class="text-center mt-5">
 
-                            <div class="row row-cols-2 justify-content-between align-items-center">
-                                <div class="col mt-4">
-                                    <h4> @{{ dish.price }} €</h4>
-                                </div>
-                                <div v-on:click="addToCart(dish)"
-                                    class="col-9 d-flex justify-content-center align-items-center add_to_cart">
-                                    <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
-                                </div>
+                                <p class="fs-1">Currently there are no dishes available 😅</p>
+
                             </div>
-                            {{-- Price and Add to cart --}}
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
 
-                <div v-else>
-                    <div class="text-center mt-5">
 
-                        <p class="fs-1">Currently there are no dishes available 😅</p>
-
-                    </div>
-
-                </div>
 
                 {{-- PAGINAZIONE --}}
                 <div class="mx-auto d-flex justify-content-center">
 
-                    <nav aria-label="Page navigation example">
+                    {{-- <nav aria-label="Page navigation example">
                         <ul class="pagination d-flex">
                             <li class="page-item">
                                 <button type="button" class="page-link" v-if="page != 1" v-on:click="page--"> Previous
@@ -97,7 +99,8 @@
                                     Next </button>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> --}}
+                    {{$dishes->links()}}
                 </div>
                 {{-- / PAGINAZIONE --}}
 
@@ -185,5 +188,4 @@
             </div>
         </div>
     </div>
-
 @endsection
