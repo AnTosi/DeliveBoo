@@ -60,7 +60,7 @@
                                         <div class="col mt-4">
                                             <h4> {{ $dish->price }} €</h4>
                                         </div>
-                                        <div v-on:click="addToCart({{ json_encode($dish) }})"
+                                        <div v-on:click="addToCart({{json_encode($dish)}})"
                                             class="col-9 d-flex justify-content-center align-items-center add_to_cart">
                                             <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
                                         </div>
@@ -82,24 +82,6 @@
 
                 {{-- PAGINAZIONE --}}
                 <div class="mx-auto d-flex justify-content-center">
-
-                    {{-- <nav aria-label="Page navigation example">
-                        <ul class="pagination d-flex">
-                            <li class="page-item">
-                                <button type="button" class="page-link" v-if="page != 1" v-on:click="page--"> Previous
-                                </button>
-                            </li>
-                            <li class="page-item d-flex">
-                                <button type="button" class="page-link" v-for="pageNumber in pages"
-                                    :class="{active: activePage(pageNumber)}" v-on:click="page = pageNumber">
-                                    @{{ pageNumber }}</button>
-                            </li>
-                            <li class="page-item">
-                                <button type="button" v-on:click="nextPage" class="page-link">
-                                    Next </button>
-                            </li>
-                        </ul>
-                    </nav> --}}
                     {{$dishes->links()}}
                 </div>
                 {{-- / PAGINAZIONE --}}

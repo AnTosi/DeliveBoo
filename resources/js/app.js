@@ -57,6 +57,8 @@ const app = new Vue({
 
       pages: [],
 
+      indexDish: [],
+
       displayedDishesLength: null,
 
     }
@@ -96,9 +98,12 @@ const app = new Vue({
       return dishes.slice(from, to);;
     },
     addToCart(dish) {
-      if (!this.cart.includes(dish)) {
+      
+      if(!this.indexDish.includes(dish.id)) {
+        this.indexDish.push(dish.id)
         this.cart.push(dish)
       }
+
     },
     removeCart(dish) {
       this.cart.splice(indexOf(this.cart, dish), 1)
