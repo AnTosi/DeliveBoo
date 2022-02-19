@@ -37,7 +37,7 @@
         <h2 class="my-5">Restaurants</h2>
         <div v-if="filterTags.length > 0" class="row row-cols-3 g-5">
             <div v-for="user in filteredUsers" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
                             <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
@@ -62,7 +62,7 @@
 
         <div v-else-if="filteredList" class="row row-cols-3 g-5">
             <div v-for="user in filteredList" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
                             <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
@@ -86,7 +86,7 @@
 
         <div v-else-if="users" class="row row-cols-3 g-5">
             <div v-for="user in users" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
 

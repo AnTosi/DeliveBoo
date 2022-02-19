@@ -13,7 +13,7 @@
     </div>
 
     <div class="container info_cart">
-        <div class="row g-3">
+        <div class="row g-3 flex-wrap">
             <div class="col-9 restaurant_aside">
                 <div class="info_wrap restaurant_info pt-5 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
                     <h1 class="fs-1 fw-bold">{{ $user->name }} <span class="fs-3"><sup>®</sup></span></h1>
@@ -39,39 +39,40 @@
                     <p class="text-muted">Free delivery for orders of 25 € or more.</p>
                 </div>
 
-                <div class="row row-cols-2 g-3">
-                    @foreach ($dishes as $dish)
-                        @if ($dish->visibility == true)
-                            <div class="col dish">
-                                <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
-                                    <div class="row row-cols-2">
-                                        <div class="col-3"><img src="{{ asset('storage/' . $dish->image) }}"
-                                                class="img-fluid rounded-circle" height="100" width="100" alt="">
-                                        </div>
-                                        <div class="col-9">
-                                            <h1 class="fs-3 fw-bold">{{ $dish->name }}</h1>
-                                        </div>
-                                    </div>
-                                    {{-- Image and dish name --}}
-
-                                    <div class="row row-cols-2 justify-content-between align-items-center">
-                                        <div class="col-3 mt-4">
-                                            <h4>{{ $dish->price }} €</h4>
-                                        </div>
-                                        <div class="col-9 d-flex justify-content-center align-items-center add_to_cart">
-                                            <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
-                                        </div>
-                                    </div>
-                                    {{-- Price and Add to cart --}}
+                <div v-if="user.dishes" class="row row-cols-2 g-3">
+                    {{-- @foreach ($dishes as $dish)
+                        @if ($dish->visibility == true) --}}
+                    <div v-for="dish in user.dishes" :key="dish.id" class="col dish">
+                        <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
+                            <div class="row row-cols-2">
+                                <div class="col-3"><img :src="'storage/' + dish.image "
+                                        class="img-fluid rounded-circle" height="100" width="100" alt="">
+                                </div>
+                                <div class="col-9">
+                                    <h1 class="fs-3 fw-bold"> @{{ dish.name }}</h1>
                                 </div>
                             </div>
-                        @else
+                            {{-- Image and dish name --}}
+
+                            <div class="row row-cols-2 justify-content-between align-items-center">
+                                <div class="col-3 mt-4">
+                                    <h4> @{{ dish.price }} €</h4>
+                                </div>
+                                <div v-on:click="addToCart(dish)"
+                                    class="col-9 d-flex justify-content-center align-items-center add_to_cart">
+                                    <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                </div>
+                            </div>
+                            {{-- Price and Add to cart --}}
+                        </div>
+                    </div>
+                    {{-- @else
                             <p>Gesù malefico</p>
                         @endif
-                    @endforeach
+                    @endforeach --}}
                 </div>
                 <div class="mx-auto d-flex justify-content-center">
-                    {{ $dishes->links() }}
+                    {{-- {{ $dishes->links() }} --}}
                 </div>
             </div>
 
@@ -103,35 +104,38 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="d-flex flex-row align-items-center">
-                                                                <div>
-                                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp"
-                                                                        class="img-fluid rounded-3" alt="Shopping item"
-                                                                        style="width: 65px;">
+                                                {{-- PRODOTTI CARRELLO --}}
+                                               
+                                                    <div  v-for="product in cart" class="card mb-3">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="d-flex flex-row align-items-center">
+                                                                    <div>
+                                                                        <img :src="'storage/' + product.image "
+                                                                            class="img-fluid rounded-3" alt="Shopping item"
+                                                                            style="width: 65px;">
+                                                                    </div>
+                                                                    <div class="ms-3">
+                                                                        <h5 class="m-0">@{{product.name}}</h5>
+                                                                        <p class="small mb-0"></p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="ms-3">
-                                                                    <h5>Iphone 11 pro</h5>
-                                                                    <p class="small mb-0">256GB, Navy Blue</p>
+                                                                <div class="d-flex flex-row align-items-center">
+                                                                    <div style="width: 50px;">
+                                                                        <h5 class="fw-normal mb-0 ms-3"> 1 </h5>
+                                                                    </div>
+                                                                    <div style="width: 80px;">
+                                                                        <h5 class="mb-0">@{{product.price}} €</h5>
+                                                                    </div>
+                                                                    <a href="#!" v-on:click="removeCart(product)" style="color: #cecece;"><i
+                                                                            class="fas fa-trash-alt"></i></a>
                                                                 </div>
-                                                            </div>
-                                                            <div class="d-flex flex-row align-items-center">
-                                                                <div style="width: 50px;">
-                                                                    <h5 class="fw-normal mb-0">2</h5>
-                                                                </div>
-                                                                <div style="width: 80px;">
-                                                                    <h5 class="mb-0">$900</h5>
-                                                                </div>
-                                                                <a href="#!" style="color: #cecece;"><i
-                                                                        class="fas fa-trash-alt"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                              
 
-                                                <div class="card mb-3">
+                                                {{-- <div class="card mb-3">
                                                     <div class="card-body">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="d-flex flex-row align-items-center">
@@ -213,8 +217,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-
+                                                </div> --}}
+                                                {{-- // PRODOTTI CARRELLO --}}
                                             </div>
                                             <div class="flex-column">
 

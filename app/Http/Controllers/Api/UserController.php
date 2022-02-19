@@ -17,6 +17,6 @@ class userController extends Controller
     public function index()
     {
         //
-        return UserResource::collection(User::with(['tags'])->paginate());
+        return UserResource::collection(User::with(['tags', 'dishes'])->paginate());
     }
 }
