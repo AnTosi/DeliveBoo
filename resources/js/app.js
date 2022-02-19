@@ -61,6 +61,7 @@ const app = new Vue({
 
       displayedDishesLength: null,
 
+      localDishes: [],
     }
   },
 
@@ -85,28 +86,44 @@ const app = new Vue({
 
     /* pagination */
     setPages() {
-      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage);
+      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
       for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
+        this.pages.push(index)
       }
     },
     paginate(dishes) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = (page * perPage) - perPage;
-      let to = (page * perPage);
-      return dishes.slice(from, to);;
+      let page = this.page
+      let perPage = this.perPage
+      let from = page * perPage - perPage
+      let to = page * perPage
+      return dishes.slice(from, to)
     },
     addToCart(dish) {
+      localStorage.setItem('localDish', JSON.stringify(this.cart))
+      this.cart = JSON.parse(localStorage.getItem('localDish'));
       
-      if(!this.indexDish.includes(dish.id)) {
-        this.indexDish.push(dish.id)
-        this.cart.push(dish)
+      if (this.cart == null) {
+        this.cart = []
       }
-
+      else if(!this.cart.includes(dish))
+      {
+/*           localStorage.setItem('dish', JSON.stringify(dish)) */
+        console.log('non incluso');
+          this.cart.push(dish)
+        }
+          console.log(this.cart)
+        /* if (!this.cart.includes(dish)) {
+          
+          // Save allEntries back to local storage
+            this.indexDish.push(dish.id)
+            
+            
+          
+        } */ 
     },
     removeCart(dish) {
       this.cart.splice(indexOf(this.cart, dish), 1)
+      this.indexDish.splice(indexOf(this.indexDish, dish.id), 1)
     },
 
     nextPage() {
@@ -122,9 +139,7 @@ const app = new Vue({
       if (pageNumber == this.page) {
         return true
       }
-    }
-
-
+    },
   },
 
   mounted() {
@@ -137,6 +152,10 @@ const app = new Vue({
 
     if (localStorage.user) {
       this.user = JSON.parse(localStorage.user)
+    }
+
+    if (localStorage.localDish) {
+      this.cart = JSON.parse(localStorage.localDish)
     }
   },
 
@@ -199,23 +218,23 @@ const app = new Vue({
     },
 
     displayedDishes() {
-      let dishes = this.user.dishes.filter(dish => dish.visibility == true);
-      this.displayedDishesLength = dishes.length;
-      return this.paginate(dishes);
-    }
+      let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
+      this.displayedDishesLength = dishes.length
+      return this.paginate(dishes)
+    },
   },
 
   watch: {
     dishes() {
-      this.setPages();
-    }
+      this.setPages()
+    },
   },
 
   filters: {
     trimWords(value) {
-      return value.split(" ").splice(0, 20).join(" ") + '...';
-    }
-  }
+      return value.split(' ').splice(0, 20).join(' ') + '...'
+    },
+  },
 })
 
 var password = document.getElementById('password')

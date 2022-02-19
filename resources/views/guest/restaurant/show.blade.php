@@ -62,7 +62,7 @@
                                         </div>
                                         <div v-on:click="addToCart({{json_encode($dish)}})"
                                             class="col-9 d-flex justify-content-center align-items-center add_to_cart">
-                                            <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                                <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
                                         </div>
                                     </div>
                                     {{-- Price and Add to cart --}}
