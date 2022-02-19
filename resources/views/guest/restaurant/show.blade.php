@@ -39,9 +39,9 @@
                     <p class="text-muted">Free delivery for orders of 25 € or more.</p>
                 </div>
 
-                <div v-if="user.dishes" class="row row-cols-2 g-3">
-                    {{-- @foreach ($dishes as $dish)
-                        @if ($dish->visibility == true) --}}
+                <div v-if="user.dishes.length > 0" class="row row-cols-2 g-3">
+
+
                     <div v-for="dish in displayedDishes" :key="dish.id" class="col dish">
 
                         <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
@@ -67,6 +67,15 @@
                             {{-- Price and Add to cart --}}
                         </div>
                     </div>
+                </div>
+
+                <div v-else>
+                    <div class="text-center mt-5">
+
+                        <p class="fs-1">Currently there are no dishes available 😅</p>
+
+                    </div>
+
                 </div>
 
                 {{-- PAGINAZIONE --}}
