@@ -123,7 +123,6 @@ const app = new Vue({
   mounted() {
     axios.get('/api/users').then((r) => {
       this.users = r.data.data
-      console.log(this.users);
     })
     axios.get('/api/tags').then((r2) => {
       this.tags = r2.data.data
@@ -178,8 +177,6 @@ const app = new Vue({
             }
           })
         }
-
-        console.log(filters)
         return filteredRestaurants
       }
     },

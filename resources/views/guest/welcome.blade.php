@@ -7,7 +7,7 @@
 @section('content')
     <div class="tags-container">
         <div
-            class="row row-cols-1 row-cols-md-2 row-cols-lg-4 w-50 mx-auto container my-auto pt-3  justify-content-center flex-wrap g-3">
+            class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 mx-auto container-fluid my-auto pt-3  justify-content-center flex-wrap g-3">
             {{-- @foreach ($tags as $tag) --}}
             <div v-for="tag in tags" :key="tag.id" class="col justify-content-center d-flex ">
                 <a href="#" class="tags_link text-black text-decoration-none text-center">
