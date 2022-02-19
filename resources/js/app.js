@@ -51,6 +51,12 @@ const app = new Vue({
 
       user: '',
 
+      page: 1,
+
+			perPage: 2,
+
+			pages: [],	
+
     }
   },
 
@@ -72,6 +78,21 @@ const app = new Vue({
       this.user = user
       localStorage.setItem('user', JSON.stringify(this.user))
     },
+
+    /* pagination */
+    setPages () {
+			let numberOfPages = Math.ceil(this.user.dishes.length / this.perPage);
+			for (let index = 1; index <= numberOfPages; index++) {
+				  this.pages.push(index);
+			}
+		},
+    paginate (dishes) {
+			let page = this.page;
+			let perPage = this.perPage;
+			let from = (page * perPage) - perPage;
+			let to = (page * perPage);
+			return dishes.slice(from, to);;
+		},
     addToCart(dish) {
         if(!this.cart.includes(dish)) {
             this.cart.push(dish)
@@ -79,12 +100,30 @@ const app = new Vue({
     },
     removeCart(dish) {
         this.cart.splice(indexOf(this.cart, dish), 1)
+    },
+
+    nextPage() {
+      	if (this.pages.length == 0) {
+            this.setPages()
+        }
+        if(this.page < this.pages.length) {
+          this.page++
+        }
+    },
+
+    activePage(pageNumber) {
+      if(pageNumber == this.page) {
+        return true
+      }
     }
+
+    
   },
 
   mounted() {
     axios.get('/api/users').then((r) => {
       this.users = r.data.data
+      console.log(this.users);
     })
     axios.get('/api/tags').then((r2) => {
       this.tags = r2.data.data
@@ -154,7 +193,23 @@ const app = new Vue({
         })
       }
     },
+
+    displayedDishes () {
+			return this.paginate(this.user.dishes);
+		}
   },
+
+  watch: {
+		dishes () {
+			this.setPages();
+		}
+	},
+
+	filters: {
+		trimWords(value){
+			return value.split(" ").splice(0,20).join(" ") + '...';
+		}
+	}
 })
 
 var password = document.getElementById('password')

@@ -42,7 +42,7 @@
                 <div v-if="user.dishes" class="row row-cols-2 g-3">
                     {{-- @foreach ($dishes as $dish)
                         @if ($dish->visibility == true) --}}
-                    <div v-for="dish in user.dishes" :key="dish.id" class="col dish">
+                    <div v-for="dish in displayedDishes" :key="dish.id" class="col dish">
                         <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
                             <div class="row row-cols-2">
                                 <div class="col-3"><img :src="'storage/' + dish.image "
@@ -73,6 +73,23 @@
                 </div>
                 <div class="mx-auto d-flex justify-content-center">
                     {{-- {{ $dishes->links() }} --}}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination d-flex">
+                            <li class="page-item">
+                                <button type="button" class="page-link" v-if="page != 1" v-on:click="page--"> Previous
+                                </button>
+                            </li>
+                            <li class="page-item d-flex">
+                                <button type="button" class="page-link"
+                                    v-for="pageNumber in pages" :class="{active: activePage(pageNumber)}" v-on:click="page = pageNumber">
+                                    @{{pageNumber}}</button>
+                            </li>
+                            <li class="page-item">
+                                <button type="button" v-on:click="nextPage" class="page-link">
+                                    Next </button>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 
@@ -105,35 +122,36 @@
                                                 </div>
 
                                                 {{-- PRODOTTI CARRELLO --}}
-                                               
-                                                    <div  v-for="product in cart" class="card mb-3">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="d-flex flex-row align-items-center">
-                                                                    <div>
-                                                                        <img :src="'storage/' + product.image "
-                                                                            class="img-fluid rounded-3" alt="Shopping item"
-                                                                            style="width: 65px;">
-                                                                    </div>
-                                                                    <div class="ms-3">
-                                                                        <h5 class="m-0">@{{product.name}}</h5>
-                                                                        <p class="small mb-0"></p>
-                                                                    </div>
+
+                                                <div v-for="product in cart" class="card mb-3">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="d-flex flex-row align-items-center">
+                                                                <div>
+                                                                    <img :src="'storage/' + product.image "
+                                                                        class="img-fluid rounded-3" alt="Shopping item"
+                                                                        style="width: 65px;">
                                                                 </div>
-                                                                <div class="d-flex flex-row align-items-center">
-                                                                    <div style="width: 50px;">
-                                                                        <h5 class="fw-normal mb-0 ms-3"> 1 </h5>
-                                                                    </div>
-                                                                    <div style="width: 80px;">
-                                                                        <h5 class="mb-0">@{{product.price}} €</h5>
-                                                                    </div>
-                                                                    <a href="#!" v-on:click="removeCart(product)" style="color: #cecece;"><i
-                                                                            class="fas fa-trash-alt"></i></a>
+                                                                <div class="ms-3">
+                                                                    <h5 class="m-0">@{{ product.name }}</h5>
+                                                                    <p class="small mb-0"></p>
                                                                 </div>
+                                                            </div>
+                                                            <div class="d-flex flex-row align-items-center">
+                                                                <div style="width: 50px;">
+                                                                    <h5 class="fw-normal mb-0 ms-3"> 1 </h5>
+                                                                </div>
+                                                                <div style="width: 80px;">
+                                                                    <h5 class="mb-0">@{{ product.price }} €</h5>
+                                                                </div>
+                                                                <a href="#!" v-on:click="removeCart(product)"
+                                                                    style="color: #cecece;"><i
+                                                                        class="fas fa-trash-alt"></i></a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                              
+                                                </div>
+
 
                                                 {{-- <div class="card mb-3">
                                                     <div class="card-body">
