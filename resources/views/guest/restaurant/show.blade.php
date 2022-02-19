@@ -43,10 +43,11 @@
                     {{-- @foreach ($dishes as $dish)
                         @if ($dish->visibility == true) --}}
                     <div v-for="dish in displayedDishes" :key="dish.id" class="col dish">
+
                         <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
                             <div class="row row-cols-2 align-items-center">
-                                <div class="col-4"><img :src="'storage/' + dish.image "
-                                        class="rounded-circle" style="object-fit:cover; width:75px; height:75px"alt="">
+                                <div class="col-4"><img :src="'storage/' + dish.image " class="rounded-circle"
+                                        style="object-fit:cover; width:75px; height:75px" alt="">
                                 </div>
                                 <div class="col">
                                     <h1 class="fs-3 fw-bold"> @{{ dish.name }}</h1>
@@ -111,7 +112,8 @@
                                                     <div class="d-flex flex-row align-items-center">
                                                         <div>
                                                             <img :src="'storage/' + product.image " class="rounded-circle"
-                                                                alt="Shopping item" style=" width: 55px; height: 55px; object-fit: cover;">
+                                                                alt="Shopping item"
+                                                                style=" width: 55px; height: 55px; object-fit: cover;">
                                                         </div>
                                                         <div class="ms-3">
                                                             <h5 class="m-0">@{{ product.name }}</h5>

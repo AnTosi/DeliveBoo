@@ -53,9 +53,11 @@ const app = new Vue({
 
       page: 1,
 
-			perPage: 2,
+      perPage: 2,
 
-			pages: [],	
+      pages: [],
+
+      displayedDishesLength: null,
 
     }
   },
@@ -80,44 +82,44 @@ const app = new Vue({
     },
 
     /* pagination */
-    setPages () {
-			let numberOfPages = Math.ceil(this.user.dishes.length / this.perPage);
-			for (let index = 1; index <= numberOfPages; index++) {
-				  this.pages.push(index);
-			}
-		},
-    paginate (dishes) {
-			let page = this.page;
-			let perPage = this.perPage;
-			let from = (page * perPage) - perPage;
-			let to = (page * perPage);
-			return dishes.slice(from, to);;
-		},
+    setPages() {
+      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate(dishes) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = (page * perPage) - perPage;
+      let to = (page * perPage);
+      return dishes.slice(from, to);;
+    },
     addToCart(dish) {
-        if(!this.cart.includes(dish)) {
-            this.cart.push(dish)
-        }
+      if (!this.cart.includes(dish)) {
+        this.cart.push(dish)
+      }
     },
     removeCart(dish) {
-        this.cart.splice(indexOf(this.cart, dish), 1)
+      this.cart.splice(indexOf(this.cart, dish), 1)
     },
 
     nextPage() {
-      	if (this.pages.length == 0) {
-            this.setPages()
-        }
-        if(this.page < this.pages.length) {
-          this.page++
-        }
+      if (this.pages.length == 0) {
+        this.setPages()
+      }
+      if (this.page < this.pages.length) {
+        this.page++
+      }
     },
 
     activePage(pageNumber) {
-      if(pageNumber == this.page) {
+      if (pageNumber == this.page) {
         return true
       }
     }
 
-    
+
   },
 
   mounted() {
@@ -191,22 +193,24 @@ const app = new Vue({
       }
     },
 
-    displayedDishes () {
-			return this.paginate(this.user.dishes);
-		}
+    displayedDishes() {
+      let dishes = this.user.dishes.filter(dish => dish.visibility == true);
+      this.displayedDishesLength = dishes.length;
+      return this.paginate(dishes);
+    }
   },
 
   watch: {
-		dishes () {
-			this.setPages();
-		}
-	},
+    dishes() {
+      this.setPages();
+    }
+  },
 
-	filters: {
-		trimWords(value){
-			return value.split(" ").splice(0,20).join(" ") + '...';
-		}
-	}
+  filters: {
+    trimWords(value) {
+      return value.split(" ").splice(0, 20).join(" ") + '...';
+    }
+  }
 })
 
 var password = document.getElementById('password')
