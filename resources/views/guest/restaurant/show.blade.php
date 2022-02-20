@@ -7,6 +7,12 @@
 
 @section('content')
     <div class="container-fliud">
+        <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 1431.5 113.39" style="enable-background:new 0 0 1431.5 113.39;"
+            xml:space="preserve">
+            <path class="st0" fill="#FCC045" fill-opacity="1"
+                d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H-8.5z" />
+        </svg>
         <img width="100%" height="200" style="filter: blur(20px); object-fit:cover"
             src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}" alt="...">
     </div>
@@ -17,7 +23,10 @@
 
                 {{-- Restaurant info --}}
                 <div class="info_wrap restaurant_info pt-5 pb-2 px-5 shadow-lg mb-5 bg-body ">
-                    <h1 class="fs-1 fw-bold">{{ $user->name }} <span class="fs-3"><sup>®</sup></span></h1>
+
+
+                    <h1 class="fs-1 fw-bold">{{ $user->name }} <span class="fs-3"><sup>®</sup></span>
+                    </h1>
 
                     <h3>
                         {{ $user->address }}
@@ -41,7 +50,7 @@
                 </div>
 
                 {{-- Dish list --}}
-                <div class="row row-cols-2 g-3">
+                <div class="row row-cols-1 row-cols-xl-2 g-3">
                     @foreach ($dishes as $dish)
                         @if ($dish->visibility == true)
                             <div class="col dish">
@@ -53,7 +62,7 @@
                                                     class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
                                                     alt="">
                                             </div>
-                                            <div class="col">
+                                            <div class="col-8">
                                                 <h1 class="fs-3 fw-bold text-start"> {{ $dish->name }}</h1>
                                             </div>
                                         </div>
@@ -127,7 +136,7 @@
                 {{-- / PAGINAZIONE --}}
 
             </div>
-
+            {{-- CART --}}
             <div class="col">
                 <section class="bg-white" style="border-radius: 1rem">
 
@@ -139,7 +148,6 @@
                                     <div class="row">
 
                                         {{-- PRODOTTI CARRELLO --}}
-
                                         <div v-for="product in cart" class="card mb-3">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between flex-wrap">
@@ -150,7 +158,8 @@
                                                                 style=" width: 55px; height: 55px; object-fit: cover;">
                                                         </div>
                                                         <div class="ms-3">
-                                                            <h5 class="m-0">@{{ product.name.substring(0, 20) }}...</h5>
+                                                            <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
+                                                            </h5>
                                                             <p class="small mb-0"></p>
                                                         </div>
                                                     </div>
@@ -173,17 +182,17 @@
 
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-2">Subtotal</p>
-                                                <p class="mb-2">$4798.00</p>
+                                                <p class="mb-2">€//</p>
                                             </div>
 
                                             <div class="d-flex justify-content-between">
                                                 <p class="mb-2">Shipping</p>
-                                                <p class="mb-2">$20.00</p>
+                                                <p class="mb-2">€2.50</p>
                                             </div>
 
                                             <div class="d-flex justify-content-between mb-4">
                                                 <p class="mb-2">Total(Incl. taxes)</p>
-                                                <p class="mb-2">$4818.00</p>
+                                                <p class="mb-2">//+2.50</p>
                                             </div>
 
                                             <button type="button" id="submit-button"
@@ -208,6 +217,7 @@
 
                 </section>
             </div>
+            {{-- / CART --}}
         </div>
     </div>
 @endsection

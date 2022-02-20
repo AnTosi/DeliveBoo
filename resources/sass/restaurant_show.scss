@@ -3,6 +3,10 @@
 // Variables
 @import "_variables";
 
+svg {
+    margin-top: -1px;
+}
+
 .info_cart {
     max-width: 1800px !important;
     position: relative;

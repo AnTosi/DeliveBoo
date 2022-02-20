@@ -1,4 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.info_cart {
+@import url(https://fonts.googleapis.com/css?family=Nunito);svg {
+  margin-top: -1px;
+}
+
+.info_cart {
   max-width: 1800px !important;
   position: relative;
   bottom: 60px;
