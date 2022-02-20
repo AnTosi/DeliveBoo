@@ -1,36 +1,36 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import '_variables';
+@import "_variables";
 
 .info_cart {
-  max-width: 1800px !important;
-  position: relative;
-  bottom: 60px;
-  .restaurant_aside {
-    .info_wrap {
-      border-radius: 1rem;
+    max-width: 1800px !important;
+    position: relative;
+    bottom: 60px;
+    .restaurant_aside {
+        .info_wrap,
+        .dish {
+            border-radius: 1rem;
+        }
+        .restaurant_info {
+            height: fit-content;
+        }
+        .dish {
+            .add_to_cart {
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                border: none;
+                background-color: $brand-color-secondary-smooth;
+            }
+        }
     }
-    .restaurant_info {
-      height: fit-content;
-    }
-    .dish {
-      
-      .add_to_cart {
-        border-radius: 50%;
-        width: 30px;
-        height: 30px;
-        border: none;
-        background-color: $brand-color-secondary-smooth;
-      }
-    }
-  }
 
-   .page-item.active .page-link {
-    z-index: 3;
-    color: $brand-color-secondary;
-    font-weight: bold;
-    background-color: $brand-color-secondary-smooth;
-    border: none;
-  }
+    .page-item.active .page-link {
+        z-index: 3;
+        color: $brand-color-secondary;
+        font-weight: bold;
+        background-color: $brand-color-secondary-smooth;
+        border: none;
+    }
 }

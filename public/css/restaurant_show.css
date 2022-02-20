@@ -3,18 +3,14 @@
   position: relative;
   bottom: 60px;
 }
-.info_cart .restaurant_aside .info_wrap {
+.info_cart .restaurant_aside .info_wrap,
+.info_cart .restaurant_aside .dish {
   border-radius: 1rem;
 }
 .info_cart .restaurant_aside .restaurant_info {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-}
-.info_cart .restaurant_aside .dish {
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
 }
 .info_cart .restaurant_aside .dish .add_to_cart {
   border-radius: 50%;

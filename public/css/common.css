@@ -1,13 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);.bg_secondary {
-  background-color: #4f009e;
+  background-color: #4f009e !important;
+}
+
+.bg_secondary_smooth {
+  background-color: #ca8fca !important;
 }
 
 .text_primary {
-  color: #ffc144;
+  color: #ffc144 !important;
 }
 
 .text_secondary {
-  color: #4f009e;
+  color: #4f009e !important;
 }
 
 .wave {

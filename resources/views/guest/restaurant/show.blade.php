@@ -42,32 +42,57 @@
                 <div class="row row-cols-2 g-3">
                     @foreach ($dishes as $dish)
                         @if ($dish->visibility == true)
-                            <div class="col dish">
+                            <button data-bs-toggle="modal" data-bs-target="#show-{{ $dish->slug }}"
+                                class="border-0 bg-white">
+                                <div class="col dish shadow-lg">
+                                    <div class="info_wrap pt-4 pb-2 px-5 p-3 mb-5 h-75">
+                                        <div class="row row-cols-2 align-items-center">
+                                            <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
+                                                    class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
+                                                    alt="">
+                                            </div>
+                                            <div class="col">
+                                                <h1 class="fs-3 fw-bold"> {{ $dish->name }}</h1>
+                                            </div>
+                                        </div>
+                                        {{-- Image and dish name --}}
 
-                                <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
-                                    <div class="row row-cols-2 align-items-center">
-                                        <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
-                                                class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
-                                                alt="">
-                                        </div>
-                                        <div class="col">
-                                            <h1 class="fs-3 fw-bold"> {{ $dish->name }}</h1>
-                                        </div>
-                                    </div>
-                                    {{-- Image and dish name --}}
-
-                                    <div class="row row-cols-2 justify-content-between align-items-center">
-                                        <div class="col mt-4">
-                                            <h4> {{ $dish->price }} €</h4>
-                                        </div>
-                                        <div v-on:click="addToCart({{json_encode($dish)}})"
-                                            class="col-9 d-flex justify-content-center align-items-center add_to_cart">
+                                        <div class="row row-cols-2 justify-content-between align-items-center">
+                                            <div class="col mt-4">
+                                                <h4> {{ $dish->price }} €</h4>
+                                            </div>
+                                            <div v-on:click="addToCart({{ json_encode($dish) }})"
+                                                class="col-9 d-flex justify-content-center align-items-center add_to_cart">
                                                 <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                            </div>
+                                        </div>
+                                        {{-- Price and Add to cart --}}
+                                    </div>
+                                </div>
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="show-{{ $dish->slug }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ $dish->name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
-                                    {{-- Price and Add to cart --}}
                                 </div>
                             </div>
+
                         @else
                             <div class="text-center mt-5">
 
@@ -82,7 +107,7 @@
 
                 {{-- PAGINAZIONE --}}
                 <div class="mx-auto d-flex justify-content-center">
-                    {{$dishes->links()}}
+                    {{ $dishes->links() }}
                 </div>
                 {{-- / PAGINAZIONE --}}
 
