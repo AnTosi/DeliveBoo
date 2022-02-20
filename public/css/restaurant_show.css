@@ -27,6 +27,9 @@
   width: fit-content;
   margin: auto;
 }
+.info_cart .restaurant_aside .modal-body .row img {
+  width: 468px;
+}
 .info_cart .page-item.active .page-link {
   z-index: 3;
   color: #4f009e;
