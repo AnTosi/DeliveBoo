@@ -5,15 +5,19 @@
 @import "_variables";
 
 .bg_secondary {
-    background-color: $brand-color-secondary;
+    background-color: $brand-color-secondary !important;
+}
+
+.bg_secondary_smooth {
+    background-color: $brand-color-secondary-smooth !important;
 }
 
 .text_primary {
-    color: $brand-color-primary;
+    color: $brand-color-primary !important;
 }
 
 .text_secondary {
-    color: $brand-color-secondary;
+    color: $brand-color-secondary !important;
 }
 
 .wave {

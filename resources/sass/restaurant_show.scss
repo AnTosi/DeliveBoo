@@ -15,7 +15,7 @@
       height: fit-content;
     }
     .dish {
-      height: max-content;
+      
       .add_to_cart {
         border-radius: 50%;
         width: 30px;
@@ -26,7 +26,7 @@
     }
   }
 
-  .page-item.active .page-link {
+   .page-item.active .page-link {
     z-index: 3;
     color: $brand-color-secondary;
     font-weight: bold;

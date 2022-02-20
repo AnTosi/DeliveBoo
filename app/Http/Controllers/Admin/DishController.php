@@ -59,7 +59,7 @@ class DishController extends Controller
             'visibility' => ['nullable']
         ]);
 
-        
+
         if ($request->file('image')) {
             $image_path = $request->file('image')->store('dish_image');
             $val_data['image'] = $image_path;
@@ -70,7 +70,7 @@ class DishController extends Controller
         $val_data['user_id'] = Auth::id();
 
         Dish::create($val_data);
-        
+
         return redirect()->route('admin.dishes.index')->with('message', 'Dish succesfully created');
     }
 
@@ -83,7 +83,7 @@ class DishController extends Controller
 
     public function show(Dish $dish)
     {
-        return view('guest.dishes.show', compact('dish'));
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**
@@ -107,13 +107,14 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        $val_data = $request->validate([
-            'name' => ['required', Rule::unique('dishes')->ignore($dish->id)->where('user_id', Auth::user()->id)],
-            'ingredients' => ['nullable', 'max:255'],
-            'description' => ['nullable', 'max:1000'],
-            'image' => ['nullable', 'image', 'max:500'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'visibility' => ['nullable']
+        $val_data = $request->validate(
+            [
+                'name' => ['required', Rule::unique('dishes')->ignore($dish->id)->where('user_id', Auth::user()->id)],
+                'ingredients' => ['nullable', 'max:255'],
+                'description' => ['nullable', 'max:1000'],
+                'image' => ['nullable', 'image', 'max:500'],
+                'price' => ['required', 'numeric', 'min:0'],
+                'visibility' => ['nullable']
             ]
         );
 
@@ -127,7 +128,7 @@ class DishController extends Controller
 
         $dish->update($val_data);
 
-        return redirect()->route('admin.dishes.index')->with('message','Dish succesfully edited !');
+        return redirect()->route('admin.dishes.index')->with('message', 'Dish succesfully edited !');
     }
 
     /**
@@ -140,6 +141,6 @@ class DishController extends Controller
     {
         Storage::delete($dish->image);
         $dish->delete();
-        return redirect()->route('admin.dishes.index')->with('message','Dish succesfully deleted');
+        return redirect()->route('admin.dishes.index')->with('message', 'Dish succesfully deleted');
     }
 }

@@ -4,9 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+const { indexOf } = require('lodash')
 
-window.Vue = require('vue');
+require('./bootstrap')
+
+window.Vue = require('vue')
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +21,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component(
+  'example-component',
+  require('./components/ExampleComponent.vue').default,
+)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,6 +47,21 @@ const app = new Vue({
 
       searchInput: '',
 
+      cart: [],
+
+      user: '',
+
+      page: 1,
+
+      perPage: 6,
+
+      pages: [],
+
+      indexDish: [],
+
+      displayedDishesLength: null,
+
+      localDishes: [],
     }
   },
 
@@ -59,6 +79,72 @@ const app = new Vue({
         }
       }
     },
+    getUser(user) {
+      this.user = user
+      localStorage.setItem('user', JSON.stringify(this.user))
+    },
+
+    /* pagination */
+    setPages() {
+      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index)
+      }
+    },
+    paginate(dishes) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = page * perPage - perPage
+      let to = page * perPage
+      return dishes.slice(from, to)
+    },
+    addToCart(dish) {
+        //localStorage.clear()
+        if (localStorage.getItem('localDish') == null) {
+           localStorage.setItem('localDish', '[]')
+        }
+        this.cart = JSON.parse(localStorage.getItem('localDish'))
+        
+        if(localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
+          localStorage.setItem('dish' + JSON.stringify(dish.id), JSON.stringify(dish))
+          let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
+          this.cart.push(Dish)
+          localStorage.setItem('localDish', JSON.stringify(this.cart))
+        }
+        else {
+          console.log('piatto gia incluso');
+        }
+        
+        console.log(this.cart);
+    },
+    removeCart(dish) {
+            let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
+            
+            for (let index = 0; index < this.cart.length; index++) {
+              if(this.cart[index].id == Dish.id) {
+                localStorage.removeItem('dish' + JSON.stringify(dish.id))
+                this.cart.splice(index, 1)
+                localStorage.setItem('localDish', JSON.stringify(this.cart))
+                }
+            }
+
+        console.log(this.cart);
+    },
+
+    nextPage() {
+      if (this.pages.length == 0) {
+        this.setPages()
+      }
+      if (this.page < this.pages.length) {
+        this.page++
+      }
+    },
+
+    activePage(pageNumber) {
+      if (pageNumber == this.page) {
+        return true
+      }
+    },
   },
 
   mounted() {
@@ -68,6 +154,15 @@ const app = new Vue({
     axios.get('/api/tags').then((r2) => {
       this.tags = r2.data.data
     })
+
+    if (localStorage.user) {
+      this.user = JSON.parse(localStorage.user)
+    }
+
+    if(localStorage.localDish) {
+      this.cart = JSON.parse(localStorage.localDish)
+    }
+
   },
 
   computed: {
@@ -80,7 +175,7 @@ const app = new Vue({
 
       filteredRestaurants = []
 
-      checkedFilters = [];
+      checkedFilters = []
 
       if (restaurants) {
         filters.forEach((filter) => {
@@ -95,21 +190,18 @@ const app = new Vue({
           }
         })
 
-
         filters.forEach((filter) => {
           for (let i = 0; i < filteredRestaurants.length; i++) {
-
-            const filteredRestaurant = filteredRestaurants[i];
+            const filteredRestaurant = filteredRestaurants[i]
 
             if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
               filteredRestaurants.splice(i, 1)
             }
-
           }
         })
 
         for (let i = 0; i < filteredRestaurants.length; i++) {
-          const filteredRestaurant = filteredRestaurants[i];
+          const filteredRestaurant = filteredRestaurants[i]
 
           filters.forEach((filter) => {
             if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
@@ -117,11 +209,6 @@ const app = new Vue({
             }
           })
         }
-
-
-
-
-        console.log(filters);
         return filteredRestaurants
       }
     },
@@ -134,6 +221,24 @@ const app = new Vue({
             .includes(this.searchInput.trim().toLowerCase())
         })
       }
+    },
+
+    displayedDishes() {
+      let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
+      this.displayedDishesLength = dishes.length
+      return this.paginate(dishes)
+    },
+  },
+
+  watch: {
+    dishes() {
+      this.setPages()
+    },
+  },
+
+  filters: {
+    trimWords(value) {
+      return value.split(' ').splice(0, 20).join(' ') + '...'
     },
   },
 })

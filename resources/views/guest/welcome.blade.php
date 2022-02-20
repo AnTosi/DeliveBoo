@@ -7,7 +7,7 @@
 @section('content')
     <div class="tags-container">
         <div
-            class="row row-cols-1 row-cols-md-2 row-cols-lg-4 w-50 mx-auto container my-auto pt-3  justify-content-center flex-wrap g-3">
+            class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 mx-auto container-fluid my-auto pt-3  justify-content-center flex-wrap g-3">
             {{-- @foreach ($tags as $tag) --}}
             <div v-for="tag in tags" :key="tag.id" class="col justify-content-center d-flex ">
                 <a href="#" class="tags_link text-black text-decoration-none text-center">
@@ -37,7 +37,7 @@
         <h2 class="my-5">Restaurants</h2>
         <div v-if="filterTags.length > 0" class="row row-cols-3 g-5">
             <div v-for="user in filteredUsers" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
                             <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
@@ -62,7 +62,7 @@
 
         <div v-else-if="filteredList" class="row row-cols-3 g-5">
             <div v-for="user in filteredList" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
                             <img class="card-img-top" :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo "
@@ -86,7 +86,7 @@
 
         <div v-else-if="users" class="row row-cols-3 g-5">
             <div v-for="user in users" :key="user.id">
-                <div class="col">
+                <div class="col" v-on:click="getUser(user)">
                     <a :href="user.slug">
                         <div class="card" aria-hidden="true">
 
