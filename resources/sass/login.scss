@@ -1,10 +1,17 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 // Variables
-@import '_variables';
+@import "_variables";
 
-
+.login_page {
+    margin-top: -1px;
+    .col-8 {
+        input {
+            border-radius: 1rem;
+        }
+    }
+}
 
 body .password-field {
     position: relative;
@@ -12,8 +19,8 @@ body .password-field {
 
 body .password-field #toggler {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 35px;
+    top: 75%;
     transform: translateY(-50%);
     cursor: pointer;
 }

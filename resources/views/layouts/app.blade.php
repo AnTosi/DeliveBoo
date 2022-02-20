@@ -55,12 +55,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link btn rounded-pill px-3 text-white me-4"
+                                <a class="nav-link btn rounded-pill fw-bold px-3 text-white me-4"
                                     href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link btn rounded-pill px-3 text-white"
+                                    <a class="nav-link btn fw-bold rounded-pill px-3 text-white"
                                         href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
@@ -78,7 +78,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

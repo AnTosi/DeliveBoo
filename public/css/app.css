@@ -11263,6 +11263,12 @@ textarea.form-control-lg {
   color: #4f009e !important;
 }
 
+.short_btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .wave {
   margin-top: -1px;
 }
