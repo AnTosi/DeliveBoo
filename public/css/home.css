@@ -152,3 +152,12 @@ svg {
     transform: rotate(450deg);
   }
 }
+.rest_card {
+  height: 337px !important;
+}
+.rest_card img {
+  height: 205px !important;
+}
+.rest_card .card-body {
+  overflow: auto;
+}

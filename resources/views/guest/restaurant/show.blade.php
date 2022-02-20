@@ -47,7 +47,7 @@
                             <div class="col dish">
                                 <div class="info_wrap pt-4 pb-2 px-5 bg-white shadow-lg ">
                                     <button data-bs-toggle="modal" data-bs-target="#show-{{ $dish->slug }}"
-                                        class="border-0 bg-white">
+                                        class="border-0 bg-white col-9">
                                         <div class="row row-cols-2 align-items-center">
                                             <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
                                                     class="rounded-circle" style="object-fit:cover; width:75px; height:75px"

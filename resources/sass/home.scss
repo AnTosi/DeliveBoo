@@ -21,7 +21,9 @@
                 font-weight: bold;
             }
         }
+
     }
+
     .tags_link {
         width: 100% !important;
         span {
@@ -105,5 +107,18 @@ $duration: 1s;
     100% {
         stroke-dashoffset: $offset;
         transform: rotate(450deg);
+    }
+}
+
+.rest_card {
+    
+    height: 337px!important;
+
+    img {
+        height: 205px!important;
+    }
+
+    .card-body {
+        overflow: auto;
     }
 }
