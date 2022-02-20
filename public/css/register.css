@@ -1,11 +1,19 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);body .password-field {
+@import url(https://fonts.googleapis.com/css?family=Nunito);input {
+  border-radius: 1rem !important;
+}
+
+svg {
+  margin-top: -1px;
+}
+
+body .password-field {
   position: relative;
 }
 
 body .password-field #toggler {
   position: absolute;
-  right: 20px;
-  top: 50%;
+  right: 35px;
+  top: 75%;
   transform: translateY(-50%);
   cursor: pointer;
 }
