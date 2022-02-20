@@ -67,6 +67,14 @@ svg {
           animation: rotator 1s linear infinite;
 }
 
+.path {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  -webkit-animation: dash 1s ease-in-out infinite, colors 5s ease-in-out infinite;
+          animation: dash 1s ease-in-out infinite, colors 5s ease-in-out infinite;
+}
+
 @-webkit-keyframes rotator {
   0% {
     transform: rotate(0deg);
@@ -84,14 +92,6 @@ svg {
     transform: rotate(270deg);
   }
 }
-.path {
-  stroke-dasharray: 100;
-  stroke-dashoffset: 0;
-  transform-origin: center;
-  -webkit-animation: dash 1s ease-in-out infinite, colors 5s ease-in-out infinite;
-          animation: dash 1s ease-in-out infinite, colors 5s ease-in-out infinite;
-}
-
 @-webkit-keyframes colors {
   0% {
     stroke: #4f009e;
@@ -109,7 +109,6 @@ svg {
     stroke: #4f009e;
   }
 }
-
 @keyframes colors {
   0% {
     stroke: #4f009e;

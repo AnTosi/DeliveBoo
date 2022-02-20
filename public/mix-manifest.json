@@ -4,7 +4,6 @@
     "/css/common.css": "/css/common.css",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
-    "/css/home.css": "/css/home.css",
     "/css/dashboard.css": "/css/dashboard.css",
     "/css/restaurant_show.css": "/css/restaurant_show.css",
     "/css/dishes.css": "/css/dishes.css",
@@ -12,5 +11,6 @@
     "/css/create.css": "/css/create.css",
     "/css/register.css": "/css/register.css",
     "/css/login.css": "/css/login.css",
-    "/css/statistics.css": "/css/statistics.css"
+    "/css/statistics.css": "/css/statistics.css",
+    "/css/home.css": "/css/home.css"
 }

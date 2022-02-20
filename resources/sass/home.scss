@@ -53,6 +53,9 @@ svg {
     margin-top: -5px;
 }
 
+$offset: 100;
+$duration: 1s;
+
 .spinner {
     animation: rotator $duration linear infinite;
 }
@@ -63,9 +66,6 @@ svg {
     transform-origin: center;
     animation: dash $duration ease-in-out infinite, colors ($duration * 5) ease-in-out infinite;
 }
-
-$offset: 100;
-$duration: 1s;
 
 @keyframes rotator {
     0% {
