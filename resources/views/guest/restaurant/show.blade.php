@@ -121,7 +121,7 @@
                 </div>
 
                 {{-- PAGINAZIONE --}}
-                <div class="mx-auto d-flex justify-content-center">
+                <div class="mx-auto d-flex justify-content-center mt-5">
                     {{ $dishes->links() }}
                 </div>
                 {{-- / PAGINAZIONE --}}
