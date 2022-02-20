@@ -150,7 +150,7 @@
                                                                 style=" width: 55px; height: 55px; object-fit: cover;">
                                                         </div>
                                                         <div class="ms-3">
-                                                            <h5 class="m-0">@{{ product.name }}</h5>
+                                                            <h5 class="m-0">@{{ product.name.substring(0, 20) }}...</h5>
                                                             <p class="small mb-0"></p>
                                                         </div>
                                                     </div>
