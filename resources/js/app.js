@@ -99,31 +99,36 @@ const app = new Vue({
       return dishes.slice(from, to)
     },
     addToCart(dish) {
-      localStorage.setItem('localDish', JSON.stringify(this.cart))
-      this.cart = JSON.parse(localStorage.getItem('localDish'));
-      
-      if (this.cart == null) {
-        this.cart = []
-      }
-      else if(!this.cart.includes(dish))
-      {
-/*           localStorage.setItem('dish', JSON.stringify(dish)) */
-        console.log('non incluso');
-          this.cart.push(dish)
+        //localStorage.clear()
+        if (localStorage.getItem('localDish') == null) {
+           localStorage.setItem('localDish', '[]')
         }
-          console.log(this.cart)
-        /* if (!this.cart.includes(dish)) {
-          
-          // Save allEntries back to local storage
-            this.indexDish.push(dish.id)
-            
-            
-          
-        } */ 
+        this.cart = JSON.parse(localStorage.getItem('localDish'))
+        
+        if(localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
+          localStorage.setItem('dish' + JSON.stringify(dish.id), JSON.stringify(dish))
+          let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
+          this.cart.push(Dish)
+          localStorage.setItem('localDish', JSON.stringify(this.cart))
+        }
+        else {
+          console.log('piatto gia incluso');
+        }
+        
+        console.log(this.cart);
     },
     removeCart(dish) {
-      this.cart.splice(indexOf(this.cart, dish), 1)
-      this.indexDish.splice(indexOf(this.indexDish, dish.id), 1)
+            let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
+            
+            for (let index = 0; index < this.cart.length; index++) {
+              if(this.cart[index].id == Dish.id) {
+                localStorage.removeItem('dish' + JSON.stringify(dish.id))
+                this.cart.splice(index, 1)
+                localStorage.setItem('localDish', JSON.stringify(this.cart))
+                }
+            }
+
+        console.log(this.cart);
     },
 
     nextPage() {
@@ -154,9 +159,10 @@ const app = new Vue({
       this.user = JSON.parse(localStorage.user)
     }
 
-    if (localStorage.localDish) {
+    if(localStorage.localDish) {
       this.cart = JSON.parse(localStorage.localDish)
     }
+
   },
 
   computed: {
