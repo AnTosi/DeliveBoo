@@ -134,7 +134,8 @@
             {{-- form submit --}}
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-outline-dark my-3 me-4">Cancel</button>
+                <a href="{{ route('admin.dishes.index') }}" type="button"
+                    class="btn btn-outline-dark my-3 me-4">Cancel</a>
                 <button type="submit" class="btn btn-dark my-3">Submit</button>
             </div>
 

@@ -29,7 +29,8 @@
                 <label for="image" class="form-label">Image*:</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image"
                     aria-describedby="imageHelper" accept=".png, .jpg" required>
-                <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file are accepted</small>
+                <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file are
+                    accepted</small>
 
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -43,8 +44,8 @@
             <div class="mb-3">
                 <label for="ingredients" class="form-label">Ingredients*:</label>
                 <textarea type="textarea" rows="3" class="form-control @error('ingredients') is-invalid @enderror"
-                    name="ingredients" id="ingredients" aria-describedby="ingredientsHelper"
-                    placeholder="Ingredients" required>{{ old('ingredients') }}</textarea>
+                    name="ingredients" id="ingredients" aria-describedby="ingredientsHelper" placeholder="Ingredients"
+                    required>{{ old('ingredients') }}</textarea>
                 <small id="ingredientsHelper" class="form-text text-muted">Write your dish' ingredients</small>
 
                 @error('ingredients')
@@ -59,10 +60,10 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Description*:</label>
                 <textarea type="textarea" rows="5" class="form-control @error('description') is-invalid @enderror"
-                    name="description" id="description" aria-describedby="descriptionHelper"
-                    placeholder="Description" required>{{ old('description') }}</textarea>
+                    name="description" id="description" aria-describedby="descriptionHelper" placeholder="Description"
+                    required>{{ old('description') }}</textarea>
                 <small id="descriptionHelper" class="form-text text-muted">Describe your dish</small>
-    
+
                 @error('description')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -74,8 +75,8 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label">Price in €*:</label>
-                <input type="number"
-                class="form-control" name="price" id="price" aria-describedby="priceHelper" step="0.01" value="{{ old('price') }}" required placeholder="€">
+                <input type="number" class="form-control" name="price" id="price" aria-describedby="priceHelper"
+                    step="0.01" value="{{ old('price') }}" required placeholder="€">
                 <small id="priceHelper" class="form-text text-muted">Write your dish' price in €</small>
 
                 @error('price')
@@ -105,7 +106,8 @@
             {{-- form submit --}}
 
             <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-outline-dark my-3 me-4">Cancel</button>
+                <a type="button" href="{{ route('admin.dishes.index') }}"
+                    class="btn btn-outline-dark my-3 me-4">Cancel</a>
                 <button type="submit" class="btn btn-dark my-3">Submit</button>
             </div>
 
