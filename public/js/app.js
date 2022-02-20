@@ -53621,6 +53621,9 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    indexOf = _require.indexOf;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -53649,7 +53652,15 @@ var app = new Vue({
       tag: '',
       filterTags: [],
       tags: null,
-      searchInput: ''
+      searchInput: '',
+      cart: [],
+      user: '',
+      page: 1,
+      perPage: 6,
+      pages: [],
+      indexDish: [],
+      displayedDishesLength: null,
+      localDishes: []
     };
   },
   methods: {
@@ -53665,6 +53676,72 @@ var app = new Vue({
           this.filterTags.splice(index, 1);
         }
       }
+    },
+    getUser: function getUser(user) {
+      this.user = user;
+      localStorage.setItem('user', JSON.stringify(this.user));
+    },
+
+    /* pagination */
+    setPages: function setPages() {
+      var numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage);
+
+      for (var index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate: function paginate(dishes) {
+      var page = this.page;
+      var perPage = this.perPage;
+      var from = page * perPage - perPage;
+      var to = page * perPage;
+      return dishes.slice(from, to);
+    },
+    addToCart: function addToCart(dish) {
+      //localStorage.clear()
+      if (localStorage.getItem('localDish') == null) {
+        localStorage.setItem('localDish', '[]');
+      }
+
+      this.cart = JSON.parse(localStorage.getItem('localDish'));
+
+      if (localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
+        localStorage.setItem('dish' + JSON.stringify(dish.id), JSON.stringify(dish));
+        var Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)));
+        this.cart.push(Dish);
+        localStorage.setItem('localDish', JSON.stringify(this.cart));
+      } else {
+        console.log('piatto gia incluso');
+      }
+
+      console.log(this.cart);
+    },
+    removeCart: function removeCart(dish) {
+      var Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)));
+
+      for (var index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].id == Dish.id) {
+          localStorage.removeItem('dish' + JSON.stringify(dish.id));
+          this.cart.splice(index, 1);
+          localStorage.setItem('localDish', JSON.stringify(this.cart));
+        }
+      }
+
+      console.log(this.cart);
+    },
+    nextPage: function nextPage() {
+      if (this.pages.length == 0) {
+        this.setPages();
+      }
+
+      if (this.page < this.pages.length) {
+        this.page++;
+      }
+    },
+    activePage: function activePage(pageNumber) {
+      if (pageNumber == this.page) {
+        return true;
+      }
     }
   },
   mounted: function mounted() {
@@ -53676,6 +53753,14 @@ var app = new Vue({
     axios.get('/api/tags').then(function (r2) {
       _this.tags = r2.data.data;
     });
+
+    if (localStorage.user) {
+      this.user = JSON.parse(localStorage.user);
+    }
+
+    if (localStorage.localDish) {
+      this.cart = JSON.parse(localStorage.localDish);
+    }
   },
   computed: {
     filteredUsers: function filteredUsers() {
@@ -53730,7 +53815,6 @@ var app = new Vue({
           _loop(i);
         }
 
-        console.log(filters);
         return filteredRestaurants;
       }
     },
@@ -53742,6 +53826,23 @@ var app = new Vue({
           return user.name.toLowerCase().includes(_this2.searchInput.trim().toLowerCase());
         });
       }
+    },
+    displayedDishes: function displayedDishes() {
+      var dishes = this.user.dishes.filter(function (dish) {
+        return dish.visibility == true;
+      });
+      this.displayedDishesLength = dishes.length;
+      return this.paginate(dishes);
+    }
+  },
+  watch: {
+    dishes: function dishes() {
+      this.setPages();
+    }
+  },
+  filters: {
+    trimWords: function trimWords(value) {
+      return value.split(' ').splice(0, 20).join(' ') + '...';
     }
   }
 });
@@ -53949,7 +54050,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Undefined variable.\n   ╷\n57 │     animation: rotator $duration linear infinite;\r\n   │                        ^^^^^^^^^\n   ╵\n  C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\resources\\sass\\home.scss 57:24  root stylesheet\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass-loader\\dist\\index.js:73:7\n    at Function.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:99012:16)\n    at render_closure1.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:84527:12)\n    at _RootZone.runBinary$3$3 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:29558:18)\n    at _FutureListener.handleError$1 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28080:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28387:49)\n    at Object._Future__propagateToListeners (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3901:77)\n    at _Future._completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28233:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27881:12)\n    at Object._asyncRethrow (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3704:17)\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:19778:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3729:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27900:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27894:25)\n    at _RootZone.runBinary$3$3 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:29558:18)\n    at _FutureListener.handleError$1 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28080:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28387:49)\n    at Object._Future__propagateToListeners (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3901:77)\n    at _Future._completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28233:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27881:12)\n    at Object._asyncRethrow (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3704:17)\n    at C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:15279:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3729:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27900:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27894:25)\n    at _RootZone.runBinary$3$3 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:29558:18)\n    at _FutureListener.handleError$1 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28080:21)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28387:49)\n    at Object._Future__propagateToListeners (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3901:77)\n    at _Future._completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:28233:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:27881:12)\n    at Object._asyncRethrow (C:\\Users\\matte\\OneDrive\\Desktop\\dev\\Site\\DeliveBoo\\node_modules\\sass\\sass.dart.js:3704:17)");
 
 /***/ }),
 

@@ -14,7 +14,9 @@
     <div class="container info_cart">
         <div class="row g-3 flex-md-nowrap flex-wrap">
             <div class="col-md-8 col-12 restaurant_aside">
-                <div class="info_wrap restaurant_info pt-5 pb-2 px-5 shadow-lg p-3 mb-5 bg-body ">
+
+                {{-- Restaurant info --}}
+                <div class="info_wrap restaurant_info pt-5 pb-2 px-5 shadow-lg mb-5 bg-body ">
                     <h1 class="fs-1 fw-bold">{{ $user->name }} <span class="fs-3"><sup>®</sup></span></h1>
 
                     <h3>
@@ -38,36 +40,76 @@
                     <p class="text-muted">Free delivery for orders of 25 € or more.</p>
                 </div>
 
-
+                {{-- Dish list --}}
                 <div class="row row-cols-2 g-3">
                     @foreach ($dishes as $dish)
                         @if ($dish->visibility == true)
                             <div class="col dish">
-
-                                <div class="info_wrap pt-4 pb-2 px-5 shadow-lg p-3 mb-5 h-75">
-                                    <div class="row row-cols-2 align-items-center">
-                                        <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
-                                                class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
-                                                alt="">
+                                <div class="info_wrap pt-4 pb-2 px-5 bg-white shadow-lg ">
+                                    <button data-bs-toggle="modal" data-bs-target="#show-{{ $dish->slug }}"
+                                        class="border-0 bg-white">
+                                        <div class="row row-cols-2 align-items-center">
+                                            <div class="col-4"><img src="{{ asset('storage/' . $dish->image) }}"
+                                                    class="rounded-circle" style="object-fit:cover; width:75px; height:75px"
+                                                    alt="">
+                                            </div>
+                                            <div class="col">
+                                                <h1 class="fs-3 fw-bold text-start"> {{ $dish->name }}</h1>
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <h1 class="fs-3 fw-bold"> {{ $dish->name }}</h1>
-                                        </div>
-                                    </div>
-                                    {{-- Image and dish name --}}
+                                        {{-- Image and dish name --}}
+                                    </button>
 
-                                    <div class="row row-cols-2 justify-content-between align-items-center">
+                                    <div class="row row-cols-2 justify-content-between align-items-center bg-white">
                                         <div class="col mt-4">
                                             <h4> {{ $dish->price }} €</h4>
                                         </div>
-                                        <div v-on:click="addToCart({{json_encode($dish)}})"
+                                        <div v-on:click="addToCart({{ json_encode($dish) }})"
                                             class="col-9 d-flex justify-content-center align-items-center add_to_cart">
-                                                <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                            <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
                                         </div>
                                     </div>
                                     {{-- Price and Add to cart --}}
                                 </div>
                             </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="show-{{ $dish->slug }}" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content border-0">
+                                        <div class="modal-body mx-auto">
+                                            <div class="row flex-column justify-content-center">
+                                                <div class="col text-capitalize fs-1">{{ $dish->name }}</div>
+                                                <div class="col">
+                                                    <img src="{{ asset('storage/' . $dish->image) }}">
+                                                </div>
+                                                <div class="col">
+                                                    <h4>Description</h4>
+                                                    <p class="capitalize">{{ $dish->description }}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4>Ingredients</h4>
+                                                    <p>{{ $dish->ingredients }}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4>€ {{ $dish->price }}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-0">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn bg_secondary_smooth text_secondary fw-bold"
+                                                v-on:click="addToCart({{ json_encode($dish) }})">
+                                                <span>Add to Cart</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         @else
                             <div class="text-center mt-5">
 
@@ -78,18 +120,16 @@
                     @endforeach
                 </div>
 
-
-
                 {{-- PAGINAZIONE --}}
-                <div class="mx-auto d-flex justify-content-center">
-                    {{$dishes->links()}}
+                <div class="mx-auto d-flex justify-content-center mt-5">
+                    {{ $dishes->links() }}
                 </div>
                 {{-- / PAGINAZIONE --}}
 
             </div>
 
             <div class="col">
-                <section style="border-radius: 1rem; background-color: white">
+                <section class="bg-white" style="border-radius: 1rem">
 
                     <div class="row d-flex justify-content-center align-items-center">
                         <div class="col">
@@ -110,7 +150,7 @@
                                                                 style=" width: 55px; height: 55px; object-fit: cover;">
                                                         </div>
                                                         <div class="ms-3">
-                                                            <h5 class="m-0">@{{ product.name }}</h5>
+                                                            <h5 class="m-0">@{{ product.name.substring(0, 20) }}...</h5>
                                                             <p class="small mb-0"></p>
                                                         </div>
                                                     </div>
