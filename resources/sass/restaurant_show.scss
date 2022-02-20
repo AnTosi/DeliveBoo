@@ -9,7 +9,8 @@
     bottom: 60px;
     .restaurant_aside {
         .info_wrap,
-        .dish {
+        .dish,
+        .modal-content {
             border-radius: 1rem;
         }
         .restaurant_info {
@@ -22,6 +23,16 @@
                 height: 30px;
                 border: none;
                 background-color: $brand-color-secondary-smooth;
+            }
+        }
+
+        .modal-body {
+            .row {
+                .col:nth-child(2),
+                .col:last-child {
+                    width: fit-content;
+                    margin: auto;
+                }
             }
         }
     }

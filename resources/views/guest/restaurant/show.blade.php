@@ -75,19 +75,34 @@
                             <div class="modal fade" id="show-{{ $dish->slug }}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">{{ $dish->name }}</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                    <div class="modal-content border-0">
+                                        <div class="modal-body mx-auto">
+                                            <div class="row flex-column justify-content-center">
+                                                <div class="col text-capitalize fs-1">{{ $dish->name }}</div>
+                                                <div class="col">
+                                                    <img src="{{ asset('storage/' . $dish->image) }}">
+                                                </div>
+                                                <div class="col">
+                                                    <h4>Description</h4>
+                                                    <p class="capitalize">{{ $dish->description }}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4>Ingredients</h4>
+                                                    <p>{{ $dish->ingredients }}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <h4>€ {{ $dish->price }}</h4>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            ...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        <div class="modal-footer border-0">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn bg_secondary_smooth text_secondary fw-bold"
+                                                v-on:click="addToCart({{ json_encode($dish) }})">
+                                                <span>Add to Cart</span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
