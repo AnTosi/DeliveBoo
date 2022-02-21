@@ -73,23 +73,23 @@ const app = new Vue({
           this.filterTags.push(this.tag)
         } else {
           let index = this.filterTags.indexOf(this.tag)
-          
+
           if (index > -1) {
             this.filterTags.splice(index, 1)
           }
         }
       })
-      this.callApi()
+      // this.callApi()
     },
 
-    callApi() {
-      let restQuery = `/api/users/?tags=${filterTags}`;
-      axios.get(restQuery)
-        .then((response) => {
-          this.filteredRest = response.data.data;
-          console.log(this.filteredRest);
-        })
-    },
+    // callApi() {
+    //   let restQuery = `/api/users/?tags=${this.filterTags}`;
+    //   axios.get(restQuery)
+    //     .then((response) => {
+    //       this.filteredRest = response.data.data;
+    //       console.log(this.filteredRest);
+    //     })
+    // },
     /* pagination */
     /*  setPages() {
       let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
