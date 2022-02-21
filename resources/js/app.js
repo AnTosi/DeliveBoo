@@ -62,13 +62,14 @@ const app = new Vue({
       lastPage: null,
 
       filteredRest: [],
+
+      filteredUsers: [],
     }
   },
 
   methods: {
     tagHandler(tag) {
-      axios.get('/api/tags/' + tag.id).then((r) => {
-        this.tag = r.data.data.name
+       this.tag = tag.id
         if (!this.filterTags.includes(this.tag)) {
           this.filterTags.push(this.tag)
         } else {
@@ -77,8 +78,19 @@ const app = new Vue({
           if (index > -1) {
             this.filterTags.splice(index, 1)
           }
-        }
-      })
+        } 
+      if(this.filterTags.length > 0) {
+
+        axios.get('/api/tag/' + [this.filterTags]).then((r) => {
+          console.log(r.data);
+          this.filteredUsers = r.data;
+        })
+
+      }
+      else {
+        this.filteredUsers = this.users
+      }
+
       // this.callApi()
     },
 

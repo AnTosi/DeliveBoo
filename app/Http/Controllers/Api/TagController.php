@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TagResource;
+use App\Http\Resources\UserResource;
 use App\Models\Tag;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class TagController extends Controller
 {
@@ -47,10 +51,26 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tags)
     {
         //
-        return new TagResource(Tag::with('users')->find($id));
+        $prova = DB::select( DB::raw("SELECT * FROM `tag_user` WHERE `tag_id` IN ($tags)"));
+        $users = [];
+
+        foreach($prova as $user) {
+            
+            $provaUser = new UserResource(User::find($user->user_id));
+
+            if(!in_array($provaUser, $users)) {
+
+                array_push($users, $provaUser);
+            }
+            
+        }
+
+        return $users;
+        
+        //return new TagResource(Tag::with('users')->find($id));
     }
 
     /**

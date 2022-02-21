@@ -12,7 +12,7 @@
             <div class="col justify-content-center d-flex ">
                 <a href="#" class="tags_link text-black text-decoration-none text-center">
                     <div class="card rounded-pill" v-on:click="tagHandler({{json_encode($tag)}})"
-                        :class=" filterTags.includes({{ json_encode($tag->name) }}) ? 'active' : '' ">
+                        :class=" filterTags.includes({{ json_encode($tag->id) }}) ? 'active' : '' ">
                         <div class="card-body">
                             <h5 class="card-title mb-0">
                                 <span> {{$tag->name}} </span>
@@ -61,8 +61,8 @@
         </div> --}}
 
 
-      {{--   <div v-else-if="filteredList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-            <div v-for="user in filteredList" :key="user.id">
+        <div v-if="filteredUsers.length > 1" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <div v-for="user in filteredUsers" :key="user.id">
                 <div class="col h-100 px-3">
                     <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                         :href="user.slug">
@@ -87,8 +87,8 @@
                 </div>
             </div>
         </div>
- --}}
-        <div v-if="users" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+
+        <div v-else class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in users" :key="user.id">
                 <div class="col h-100 px-3">
                     <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
