@@ -31,10 +31,10 @@
             d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H-8.5z" />
     </svg>
 
-    {{-- <div class="container mb-5">
+    <div class="container mb-5">
         <h2 class="my-5 fs-1">Restaurants</h2>
-        <div v-if="filterTags.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-            <div v-for="user in filteredUsers" :key="user.id">
+        <div v-if="filteredRest.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <div v-for="user in filteredRest" :key="user.id">
                 <div class="col h-100 px-3">
                     <a class="text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                         :href="user.slug">
@@ -58,10 +58,10 @@
                     </a>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
 
-        <div v-if="filteredUsers.length > 1" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        <div v-else-if="filteredUsers.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in filteredUsers" :key="user.id">
                 <div class="col h-100 px-3">
                     <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"

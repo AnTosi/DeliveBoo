@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class userController extends Controller
@@ -18,5 +19,12 @@ class userController extends Controller
     {
         //
         return UserResource::collection(User::with(['tags', 'dishes'])->paginate(3));
+    }
+
+    public function show($name)
+    {
+        //
+        $prova = DB::select(DB::raw("SELECT * FROM `users` WHERE `name` LIKE '%$name%'"));
+        return $prova;
     }
 }

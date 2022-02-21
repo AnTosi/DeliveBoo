@@ -61,7 +61,7 @@ const app = new Vue({
 
       lastPage: null,
 
-      filteredRest: [],
+     filteredRest: [], 
 
       filteredUsers: [],
     }
@@ -69,25 +69,22 @@ const app = new Vue({
 
   methods: {
     tagHandler(tag) {
-       this.tag = tag.id
-        if (!this.filterTags.includes(this.tag)) {
-          this.filterTags.push(this.tag)
-        } else {
-          let index = this.filterTags.indexOf(this.tag)
+      this.tag = tag.id
+      if (!this.filterTags.includes(this.tag)) {
+        this.filterTags.push(this.tag)
+      } else {
+        let index = this.filterTags.indexOf(this.tag)
 
-          if (index > -1) {
-            this.filterTags.splice(index, 1)
-          }
-        } 
-      if(this.filterTags.length > 0) {
-
-        axios.get('/api/tag/' + [this.filterTags]).then((r) => {
-          console.log(r.data);
-          this.filteredUsers = r.data;
-        })
-
+        if (index > -1) {
+          this.filterTags.splice(index, 1)
+        }
       }
-      else {
+      if (this.filterTags.length > 0) {
+        axios.get('/api/tag/' + [this.filterTags]).then((r) => {
+          console.log(r.data)
+          this.filteredUsers = r.data
+        })
+      } else {
         this.filteredUsers = this.users
       }
 
@@ -181,6 +178,23 @@ const app = new Vue({
         this.users = r.data.data
       })
     },
+    filteredList() {
+      /* if (this.users) {
+        return this.users.filter((user) => {
+          return user.name
+            .toLowerCase()
+            .includes(this.searchInput.trim().toLowerCase())
+        })
+      } */
+      axios.get('api/user/' + this.searchInput).then((r) => {
+        console.log(r.data);
+        if(!this.filteredRest.includes(r.data)) {
+
+          this.filteredRest = r.data
+        }
+      })
+
+    },
   },
 
   mounted() {
@@ -197,7 +211,7 @@ const app = new Vue({
   },
 
   computed: {
-    filteredUsers() {
+    /* filteredUsers() {
       let restaurants = []
       if (this.users) {
         restaurants = this.users
@@ -242,17 +256,7 @@ const app = new Vue({
         }
         return filteredRestaurants
       }
-    },
-
-    filteredList() {
-      if (this.users) {
-        return this.users.filter((user) => {
-          return user.name
-            .toLowerCase()
-            .includes(this.searchInput.trim().toLowerCase())
-        })
-      }
-    },
+    }, */
 
     displayedDishes() {
       let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
