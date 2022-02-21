@@ -186,13 +186,19 @@ const app = new Vue({
             .includes(this.searchInput.trim().toLowerCase())
         })
       } */
-      axios.get('api/user/' + this.searchInput).then((r) => {
-        console.log(r.data);
-        if(!this.filteredRest.includes(r.data)) {
+      if (this.searchInput) {
+        axios.get('api/user/' + this.searchInput).then((r) => {
+          console.log(r.data);
+          if(!this.filteredRest.includes(r.data)) {
+  
+            this.filteredRest = r.data
+          }
 
-          this.filteredRest = r.data
-        }
-      })
+        })
+        
+      }else {
+        this.filteredRest = []
+      }
 
     },
   },

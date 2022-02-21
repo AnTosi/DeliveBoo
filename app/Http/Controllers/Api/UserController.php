@@ -25,6 +25,18 @@ class userController extends Controller
     {
         //
         $prova = DB::select(DB::raw("SELECT * FROM `users` WHERE `name` LIKE '%$name%'"));
-        return $prova;
+
+        $users = [];
+
+        foreach ($prova as $user) {
+
+            $provaUser = new UserResource(User::find($user->id));
+
+            if (!in_array($provaUser, $users)) {
+
+                array_push($users, $provaUser);
+            }
+        }
+        return $users;
     }
 }
