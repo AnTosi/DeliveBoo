@@ -49,43 +49,49 @@ const app = new Vue({
 
       cart: [],
 
-      user: '',
-
-      page: 1,
-
-      perPage: 6,
-
-      pages: [],
-
       indexDish: [],
+
+      currentPage: 1,
 
       displayedDishesLength: null,
 
       localDishes: [],
+
+      previousPage: null,
+
+      lastPage: null,
+
+      filteredRest: [],
     }
   },
 
   methods: {
     tagHandler(tag) {
-      this.tag = tag
-
-      if (!this.filterTags.includes(tag)) {
-        this.filterTags.push(tag)
-      } else {
-        let index = this.filterTags.indexOf(tag)
-
-        if (index > -1) {
-          this.filterTags.splice(index, 1)
+      axios.get('/api/tags/' + tag.id).then((r) => {
+        this.tag = r.data.data.name
+        if (!this.filterTags.includes(this.tag)) {
+          this.filterTags.push(this.tag)
+        } else {
+          let index = this.filterTags.indexOf(this.tag)
+          
+          if (index > -1) {
+            this.filterTags.splice(index, 1)
+          }
         }
-      }
-    },
-    getUser(user) {
-      this.user = user
-      localStorage.setItem('user', JSON.stringify(this.user))
+      })
+      this.callApi()
     },
 
+    callApi() {
+      let restQuery = `/api/users/?tags=${filterTags}`;
+      axios.get(restQuery)
+        .then((response) => {
+          this.filteredRest = response.data.data;
+          console.log(this.filteredRest);
+        })
+    },
     /* pagination */
-    setPages() {
+    /*  setPages() {
       let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
       for (let index = 1; index <= numberOfPages; index++) {
         this.pages.push(index)
@@ -97,72 +103,85 @@ const app = new Vue({
       let from = page * perPage - perPage
       let to = page * perPage
       return dishes.slice(from, to)
-    },
+    }, */
     addToCart(dish) {
-        //localStorage.clear()
-        if (localStorage.getItem('localDish') == null) {
-           localStorage.setItem('localDish', '[]')
-        }
-        this.cart = JSON.parse(localStorage.getItem('localDish'))
-        
-        if(localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
-          localStorage.setItem('dish' + JSON.stringify(dish.id), JSON.stringify(dish))
-          let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
-          this.cart.push(Dish)
-          localStorage.setItem('localDish', JSON.stringify(this.cart))
-        }
-        else {
-          console.log('piatto gia incluso');
-        }
-        
-        console.log(this.cart);
+      //localStorage.clear()
+      if (localStorage.getItem('localDish') == null) {
+        localStorage.setItem('localDish', '[]')
+      }
+      this.cart = JSON.parse(localStorage.getItem('localDish'))
+
+      if (localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
+        localStorage.setItem(
+          'dish' + JSON.stringify(dish.id),
+          JSON.stringify(dish),
+        )
+        let Dish = JSON.parse(
+          localStorage.getItem('dish' + JSON.stringify(dish.id)),
+        )
+        this.cart.push(Dish)
+        localStorage.setItem('localDish', JSON.stringify(this.cart))
+      }
     },
     removeCart(dish) {
-            let Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)))
-            
-            for (let index = 0; index < this.cart.length; index++) {
-              if(this.cart[index].id == Dish.id) {
-                localStorage.removeItem('dish' + JSON.stringify(dish.id))
-                this.cart.splice(index, 1)
-                localStorage.setItem('localDish', JSON.stringify(this.cart))
-                }
-            }
+      let Dish = JSON.parse(
+        localStorage.getItem('dish' + JSON.stringify(dish.id)),
+      )
 
-        console.log(this.cart);
+      for (let index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].id == Dish.id) {
+          localStorage.removeItem('dish' + JSON.stringify(dish.id))
+          this.cart.splice(index, 1)
+          localStorage.setItem('localDish', JSON.stringify(this.cart))
+        }
+      }
+
+      console.log(this.cart)
     },
 
-    nextPage() {
-      if (this.pages.length == 0) {
-        this.setPages()
+    next() {
+      if (this.currentPage == this.lastPage) {
+        this.currentPage = 1
+      } else {
+        this.currentPage++
       }
-      if (this.page < this.pages.length) {
-        this.page++
-      }
+
+      axios.get('/api/users?page=' + this.currentPage).then((r) => {
+        this.users = r.data.data
+      })
     },
 
-    activePage(pageNumber) {
-      if (pageNumber == this.page) {
-        return true
+    prev() {
+      if (this.currentPage == 1) {
+        this.currentPage = this.lastPage
+      } else {
+        this.currentPage--
       }
+
+      axios.get('/api/users?page=' + this.currentPage).then((r) => {
+        this.users = r.data.data
+      })
+    },
+
+    current(page) {
+      this.currentPage = page
+      axios.get('/api/users?page=' + this.currentPage).then((r) => {
+        this.users = r.data.data
+      })
     },
   },
 
   mounted() {
-    axios.get('/api/users').then((r) => {
+    axios.get('/api/users?page=1').then((r) => {
       this.users = r.data.data
-    })
-    axios.get('/api/tags').then((r2) => {
-      this.tags = r2.data.data
+      this.currentPage = r.data.meta.current_page
+      this.previousPage = r.data.meta.from
+      this.lastPage = r.data.meta.last_page
     })
 
-    if (localStorage.user) {
-      this.user = JSON.parse(localStorage.user)
-    }
-
-    if(localStorage.localDish) {
+    if (localStorage.localDish) {
       this.cart = JSON.parse(localStorage.localDish)
     }
-
   },
 
   computed: {

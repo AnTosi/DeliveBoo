@@ -50,6 +50,7 @@ class TagController extends Controller
     public function show($id)
     {
         //
+        return new TagResource(Tag::with('users')->find($id));
     }
 
     /**
