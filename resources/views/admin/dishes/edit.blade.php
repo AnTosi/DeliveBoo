@@ -50,8 +50,9 @@
                         <label for="old_image" class="form-label">
                             Your old image:
                         </label>
-                        <div class="old_image">
-                            <img height="200" src="{{ asset('storage/' . $dish->image) }}" alt="" class="img-fluid">
+                        <div class="old_image mb-3">
+                            <img style="width: 100%" src="{{ asset('storage/' . $dish->image) }}" alt=""
+                                class="img-fluid">
                         </div>
                     </div>
 
@@ -60,14 +61,14 @@
                         <label for="thumbnail" class="form-label">
                             Your new image:
                         </label>
-                        <div class="thumbnail">
-                            <img style="width: 200px"
+                        <div class="thumbnail mb-3">
+                            <img style="width: 100%"
                                 src="http://www.fotopettine.it/wp-content/themes/panama/assets/img/empty/600x600.png"
                                 id="thumb" alt="New image" class="img-fluid">
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col ms-auto">
                         <input type="file" v-on:change="change" class="form-control @error('image') is-invalid @enderror"
                             name="image" id="my_image" aria-describedby="imageHelper" accept=".png, .jpg">
                         <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file

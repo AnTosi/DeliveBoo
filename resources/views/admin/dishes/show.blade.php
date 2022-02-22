@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <img src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}">
+                <img src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}" style="width: 100%">
             </div>
             <div class="col-3">
                 <div class="text-muted">

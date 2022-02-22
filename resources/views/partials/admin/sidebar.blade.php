@@ -10,7 +10,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === 'admin.dishes.index' ? 'active shadow rounded' : '' }}"
+                <a class="nav-link {{ Route::currentRouteName() === 'admin.dishes.index' || 'admin.dishes.create' || 'admin.dishes.edit'? 'active shadow rounded': '' }}"
                     href="{{ route('admin.dishes.index') }}">
                     <i class="fas fa-utensils fa-lg fa-fw"></i>
                     Dishes
