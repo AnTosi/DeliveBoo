@@ -131,7 +131,7 @@
 
         </div>
 
-        <div class="d-flex justify-content-center mt-5">
+        <div v-if="filteredUsers == 0 && filteredRest == 0" class="d-flex justify-content-center mt-5">
             <button class="btn btn-outline-dark me-1" v-on:click="prev" v-show="currentPage != 1">
                 Prev
             </button>
