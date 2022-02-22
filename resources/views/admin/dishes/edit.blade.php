@@ -4,9 +4,26 @@
     <link rel="stylesheet" href="{{ 'css/create.css' }}">
 @endsection
 @section('content')
-    <div class="container lg-sm pt-5">
-        <h1 class="pb-3">Edit your dish</h1>
+    <div class="container lg-sm pt-3">
+
+        {{-- back to index --}}
+        <div class="back">
+            <a class="text-muted" href="{{ route('admin.dishes.index') }}">
+                <i class="fas fa-arrow-left fa-lg fa-fw"></i>
+            </a>
+        </div>
+
+
         <form action="{{ route('admin.dishes.update', $dish->slug) }}" method="post" enctype="multipart/form-data">
+            <div class="d-flex justify-content-between py-3">
+                <div class="col-6">
+                    <h1>Edit your dish</h1>
+                </div>
+                {{-- form submit --}}
+                <div class="col-6 text-end">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
             @csrf
             @method('PUT')
 
@@ -130,16 +147,6 @@
             <div class="pt-3 pb-2 text-muted">
                 <p>All the fields with * are required</p>
             </div>
-
-            {{-- form submit --}}
-
-            <div class="d-flex justify-content-end">
-                <a href="{{ route('admin.dishes.index') }}" type="button"
-                    class="btn btn-outline-dark my-3 me-4">Cancel</a>
-                <button type="submit" class="btn btn-dark my-3">Submit</button>
-            </div>
-
-            {{-- form submit --}}
 
         </form>
     </div>

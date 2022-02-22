@@ -7,7 +7,7 @@
         </div>
     @endif
 
-    <div class="d-flex justify-content-between pt-4">
+    <div class="d-flex justify-content-between pt-3">
         <div class="col-6">
             <h1>Dishes</h1>
         </div>
@@ -26,8 +26,8 @@
                 <th class="text-center" scope="col">Image</th>
                 <th class="text-center" scope="col">Price</th>
                 <th class="text-center" scope="col">Visible</th>
-                <th class="text-center" scope="col">Created At</th>
-                <th class="text-center" scope="col">Updated At</th>
+                <th class="text-center created" scope="col">Created</th>
+                <th class="text-center updated" scope="col">Updated</th>
                 <th class="text-center" scope="col">Option </th>
             </tr>
         </thead>
@@ -39,10 +39,13 @@
 
                     <td class="text-center align-middle">{{ $dish->name }}</td>
 
-                    <td class="text-center align-middle"><img height="60" src="{{ asset('storage/' . $dish->image) }}"
-                            alt=""></td>
+                    <td class="text-center align-middle">
+                        @if ($dish->image)
+                            <img class="rounded-circle" height="60" src="{{ asset('storage/' . $dish->image) }}" alt="">
+                        @endif
+                    </td>
 
-                    <td class="text-center align-middle">{{ $dish->price }}</td>
+                    <td class="text-center align-middle">&euro;{{ $dish->price }}</td>
 
                     <td class="text-center align-middle">
                         @if ($dish->visibility === 1)
@@ -52,15 +55,15 @@
                         @endif
                     </td>
 
-                    <td class="text-center align-middle">{{ $dish->created_at }}</td>
+                    <td class="text-center align-middle created">{{ $dish->created_at }}</td>
 
-                    <td class="text-center align-middle">{{ $dish->updated_at }}</td>
+                    <td class="text-center align-middle updated">{{ $dish->updated_at }}</td>
 
                     <td class="text-center align-middle">
                         <div class="dropdown">
                             <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-wrench fa-lg fa-fw"></i>
+                                <i class="fas fa-wrench fa-fw"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item"
@@ -82,16 +85,18 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Delete {{ $dish->name }}?</h5>
+                                            <h5 class="modal-title">Delete: {{ $dish->name }}?</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             </button>
                                         </div>
-                                        <div class="modal-body">
-                                            WARNING! You are permanently deleting "{{ $dish->name }}" from your menu
-                                            ⚠️
+                                        <div class="modal-body text-start">
+                                            WARNING! ⚠️
+                                            <br>
+                                            You are permanently deleting "{{ $dish->name }}" from your menu
+
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer text-start">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
                                             <form action="{{ route('admin.dishes.destroy', $dish->slug) }}"
@@ -106,9 +111,6 @@
                             </div>
                         </div>
                     </td>
-
-
-
                 </tr>
             @endforeach
 

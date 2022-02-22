@@ -49,6 +49,12 @@ body {
     }
 }
 
+@media (max-width: 400px) {
+    .created, .updated {
+        display: none;
+    }
+}
+
 .sidebar-sticky {
     position: relative;
     top: 0;
