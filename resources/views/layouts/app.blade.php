@@ -86,6 +86,65 @@
         <main class="pb-4">
             @yield('content')
         </main>
+        <footer>
+            <div class="container">
+                <div class="row justify-content-between d-flex">
+                    <div class="col-3">
+                        <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                    <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                    <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                    <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
     </div>
     <script>
         var incrementButton = document.getElementsByClassName('inc');
@@ -95,7 +154,7 @@
         for (var i = 0; i < incrementButton.length; i++) {
             var btn = incrementButton[i];
             console.log(btn);
-            btn.addEventListener('click',function(event){
+            btn.addEventListener('click', function(event) {
                 var buttonClicked = event.target;
                 console.log(buttonClicked);
 
@@ -103,9 +162,9 @@
                 console.log(input);
 
                 var inputValue = parseInt(inputValue) + 1;
- 
+
             })
-            
+
         }
     </script>
 </body>

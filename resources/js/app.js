@@ -70,6 +70,8 @@ const app = new Vue({
   },
 
   methods: {
+
+
     tagHandler(tag) {
       this.tag = tag.id
       if (!this.filterTags.includes(this.tag)) {
@@ -86,11 +88,12 @@ const app = new Vue({
           this.filteredUsers = r.data
         })
       } else {
-        this.filteredUsers = 0
+        this.filteredUsers = this.users
       }
 
       // this.callApi()
     },
+
 
     addToCart(dish) {
       //localStorage.clear()
@@ -133,6 +136,7 @@ const app = new Vue({
       } else {
         this.currentPage++
       }
+
       axios.get('/api/users?page=' + this.currentPage).then((r) => {
         this.users = r.data.data
       })
@@ -144,6 +148,7 @@ const app = new Vue({
       } else {
         this.currentPage--
       }
+
       axios.get('/api/users?page=' + this.currentPage).then((r) => {
         this.users = r.data.data
       })
@@ -156,15 +161,20 @@ const app = new Vue({
       })
     },
     filteredList() {
+
       if (this.searchInput) {
         axios.get('api/user/' + this.searchInput).then((r) => {
           if (!this.filteredRest.includes(r.data)) {
+
             this.filteredRest = r.data
           }
+
         })
+
       } else {
-        this.filteredRest = 0
+        this.filteredRest = []
       }
+
     },
   },
 
@@ -182,6 +192,8 @@ const app = new Vue({
   },
 
   computed: {
+
+
     displayedDishes() {
       let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
       this.displayedDishesLength = dishes.length()
@@ -214,3 +226,7 @@ showHidePassword = () => {
   }
 }
 toggler.addEventListener('click', showHidePassword)
+
+
+
+
