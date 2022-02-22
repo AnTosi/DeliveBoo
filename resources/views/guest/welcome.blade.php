@@ -8,20 +8,20 @@
     <div class="tags-container">
         <div
             class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 mx-auto container-fluid my-auto pt-3  justify-content-center flex-wrap g-3">
-            {{-- @foreach ($tags as $tag) --}}
-            <div v-for="tag in tags" :key="tag.id" class="col justify-content-center d-flex ">
-                <a href="#" class="tags_link text-black text-decoration-none text-center">
-                    <div class="card rounded-pill" v-on:click="tagHandler(tag.name)"
-                        :class=" filterTags.includes(tag.name) ? 'active' : '' ">
-                        <div class="card-body">
-                            <h5 class="card-title mb-0">
-                                <span> @{{ tag.name }}</span>
-                            </h5>
+            @foreach ($tags as $tag)
+                <div class="col justify-content-center d-flex ">
+                    <a href="#" class="tags_link text-black text-decoration-none text-center">
+                        <div class="card rounded-pill" v-on:click="tagHandler({{ json_encode($tag) }})"
+                            :class=" filterTags.includes({{ json_encode($tag->id) }}) ? 'active' : '' ">
+                            <div class="card-body">
+                                <h5 class="card-title mb-0">
+                                    <span> {{ $tag->name }} </span>
+                                </h5>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            {{-- @endforeach --}}
+                    </a>
+                </div>
+            @endforeach
 
         </div>
     </div>
@@ -33,12 +33,12 @@
 
     <div class="container mb-5">
         <h2 class="my-5 fs-1">Restaurants</h2>
-        <div v-if="filterTags.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-            <div v-for="user in filteredUsers" :key="user.id">
-                <div class="col h-100 px-3" v-on:click="getUser(user)">
+        <div v-if="filteredRest.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <div v-for="user in filteredRest" :key="user.id">
+                <div class="col h-100 px-3">
                     <a class="text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                         :href="user.slug">
-                        <div class="rest_card card border-0 shadow-lg" style="border-radius: 1rem;" aria-hidden="true">
+                        <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
                             <img class="card-img-top img-fluid" style="border-radius: 1rem;"
                                 :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
                             <div class="card-body">
@@ -61,17 +61,17 @@
         </div>
 
 
-        <div v-else-if="filteredList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-            <div v-for="user in filteredList" :key="user.id">
-                <div class="col h-100 px-3" v-on:click="getUser(user)">
+        <div v-else-if="filteredUsers.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <div v-for="user in filteredUsers" :key="user.id">
+                <div class="col h-100 px-3">
                     <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                         :href="user.slug">
-                        <div class="rest_card card border-0 shadow-lg" style="border-radius: 1rem;" aria-hidden="true">
+                        <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
                             <img class="card-img-top img-fluid" style="border-radius: 1rem;"
                                 :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <span class="capitalize fs-3 text-black"> @{{ user.name }}</span>
+                                    <p><span class="capitalize fs-3 text-black"> @{{ user.name }}</span></p>
                                 </h5>
                                 <p class="text-decoration-none mb-1">
                                     @{{ user.address }}
@@ -88,26 +88,29 @@
             </div>
         </div>
 
-        <div v-else-if="users" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        <div v-else class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in users" :key="user.id">
-                <div class="col h-100 px-3" v-on:click="getUser(user)">
-                    <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
+                <div class="col h-100 px-3">
+                    <a class="text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                         :href="user.slug">
-                        <div class="card border-0 shadow-lg" style="border-radius: 1rem;" aria-hidden="true">
+                        <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
 
                             <img class="card-img-top img-fluid" style="border-radius: 1rem;"
                                 :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
 
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <span class="capitalize fs-3 text-black"> @{{ user.name }}</span>
+                                    <p><span class="capitalize fs-3 text-black"> @{{ user.name }}</span></p>
+
                                 </h5>
-                                <p class="text-decoration-none">
+                                <p class="text-decoration-none mb-1">
                                     @{{ user.address }}
                                 </p>
-                                <span v-for="tag in user.tags" :key="tag.id">
-                                    @{{ tag.name }}
-                                </span>
+                                <p class="mb-0">
+                                    <span v-for="tag in user.tags" :key="tag.id">
+                                        @{{ tag.name }}
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </a>
@@ -126,5 +129,19 @@
                 </svg>
             </div>
 
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+            <button class="btn btn-outline-dark me-1" v-on:click="prev" v-show="currentPage != 1">
+                Prev
+            </button>
+            <div v-for="page in lastPage" :key="page" class="page">
+                <button class="btn btn-outline-dark mx-1" v-on:click="current(page)">
+                    @{{ page }}
+                </button>
+            </div>
+            <button class="btn btn-outline-dark ms-1" v-on:click="next" v-show="lastPage != currentPage">
+                Next
+            </button>
         </div>
     @endsection

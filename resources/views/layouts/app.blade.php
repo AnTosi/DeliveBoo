@@ -46,7 +46,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <input v-model='searchInput' type="text" placeholder="Search">
+                    <input v-on:keyup.enter='filteredList' v-model="searchInput" type="text" placeholder="Search">
                     <!-- Left Side Of Navbar -->
 
 

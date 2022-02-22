@@ -153,11 +153,19 @@ svg {
   }
 }
 .rest_card {
-  height: 337px !important;
+  border-radius: 1rem !important;
+  height: 368px !important;
+  max-width: 368px;
 }
 .rest_card img {
-  height: 205px !important;
+  height: 245px !important;
+  max-width: 368px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .rest_card .card-body {
-  overflow: auto;
+  overflow: hidden;
+}
+.rest_card .card-title p {
+  margin-bottom: 0;
 }

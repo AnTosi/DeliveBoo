@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/users', 'Api\UserController@index');
+Route::get('/user/{name}', 'Api\UserController@show');
 
 Route::get('/tags', 'Api\tagController@index');
+Route::get('/tag/{params}', 'Api\tagController@show');

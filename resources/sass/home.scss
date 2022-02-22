@@ -111,14 +111,26 @@ $duration: 1s;
 }
 
 .rest_card {
-    
-    height: 337px!important;
+
+    border-radius: 1rem!important;
+
+    height: 368px!important;
+
+    max-width: 368px;
 
     img {
-        height: 205px!important;
+        height: 245px!important;
+        max-width: 368px;
+        object-fit: cover;
     }
 
     .card-body {
-        overflow: auto;
+        overflow: hidden;
+    }
+
+    .card-title {
+        p {
+            margin-bottom: 0;
+        }
     }
 }
