@@ -32,11 +32,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
     Route::resource('orders', OrderController::class);
 
+    
     Route::get('/statistics', function () {
         return view('statistics')->name('statistics');
     });
 });
 
+Route::post('/guest/order/', 'OrderController@showOrder')->name('orders.showOrder');
 
 Route::get('/register', function () {
 

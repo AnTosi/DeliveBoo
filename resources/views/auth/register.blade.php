@@ -132,7 +132,7 @@
 
                 <div class="form-group row justify-content-center ms-2 mt-4">
                     <div class="col-8 col-sm-5">
-                        <label for="image" class="form-label fs-4 text-md-right">Backgroung Image*</label>
+                        <label for="image" class="form-label fs-4 text-md-right">Background Image*</label>
                         <input id="image" type="file" class="form-control @error('image') is-invalid @enderror" name="image"
                             accept=".jpg,.png" autofocus>
 
