@@ -138,30 +138,33 @@
                                 <div class="row">
 
                                     {{-- PRODOTTI CARRELLO --}}
-                                    <div v-for="(product,index) in cart" :key="index" class="card mb-3">
-                                        <div class="card-body">
-                                            <div class="d-flex justify-content-between flex-wrap">
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <div>
-                                                        <img :src="'storage/' + product.image " class="rounded-circle" alt="Shopping item" style=" width: 55px; height: 55px; object-fit: cover;">
+                                    <div class="cart_wrapper">
+
+                                        <div v-if="product.user_id == {{json_encode($user->id)}}" v-for="(product,index) in cart" :key="index" class="card mb-3">
+                                            <div  class="card-body">
+                                                <div class="d-flex justify-content-between flex-wrap">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div>
+                                                            <img :src="'storage/' + product.image " class="rounded-circle" alt="Shopping item" style=" width: 55px; height: 55px; object-fit: cover;">
+                                                        </div>
+                                                        <div class="ms-3">
+                                                            <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
+                                                            </h5>
+                                                            <p class="small mb-0"></p>
+                                                        </div>
                                                     </div>
-                                                    <div class="ms-3">
-                                                        <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
-                                                        </h5>
-                                                        <p class="small mb-0"></p>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div class="me-2 align-items-center d-flex box">
+                                                            <label for="name">DIO :</label>
+                                                            <div class="dec btn">-</div>
+                                                            <input type="text" name='qty' v-bind:id="product.id" value="0" class="input-filed">
+                                                            <div class="inc btn">+</div>
+                                                        </div>
+                                                        <div style="width: 80px;">
+                                                            <h5 class="mb-0">@{{ product.price }} €</h5>
+                                                        </div>
+                                                        <a href="#!" v-on:click="removeCart(product)" style="color: #000000;"><i class="fas fa-trash-alt"></i></a>
                                                     </div>
-                                                </div>
-                                                <div class="d-flex flex-row align-items-center">
-                                                    <div class="me-2 align-items-center d-flex box">
-                                                        <label for="name">DIO :</label>
-                                                        <div class="dec btn">-</div>
-                                                        <input type="text" name='qty' v-bind:id="product.id" value="0" class="input-filed">
-                                                        <div class="inc btn">+</div>
-                                                    </div>
-                                                    <div style="width: 80px;">
-                                                        <h5 class="mb-0">@{{ product.price }} €</h5>
-                                                    </div>
-                                                    <a href="#!" v-on:click="removeCart(product)" style="color: #000000;"><i class="fas fa-trash-alt"></i></a>
                                                 </div>
                                             </div>
                                         </div>
