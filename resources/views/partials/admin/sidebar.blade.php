@@ -2,14 +2,16 @@
     <div class="position-sticky d-flex flex-column justify-content-between h-100 pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link {{ Route::currentRouteName() === 'admin.dashboard' ? 'active shadow rounded' : '' }} "
+                    aria-current="page" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-tachometer-alt fa-lg fa-fw"></i>
                     Dashboard
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.dishes.index') }}">
+                <a class="nav-link {{ Route::currentRouteName() === 'admin.dishes.index' || 'admin.dishes.create' || 'admin.dishes.edit'? 'active shadow rounded': '' }}"
+                    href="{{ route('admin.dishes.index') }}">
                     <i class="fas fa-utensils fa-lg fa-fw"></i>
                     Dishes
                 </a>
