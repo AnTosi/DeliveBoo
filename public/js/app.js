@@ -53660,37 +53660,44 @@ var app = new Vue({
       localDishes: [],
       previousPage: null,
       lastPage: null,
-      filteredRest: []
+      filteredRest: [],
+      filteredUsers: []
     };
   },
   methods: {
     tagHandler: function tagHandler(tag) {
       var _this = this;
 
-      axios.get('/api/tags/' + tag.id).then(function (r) {
-        _this.tag = r.data.data.name;
+      this.tag = tag.id;
 
-        if (!_this.filterTags.includes(_this.tag)) {
-          _this.filterTags.push(_this.tag);
-        } else {
-          var index = _this.filterTags.indexOf(_this.tag);
+      if (!this.filterTags.includes(this.tag)) {
+        this.filterTags.push(this.tag);
+      } else {
+        var index = this.filterTags.indexOf(this.tag);
 
-          if (index > -1) {
-            _this.filterTags.splice(index, 1);
-          }
+        if (index > -1) {
+          this.filterTags.splice(index, 1);
         }
-      });
-      this.callApi();
-    },
-    callApi: function callApi() {
-      var _this2 = this;
+      }
 
-      var restQuery = "/api/users/?tags + ".concat(this.filterTags);
-      axios.get(restQuery).then(function (response) {
-        _this2.filteredRest = response.data.data;
-        console.log(_this2.filteredRest);
-      });
+      if (this.filterTags.length > 0) {
+        axios.get('/api/tag/' + [this.filterTags]).then(function (r) {
+          console.log(r.data);
+          _this.filteredUsers = r.data;
+        });
+      } else {
+        this.filteredUsers = this.users;
+      } // this.callApi()
+
     },
+    // callApi() {
+    //   let restQuery = `/api/users/?tags=${this.filterTags}`;
+    //   axios.get(restQuery)
+    //     .then((response) => {
+    //       this.filteredRest = response.data.data;
+    //       console.log(this.filteredRest);
+    //     })
+    // },
 
     /* pagination */
 
@@ -53736,7 +53743,7 @@ var app = new Vue({
       console.log(this.cart);
     },
     next: function next() {
-      var _this3 = this;
+      var _this2 = this;
 
       if (this.currentPage == this.lastPage) {
         this.currentPage = 1;
@@ -53745,11 +53752,11 @@ var app = new Vue({
       }
 
       axios.get('/api/users?page=' + this.currentPage).then(function (r) {
-        _this3.users = r.data.data;
+        _this2.users = r.data.data;
       });
     },
     prev: function prev() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (this.currentPage == 1) {
         this.currentPage = this.lastPage;
@@ -53758,16 +53765,38 @@ var app = new Vue({
       }
 
       axios.get('/api/users?page=' + this.currentPage).then(function (r) {
-        _this4.users = r.data.data;
+        _this3.users = r.data.data;
       });
     },
     current: function current(page) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.currentPage = page;
       axios.get('/api/users?page=' + this.currentPage).then(function (r) {
-        _this5.users = r.data.data;
+        _this4.users = r.data.data;
       });
+    },
+    filteredList: function filteredList() {
+      var _this5 = this;
+
+      /* if (this.users) {
+        return this.users.filter((user) => {
+          return user.name
+            .toLowerCase()
+            .includes(this.searchInput.trim().toLowerCase())
+        })
+      } */
+      if (this.searchInput) {
+        axios.get('api/user/' + this.searchInput).then(function (r) {
+          console.log(r.data);
+
+          if (!_this5.filteredRest.includes(r.data)) {
+            _this5.filteredRest = r.data;
+          }
+        });
+      } else {
+        this.filteredRest = [];
+      }
     }
   },
   mounted: function mounted() {
@@ -53785,70 +53814,44 @@ var app = new Vue({
     }
   },
   computed: {
-    filteredUsers: function filteredUsers() {
-      var restaurants = [];
-
+    /* filteredUsers() {
+      let restaurants = []
       if (this.users) {
-        restaurants = this.users;
+        restaurants = this.users
       }
-
-      var filters = this.filterTags;
-      filteredRestaurants = [];
-      checkedFilters = [];
-
-      if (restaurants) {
-        filters.forEach(function (filter) {
-          for (var i = 0; i < restaurants.length; i++) {
-            var restaurant = restaurants[i];
-
-            if (restaurant.tags.some(function (tag) {
-              return tag.name === filter;
-            })) {
+      let filters = this.filterTags
+        filteredRestaurants = []
+        checkedFilters = []
+        if (restaurants) {
+        filters.forEach((filter) => {
+          for (let i = 0; i < restaurants.length; i++) {
+            const restaurant = restaurants[i]
+              if (restaurant.tags.some((tag) => tag.name === filter)) {
               if (!filteredRestaurants.includes(restaurant)) {
-                filteredRestaurants.push(restaurant);
+                filteredRestaurants.push(restaurant)
               }
             }
           }
-        });
-        filters.forEach(function (filter) {
-          for (var i = 0; i < filteredRestaurants.length; i++) {
-            var filteredRestaurant = filteredRestaurants[i];
-
-            if (!filteredRestaurant.tags.some(function (tag) {
-              return tag.name === filter;
-            })) {
-              filteredRestaurants.splice(i, 1);
+        })
+          filters.forEach((filter) => {
+          for (let i = 0; i < filteredRestaurants.length; i++) {
+            const filteredRestaurant = filteredRestaurants[i]
+              if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
+              filteredRestaurants.splice(i, 1)
             }
           }
-        });
-
-        var _loop = function _loop(i) {
-          var filteredRestaurant = filteredRestaurants[i];
-          filters.forEach(function (filter) {
-            if (!filteredRestaurant.tags.some(function (tag) {
-              return tag.name === filter;
-            })) {
-              filteredRestaurants.splice(i, 1);
+        })
+          for (let i = 0; i < filteredRestaurants.length; i++) {
+          const filteredRestaurant = filteredRestaurants[i]
+            filters.forEach((filter) => {
+            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
+              filteredRestaurants.splice(i, 1)
             }
-          });
-        };
-
-        for (var i = 0; i < filteredRestaurants.length; i++) {
-          _loop(i);
+          })
         }
-
-        return filteredRestaurants;
+        return filteredRestaurants
       }
-    },
-    filteredList: function filteredList() {
-      var _this7 = this;
-
-      if (this.users) {
-        return this.users.filter(function (user) {
-          return user.name.toLowerCase().includes(_this7.searchInput.trim().toLowerCase());
-        });
-      }
-    },
+    }, */
     displayedDishes: function displayedDishes() {
       var dishes = this.user.dishes.filter(function (dish) {
         return dish.visibility == true;
