@@ -91,28 +91,7 @@ const app = new Vue({
       // this.callApi()
     },
 
-    // callApi() {
-    //   let restQuery = `/api/users/?tags=${this.filterTags}`;
-    //   axios.get(restQuery)
-    //     .then((response) => {
-    //       this.filteredRest = response.data.data;
-    //       console.log(this.filteredRest);
-    //     })
-    // },
-    /* pagination */
-    /*  setPages() {
-      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index)
-      }
-    },
-    paginate(dishes) {
-      let page = this.page
-      let perPage = this.perPage
-      let from = page * perPage - perPage
-      let to = page * perPage
-      return dishes.slice(from, to)
-    }, */
+    
     addToCart(dish) {
       //localStorage.clear()
       if (localStorage.getItem('localDish') == null) {
@@ -179,13 +158,7 @@ const app = new Vue({
       })
     },
     filteredList() {
-      /* if (this.users) {
-        return this.users.filter((user) => {
-          return user.name
-            .toLowerCase()
-            .includes(this.searchInput.trim().toLowerCase())
-        })
-      } */
+     
       if (this.searchInput) {
         axios.get('api/user/' + this.searchInput).then((r) => {
           console.log(r.data);
@@ -217,52 +190,7 @@ const app = new Vue({
   },
 
   computed: {
-    /* filteredUsers() {
-      let restaurants = []
-      if (this.users) {
-        restaurants = this.users
-      }
-      let filters = this.filterTags
-
-      filteredRestaurants = []
-
-      checkedFilters = []
-
-      if (restaurants) {
-        filters.forEach((filter) => {
-          for (let i = 0; i < restaurants.length; i++) {
-            const restaurant = restaurants[i]
-
-            if (restaurant.tags.some((tag) => tag.name === filter)) {
-              if (!filteredRestaurants.includes(restaurant)) {
-                filteredRestaurants.push(restaurant)
-              }
-            }
-          }
-        })
-
-        filters.forEach((filter) => {
-          for (let i = 0; i < filteredRestaurants.length; i++) {
-            const filteredRestaurant = filteredRestaurants[i]
-
-            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
-              filteredRestaurants.splice(i, 1)
-            }
-          }
-        })
-
-        for (let i = 0; i < filteredRestaurants.length; i++) {
-          const filteredRestaurant = filteredRestaurants[i]
-
-          filters.forEach((filter) => {
-            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
-              filteredRestaurants.splice(i, 1)
-            }
-          })
-        }
-        return filteredRestaurants
-      }
-    }, */
+    
 
     displayedDishes() {
       let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
