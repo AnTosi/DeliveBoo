@@ -8,21 +8,30 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     //
-    public function showOrder(Request $request) {
+    public function showOrder(Request $request)
+    {
 
-       $listaOrdine = $request['qty'];
-        
+        $listaOrdine = $request['qty'];
+
         $piatti = [];
 
+        $prezzo_totale = 0;
+        $prezzo_piatto = [];
+
         foreach ($listaOrdine as $id => $qty) {
-            # code...
             $dish = Dish::find($id);
 
-            $piatti[] = $dish;
+            $prezzo_piatto[] = $dish->price * $qty;
 
+            $piatti[] = $dish;
         }
 
-      
-        return view('guest.restaurant.order', compact('piatti', 'listaOrdine'));
+        foreach ($prezzo_piatto as $prezzo) {
+            $prezzo_totale += $prezzo;
+        }
+
+        // dd($prezzo_totale);
+
+        return view('guest.restaurant.order', compact('piatti', 'listaOrdine', 'prezzo_totale'));
     }
 }

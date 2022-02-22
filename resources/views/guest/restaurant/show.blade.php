@@ -180,7 +180,7 @@
                                                                 <div style="width: 80px;">
                                                                     <h5 class="mb-0">@{{ product.price }} €</h5>
                                                                 </div>
-                                                                <a href="#!" v-on:click="removeCart(product)"
+                                                                <a v-on:click="removeCart(product)"
                                                                     style="color: #000000;"><i
                                                                         class="fas ms-1 fa-trash-alt"></i></a>
                                                             </div>
