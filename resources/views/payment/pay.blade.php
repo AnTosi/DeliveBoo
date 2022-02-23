@@ -2,10 +2,18 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div id="dropin-container"></div>
-                <button id="submit-button">Request payment method</button>
+        <div class="row row-cols-2">
+            <div class="col">
+
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div id="dropin-container"></div>
+                        <button id="submit-button">Request payment method</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

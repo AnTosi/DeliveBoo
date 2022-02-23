@@ -27,7 +27,7 @@
                 @endforeach
             </div>
             <div class="mb-3 d-flex flex-row justify-content-center">
-                <form action="#" method="post">
+                <form method="post">
                     @csrf
                     <div class="form-group">
                         <label for="customer_name" class="form-label fs-4">Write your name</label>
@@ -66,9 +66,10 @@
 
                     <div class="d-flex justify-content-center mt-3">
 
-                        <button class="btn bg_secondary_smooth text_secondary fw-bold " type="submit">
+                        <a class="btn bg_secondary_smooth text_secondary fw-bold " type="submit"
+                            href="{{ route('payment.pay') }}">
                             Proceed to Payment
-                        </button>
+                        </a>
                     </div>
 
                 </form>
