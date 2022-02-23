@@ -11,9 +11,11 @@
     <title> DeliveBoo | @yield('page-title', 'Homepage') </title>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -21,10 +23,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     @yield('custom-css')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -34,7 +39,9 @@
                 <a class="navbar-brand" href="{{ route('home') }}">
                     <img src="{{ asset('img/logo-deliveboo.svg') }}" width="200">
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -49,34 +56,40 @@
                     <ul class="navbar-nav">
                         <!-- Authentication Links -->
                         @guest
-                        <li class="nav-item">
-                            <a class="nav-link btn rounded-pill fw-bold px-3 text-white me-4" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link btn fw-bold rounded-pill px-3 text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                        @endif
+                            <li class="nav-item">
+                                <a class="nav-link btn rounded-pill fw-bold px-3 text-white me-4"
+                                    href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link btn fw-bold rounded-pill px-3 text-white"
+                                        href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link btn rounded-pill px-3 text-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                    Dashboard
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link btn rounded-pill px-3 text-white dropdown-toggle"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        Dashboard
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
                         @endguest
                     </ul>
                 </div>
@@ -103,7 +116,7 @@
                         <p>Diventa nostro partenr</p>
                     </div>
                     <div class="col-3">
-                    <h3>Scopri Deliveboo</h3>
+                        <h3>Scopri Deliveboo</h3>
                         <p>Investitori</p>
                         <p>Chi siamo</p>
                         <p>Ristoranti</p>
@@ -116,7 +129,7 @@
                         <p>Diventa nostro partenr</p>
                     </div>
                     <div class="col-3">
-                    <h3>Scopri Deliveboo</h3>
+                        <h3>Scopri Deliveboo</h3>
                         <p>Investitori</p>
                         <p>Chi siamo</p>
                         <p>Ristoranti</p>
@@ -129,7 +142,7 @@
                         <p>Diventa nostro partenr</p>
                     </div>
                     <div class="col-3">
-                    <h3>Scopri Deliveboo</h3>
+                        <h3>Scopri Deliveboo</h3>
                         <p>Investitori</p>
                         <p>Chi siamo</p>
                         <p>Ristoranti</p>
@@ -146,27 +159,7 @@
             </div>
         </footer>
     </div>
-    <script>
-        var incrementButton = document.getElementsByClassName('inc');
-        var decrementButton = document.getElementsByClassName('dec');
-
-        //console.log(incrementButton);
-        for (var i = 0; i < incrementButton.length; i++) {
-            var btn = incrementButton[i];
-            console.log(btn);
-            btn.addEventListener('click', function(event) {
-                var buttonClicked = event.target;
-                console.log(buttonClicked);
-
-                var input = buttonClicked.parentElement[2];
-                console.log(input);
-
-                var inputValue = parseInt(inputValue) + 1;
-
-            })
-
-        }
-    </script>
+    @yield('custom-js')
 </body>
 
 </html>

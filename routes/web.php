@@ -32,7 +32,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
     Route::resource('orders', OrderController::class);
 
-    
+
     Route::get('/statistics', function () {
         return view('statistics')->name('statistics');
     });
@@ -48,3 +48,7 @@ Route::get('/register', function () {
 
 
 Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');
+
+Route::get('/payment/pay', 'OrderController@pay')->name('payment.pay');
+
+Route::get('/payment/make', 'PaymentController@make')->name('payment.make');
