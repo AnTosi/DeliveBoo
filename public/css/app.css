@@ -11333,3 +11333,17 @@ footer .container .row .col-3 {
   background-color: #434848;
   color: white;
 }
+
+@media (max-width: 1400px) {
+  footer {
+    height: 100%;
+  }
+  footer .container {
+    margin: auto;
+    width: 80%;
+  }
+  footer .container .col-3 {
+    align-items: center;
+    text-align: center;
+  }
+}
