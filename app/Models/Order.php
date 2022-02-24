@@ -8,6 +8,8 @@ class Order extends Model
 {
     //
 
+    protected $fillable = ['email', 'address', 'customer_name', 'dish_price', 'total_price', 'user_id'];
+
     public function dishes() {
         return $this->belongsToMany('App\Models\Dish');
     }

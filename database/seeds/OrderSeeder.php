@@ -17,6 +17,7 @@ class OrderSeeder extends Seeder
             $order = new Order();
             $order->customer_name = $faker->name();
             $order->address = $faker->address();
+            $order->email = $faker->email();
             $order->data = $faker->dateTime();
             $order->dish_price = $faker->randomFloat(2,3,200);
             $order->total_price = $faker->randomFloat(2,3,200);

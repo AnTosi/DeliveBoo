@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dish;
+use App\Models\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Braintree;
+
+
 
 class OrderController extends Controller
 {
@@ -19,8 +23,12 @@ class OrderController extends Controller
         $prezzo_totale = 0;
         $prezzo_piatto = [];
 
+        $restaurant = null;
+
         foreach ($listaOrdine as $id => $qty) {
             $dish = Dish::find($id);
+
+            $restaurant = User::find($dish->user_id);
 
             $prezzo_piatto[] = $dish->price * $qty;
 
@@ -33,10 +41,10 @@ class OrderController extends Controller
 
         // dd($prezzo_totale);
 
-        return view('guest.restaurant.order', compact('piatti', 'listaOrdine', 'prezzo_totale'));
+        return view('guest.restaurant.order', compact('piatti', 'listaOrdine', 'prezzo_totale', 'restaurant'));
     }
 
-    public function pay()
+    public function pay(Request $request)
     {
         # code...
         $gateway = new \Braintree\Gateway([
@@ -48,6 +56,29 @@ class OrderController extends Controller
 
         $token = $gateway->ClientToken()->generate();
 
-        return view('payment.pay', compact('token'));
+        $val_data = $request->validate([
+            'customer_name' => ['required'],
+            'email' => ['required'],
+            'address' => ['required'],
+            'dish_price' => ['required'],
+            'total_price' => ['required'],
+            'user_id' => ['required'],
+
+        ]);
+
+
+        $order = Order::create([
+            'customer_name' => $val_data['customer_name'],
+            'email' =>$val_data['email'],
+            'address' =>$val_data['address'],
+            'dish_price' =>$val_data['dish_price'],
+            'total_price' => $val_data['total_price'],
+            'user_id' => $val_data['user_id'],
+        ]);
+
+        
+        
+
+        return view('payment.pay', compact('token', 'order'));
     }
 }

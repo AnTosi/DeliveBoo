@@ -28,6 +28,13 @@ class OrderController extends Controller
         //
     }
 
+    public function store(Request $request)
+    {
+        //
+        ddd($request->all());
+
+    }
+
     /**
      * Update the specified resource in storage.
      *
