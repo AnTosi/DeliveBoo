@@ -32,19 +32,23 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
     Route::resource('orders', OrderController::class);
 
-    
+
     Route::get('/statistics', function () {
         return view('statistics')->name('statistics');
     });
 });
 
-Route::post('/guest/order/', 'OrderController@showOrder')->name('orders.showOrder');
+Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
 
 Route::get('/register', function () {
-
+    
     $tags = Tag::all();
     return view('auth.register', compact('tags'));
 })->name('register');
 
+Route::post('/guest/order', 'OrderController@showOrder')->name('orders.showOrder');
 
 Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');
+
+
+Route::get('/payment/make', 'PaymentController@make')->name('payment.make');

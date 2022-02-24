@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('customer_name');
+            $table->string('email');
             $table->string('address')->nullable();
             $table->dateTime('data')->nullable();
             $table->float('dish_price',6,2);

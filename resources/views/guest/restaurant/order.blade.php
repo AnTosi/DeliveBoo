@@ -27,7 +27,7 @@
                 @endforeach
             </div>
             <div class="mb-3 d-flex flex-row justify-content-center">
-                <form action="#" method="post">
+                <form method="post" action="{{ route('payment.pay') }}">
                     @csrf
                     <div class="form-group">
                         <label for="customer_name" class="form-label fs-4">Write your name</label>
@@ -35,6 +35,14 @@
                             class="form-control bg-white border-0 shadow-lg " placeholder="Write your name"
                             aria-describedby="helpName">
                         <small id="helpName" class="text-muted">Name</small>
+                    </div>
+                    <input type="number" disabled value="{{$restaurant->id}}" name="user_id">
+                    <div class="form-group">
+                        <label for="email"  class="form-label fs-4">Write your e-mail</label>
+                        <input type="email" required name="email" id="email"
+                            class="form-control bg-white border-0 shadow-lg " placeholder="Write your name"
+                            aria-describedby="helpName">
+                        <small id="helpName" class="text-muted">E-Mail</small>
                     </div>
                     <div class="form-group">
                         <label for="address" class="form-label fs-3">Write your Address</label>
@@ -47,26 +55,26 @@
                         <div class="dish_price_only me-2">
                             <label for="dish_price" class="form-label fs-3">Dish Price</label>
                             <input class="form-control" name="dish_price" id="dish_price" type="text"
-                                value="{{ $prezzo_totale }}€" readonly>
+                                value="{{ $prezzo_totale }}" readonly>
                         </div>
                         <div class="dish_price_delivery ms-2">
                             <label for="dish_price" class="form-label fs-3">Total Price</label>
 
                             @if ($prezzo_totale < 25)
                                 <input class="form-control" type="text" name="total_price" id="total_price"
-                                    value="{{ $prezzo_totale + 2.5 }}€" readonly>
+                                    value="{{ $prezzo_totale + 2.5 }}" readonly>
                                 <small class="text-danger">Pay 2.50€ for orders under 25€</small>
                             @else
                                 <input class="form-control" type="text" name="total_price" id="total_price"
-                                    value="{{ $prezzo_totale }}€" readonly>
+                                    value="{{ $prezzo_totale }}" readonly>
                                 <small class="text-success">Free Shipping</small>
                             @endif
                         </div>
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
-
-                        <button class="btn bg_secondary_smooth text_secondary fw-bold " type="submit">
+                        <button class="btn bg_secondary_smooth text_secondary fw-bold " type="submit"
+                            href="{{ route('payment.pay') }}">
                             Proceed to Payment
                         </button>
                     </div>

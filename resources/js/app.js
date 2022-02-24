@@ -88,7 +88,7 @@ const app = new Vue({
           this.filteredUsers = r.data
         })
       } else {
-        this.filteredUsers = this.users
+        this.filteredUsers = 0
       }
 
       // this.callApi()
@@ -172,7 +172,7 @@ const app = new Vue({
         })
 
       } else {
-        this.filteredRest = []
+        this.filteredRest = 0
       }
 
     },
@@ -226,6 +226,7 @@ showHidePassword = () => {
   }
 }
 toggler.addEventListener('click', showHidePassword)
+
 
 
 

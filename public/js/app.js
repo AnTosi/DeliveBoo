@@ -53686,7 +53686,7 @@ var app = new Vue({
           _this.filteredUsers = r.data;
         });
       } else {
-        this.filteredUsers = this.users;
+        this.filteredUsers = 0;
       } // this.callApi()
 
     },
@@ -53761,7 +53761,7 @@ var app = new Vue({
           }
         });
       } else {
-        this.filteredRest = [];
+        this.filteredRest = 0;
       }
     }
   },
@@ -54069,19 +54069,19 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\laravel\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })
