@@ -39,9 +39,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 });
 
 Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
+Route::get('/payment/pay', 'OrderController@create')->name('payment.pay');
 
 Route::get('/register', function () {
-    
+
     $tags = Tag::all();
     return view('auth.register', compact('tags'));
 })->name('register');

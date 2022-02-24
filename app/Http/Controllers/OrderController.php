@@ -56,6 +56,12 @@ class OrderController extends Controller
 
         $token = $gateway->ClientToken()->generate();
 
+        return view('payment.pay', compact('token'));
+    }
+
+    public function create(Request $request)
+    {
+        # code...
         $val_data = $request->validate([
             'customer_name' => ['required'],
             'email' => ['required'],
@@ -69,16 +75,12 @@ class OrderController extends Controller
 
         $order = Order::create([
             'customer_name' => $val_data['customer_name'],
-            'email' =>$val_data['email'],
-            'address' =>$val_data['address'],
-            'dish_price' =>$val_data['dish_price'],
+            'email' => $val_data['email'],
+            'address' => $val_data['address'],
+            'dish_price' => $val_data['dish_price'],
             'total_price' => $val_data['total_price'],
             'user_id' => $val_data['user_id'],
         ]);
-
-        
-        
-
-        return view('payment.pay', compact('token', 'order'));
+        return redirect()->route('payment.pay', compact('order'));
     }
 }
