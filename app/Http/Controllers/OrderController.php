@@ -66,6 +66,8 @@ class OrderController extends Controller
         $order->user_id = $val_data['user_id'];
         $order->save();
 
+        $restaurant = User::find($request['user_id']);
+
         # code...
         $gateway = new \Braintree\Gateway([
             'environment' => 'sandbox',
@@ -77,31 +79,6 @@ class OrderController extends Controller
         $token = $gateway->ClientToken()->generate();
 
 
-        return view('payment.pay', compact('order', 'token'));
+        return view('payment.pay', compact('order', 'token', 'restaurant'));
     }
-
-    // public function create(Request $request)
-    // {
-    //     # code...
-    //     $val_data = $request->validate([
-    //         'customer_name' => ['required'],
-    //         'email' => ['required'],
-    //         'address' => ['required'],
-    //         'dish_price' => ['required'],
-    //         'total_price' => ['required'],
-    //         'user_id' => ['required'],
-
-    //     ]);
-
-
-    //     $order = Order::create([
-    //         'customer_name' => $val_data['customer_name'],
-    //         'email' => $val_data['email'],
-    //         'address' => $val_data['address'],
-    //         'dish_price' => $val_data['dish_price'],
-    //         'total_price' => $val_data['total_price'],
-    //         'user_id' => $val_data['user_id'],
-    //     ]);
-    //     return redirect()->route('payment.pay', compact('order'));
-    // }
 }

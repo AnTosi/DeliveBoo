@@ -2,8 +2,16 @@
 
 @section('content')
     <div class="container">
-        <div class="row row-cols-2">
-            <div class="col">
+        <div class="row mt-5 row-cols-2">
+            <div class="col d-flex flex-column justify-content-center">
+
+                <span class="fs-1">{{ $restaurant->name }}</span>
+
+                <span class="fs-2">{{ $order->customer_name }}</span>
+                <span class="fs-3">{{ $order->address }}</span>
+                <span class="fs-3">{{ $order->email }}</span>
+                <span class="fs-3">{{ $order->total_price }}€</span>
+
 
             </div>
 
