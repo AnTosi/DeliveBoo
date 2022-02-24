@@ -4,9 +4,25 @@
     <link rel="stylesheet" href="{{ 'css/create.css' }}">
 @endsection
 @section('content')
-    <div class="container lg-sm pt-5">
-        <h1 class="pb-3">Add your creation</h1>
+    <div class="container lg-sm pt-3">
+
+        {{-- back to index --}}
+        <div class="back">
+            <a class="text-muted" href="{{ route('admin.dishes.index') }}">
+                <i class="fas fa-arrow-left fa-lg fa-fw"></i>
+            </a>
+        </div>
+
         <form action="{{ route('admin.dishes.store') }}" method="post" enctype="multipart/form-data">
+            <div class="d-flex justify-content-between py-3">
+                <div class="col-8">
+                    <h1>Add your creation</h1>
+                </div>
+                {{-- form submit --}}
+                <div class="col-4 text-end">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
             @csrf
 
             {{-- name --}}
@@ -28,7 +44,7 @@
             <div class="mb-3">
                 <label for="image" class="form-label">Image*:</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image"
-                    aria-describedby="imageHelper" accept=".png, .jpg" required>
+                    aria-describedby="imageHelper" accept=".png, .jpg">
                 <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file are
                     accepted</small>
 
@@ -102,16 +118,6 @@
             <div class="pt-3 pb-2 text-muted">
                 <p>All the fields with * are required</p>
             </div>
-
-            {{-- form submit --}}
-
-            <div class="d-flex justify-content-end">
-                <a type="button" href="{{ route('admin.dishes.index') }}"
-                    class="btn btn-outline-dark my-3 me-4">Cancel</a>
-                <button type="submit" class="btn btn-dark my-3">Submit</button>
-            </div>
-
-            {{-- form submit --}}
 
         </form>
     </div>

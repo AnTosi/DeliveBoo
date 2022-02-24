@@ -63,7 +63,7 @@ class DishController extends Controller
         if ($request->file('image')) {
             $image_path = $request->file('image')->store('dish_image');
             $val_data['image'] = $image_path;
-        }
+        } 
 
 
         $val_data['slug'] = Str::slug($val_data['name'] . ' ' . Auth::user()->id);

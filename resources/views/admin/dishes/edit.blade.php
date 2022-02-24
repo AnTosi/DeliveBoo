@@ -4,9 +4,26 @@
     <link rel="stylesheet" href="{{ 'css/create.css' }}">
 @endsection
 @section('content')
-    <div class="container lg-sm pt-5">
-        <h1 class="pb-3">Edit your dish</h1>
+    <div class="container lg-sm pt-3">
+
+        {{-- back to index --}}
+        <div class="back">
+            <a class="text-muted" href="{{ route('admin.dishes.index') }}">
+                <i class="fas fa-arrow-left fa-lg fa-fw"></i>
+            </a>
+        </div>
+
+
         <form action="{{ route('admin.dishes.update', $dish->slug) }}" method="post" enctype="multipart/form-data">
+            <div class="d-flex justify-content-between py-3">
+                <div class="col-6">
+                    <h1>Edit your dish</h1>
+                </div>
+                {{-- form submit --}}
+                <div class="col-6 text-end">
+                    <button type="submit" class="btn btn-dark">Submit</button>
+                </div>
+            </div>
             @csrf
             @method('PUT')
 
@@ -27,30 +44,36 @@
             {{-- image --}}
 
             <div class="mb-3">
-                <div class="flex-wrap row align-items-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                <div class="flex-wrap row d-flex row-cols-sm-2 row-cols-1">
 
-                    <div class="col">
+                    <div class="col col-md-6">
                         <label for="old_image" class="form-label">
                             Your old image:
                         </label>
-                        <div class="old_image">
-                            <img height="200" src="{{ asset('storage/' . $dish->image) }}" alt="" class="img-fluid">
+                        <div class="old_image mb-3">
+                            @if ($dish->image == null)
+                                <img class="img-fluid" style="width: 100%"
+                                    src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                            @else
+                                <img class="img-fluid" style="width: 100%"
+                                    src="{{ asset('storage/' . $dish->image) }}" alt="">
+                            @endif
                         </div>
                     </div>
 
 
-                    <div class="col">
+                    <div class="col col-md-6">
                         <label for="thumbnail" class="form-label">
                             Your new image:
                         </label>
-                        <div class="thumbnail">
-                            <img style="width: 200px"
+                        <div class="thumbnail mb-3">
+                            <img style="width: 100%"
                                 src="http://www.fotopettine.it/wp-content/themes/panama/assets/img/empty/600x600.png"
                                 id="thumb" alt="New image" class="img-fluid">
                         </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col ms-auto">
                         <input type="file" v-on:change="change" class="form-control @error('image') is-invalid @enderror"
                             name="image" id="my_image" aria-describedby="imageHelper" accept=".png, .jpg">
                         <small id="imageHelper" class="form-text text-muted">Add an image file, only .png and .jpg file
@@ -130,16 +153,6 @@
             <div class="pt-3 pb-2 text-muted">
                 <p>All the fields with * are required</p>
             </div>
-
-            {{-- form submit --}}
-
-            <div class="d-flex justify-content-end">
-                <a href="{{ route('admin.dishes.index') }}" type="button"
-                    class="btn btn-outline-dark my-3 me-4">Cancel</a>
-                <button type="submit" class="btn btn-dark my-3">Submit</button>
-            </div>
-
-            {{-- form submit --}}
 
         </form>
     </div>
