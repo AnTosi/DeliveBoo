@@ -17,7 +17,7 @@ class CreateDishesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('image')->nullable()->default('no-food-image.jpeg');
+            $table->string('image')->nullable();
             $table->string('ingredients')->nullable();
             $table->text('description')->nullable();
             $table->float('price', 5,2);

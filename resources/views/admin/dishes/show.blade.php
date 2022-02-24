@@ -67,7 +67,11 @@
                 </div>
             </div>
             <div class="col-9">
-                <img src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}" style="width: 100%">
+                @if ($dish->image == null)
+                    <img style="width: 100%" src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                @else
+                    <img style="width: 100%" src="{{ asset('storage/' . $dish->image) }}" alt="">
+                @endif
             </div>
             <div class="col-3">
                 <div class="text-muted">

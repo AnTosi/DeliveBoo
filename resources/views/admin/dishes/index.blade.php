@@ -40,9 +40,14 @@
                     <td class="text-center align-middle">{{ $dish->name }}</td>
 
                     <td class="text-center align-middle">
-                        @if ($dish->image)
-                            <img class="rounded-circle" height="60" src="{{ asset('storage/' . $dish->image) }}" alt="">
+                        @if ($dish->image == null)
+                            <img class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover"
+                                src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                        @else
+                            <img class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover"
+                                src="{{ asset('storage/' . $dish->image) }}" alt="">
                         @endif
+
                     </td>
 
                     <td class="text-center align-middle">&euro;{{ $dish->price }}</td>

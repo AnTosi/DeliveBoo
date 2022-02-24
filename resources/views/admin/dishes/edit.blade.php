@@ -44,20 +44,25 @@
             {{-- image --}}
 
             <div class="mb-3">
-                <div class="flex-wrap row align-items-center row-cols-lg-3 row-cols-sm-2 row-cols-1">
+                <div class="flex-wrap row d-flex row-cols-sm-2 row-cols-1">
 
-                    <div class="col">
+                    <div class="col col-md-6">
                         <label for="old_image" class="form-label">
                             Your old image:
                         </label>
                         <div class="old_image mb-3">
-                            <img style="width: 100%" src="{{ asset('storage/' . $dish->image) }}" alt=""
-                                class="img-fluid">
+                            @if ($dish->image == null)
+                                <img class="img-fluid" style="width: 100%"
+                                    src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                            @else
+                                <img class="img-fluid" style="width: 100%"
+                                    src="{{ asset('storage/' . $dish->image) }}" alt="">
+                            @endif
                         </div>
                     </div>
 
 
-                    <div class="col">
+                    <div class="col col-md-6">
                         <label for="thumbnail" class="form-label">
                             Your new image:
                         </label>
