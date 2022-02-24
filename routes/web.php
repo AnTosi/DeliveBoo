@@ -53,4 +53,4 @@ Route::post('/guest/order', 'OrderController@showOrder')->name('orders.showOrder
 Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
 
 
-Route::get('/payment/make', 'PaymentController@make')->name('payment.make');
+Route::get('/payment/make/{order}', 'OrderController@make')->name('payment.make');
