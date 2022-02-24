@@ -47,9 +47,10 @@ Route::get('/register', function () {
     return view('auth.register', compact('tags'));
 })->name('register');
 
+Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');
 Route::post('/guest/order', 'OrderController@showOrder')->name('orders.showOrder');
 
-Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');
+Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
 
 
 Route::get('/payment/make', 'PaymentController@make')->name('payment.make');

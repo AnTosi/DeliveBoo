@@ -36,9 +36,9 @@
                             aria-describedby="helpName">
                         <small id="helpName" class="text-muted">Name</small>
                     </div>
-                    <input type="number" disabled value="{{$restaurant->id}}" name="user_id">
+                    <input hidden type="number" value="{{ $restaurant->id }}" name="user_id">
                     <div class="form-group">
-                        <label for="email"  class="form-label fs-4">Write your e-mail</label>
+                        <label for="email" class="form-label fs-4">Write your e-mail</label>
                         <input type="email" required name="email" id="email"
                             class="form-control bg-white border-0 shadow-lg " placeholder="Write your name"
                             aria-describedby="helpName">
@@ -73,10 +73,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
-                        <button class="btn bg_secondary_smooth text_secondary fw-bold " type="submit"
-                            href="{{ route('payment.pay') }}">
-                            Proceed to Payment
-                        </button>
+                        <button type="submit"> Proceed to payment</button>
                     </div>
 
                 </form>

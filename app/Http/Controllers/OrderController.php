@@ -6,7 +6,7 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
-use Braintree;
+use Braintree\Gateway;
 
 
 
@@ -46,6 +46,26 @@ class OrderController extends Controller
 
     public function pay(Request $request)
     {
+
+        $val_data = $request->validate([
+            'customer_name' => ['required'],
+            'email' => ['required'],
+            'address' => ['required'],
+            'dish_price' => ['required'],
+            'total_price' => ['required'],
+            'user_id' => ['required'],
+
+        ]);
+        $order = new Order;
+
+        $order->customer_name = $val_data['customer_name'];
+        $order->email = $val_data['email'];
+        $order->address = $val_data['address'];
+        $order->dish_price = $val_data['dish_price'];
+        $order->total_price = $val_data['total_price'];
+        $order->user_id = $val_data['user_id'];
+        $order->save();
+
         # code...
         $gateway = new \Braintree\Gateway([
             'environment' => 'sandbox',
@@ -56,31 +76,32 @@ class OrderController extends Controller
 
         $token = $gateway->ClientToken()->generate();
 
-        return view('payment.pay', compact('token'));
+
+        return view('payment.pay', compact('order', 'token'));
     }
 
-    public function create(Request $request)
-    {
-        # code...
-        $val_data = $request->validate([
-            'customer_name' => ['required'],
-            'email' => ['required'],
-            'address' => ['required'],
-            'dish_price' => ['required'],
-            'total_price' => ['required'],
-            'user_id' => ['required'],
+    // public function create(Request $request)
+    // {
+    //     # code...
+    //     $val_data = $request->validate([
+    //         'customer_name' => ['required'],
+    //         'email' => ['required'],
+    //         'address' => ['required'],
+    //         'dish_price' => ['required'],
+    //         'total_price' => ['required'],
+    //         'user_id' => ['required'],
 
-        ]);
+    //     ]);
 
 
-        $order = Order::create([
-            'customer_name' => $val_data['customer_name'],
-            'email' => $val_data['email'],
-            'address' => $val_data['address'],
-            'dish_price' => $val_data['dish_price'],
-            'total_price' => $val_data['total_price'],
-            'user_id' => $val_data['user_id'],
-        ]);
-        return redirect()->route('payment.pay', compact('order'));
-    }
+    //     $order = Order::create([
+    //         'customer_name' => $val_data['customer_name'],
+    //         'email' => $val_data['email'],
+    //         'address' => $val_data['address'],
+    //         'dish_price' => $val_data['dish_price'],
+    //         'total_price' => $val_data['total_price'],
+    //         'user_id' => $val_data['user_id'],
+    //     ]);
+    //     return redirect()->route('payment.pay', compact('order'));
+    // }
 }
