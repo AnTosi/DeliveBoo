@@ -29,6 +29,7 @@
             <div class="mb-3 d-flex flex-row justify-content-center">
                 <form method="post" action="{{ route('payment.pay') }}">
                     @csrf
+
                     <div class="form-group">
                         <label for="customer_name" class="form-label fs-4">Write your name</label>
                         <input type="text" name="customer_name" id="customer_name"
