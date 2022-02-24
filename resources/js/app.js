@@ -61,13 +61,17 @@ const app = new Vue({
 
       lastPage: null,
 
-     filteredRest: [], 
+      filteredRest: [],
 
       filteredUsers: [],
+
+      qty: 1,
     }
   },
 
   methods: {
+
+
     tagHandler(tag) {
       this.tag = tag.id
       if (!this.filterTags.includes(this.tag)) {
@@ -81,7 +85,6 @@ const app = new Vue({
       }
       if (this.filterTags.length > 0) {
         axios.get('/api/tag/' + [this.filterTags]).then((r) => {
-          console.log(r.data)
           this.filteredUsers = r.data
         })
       } else {
@@ -91,7 +94,7 @@ const app = new Vue({
       // this.callApi()
     },
 
-    
+
     addToCart(dish) {
       //localStorage.clear()
       if (localStorage.getItem('localDish') == null) {
@@ -124,7 +127,7 @@ const app = new Vue({
         }
       }
 
-      console.log(this.cart)
+      //console.log(this.cart)
     },
 
     next() {
@@ -158,18 +161,17 @@ const app = new Vue({
       })
     },
     filteredList() {
-     
+
       if (this.searchInput) {
         axios.get('api/user/' + this.searchInput).then((r) => {
-          console.log(r.data);
-          if(!this.filteredRest.includes(r.data)) {
-  
+          if (!this.filteredRest.includes(r.data)) {
+
             this.filteredRest = r.data
           }
 
         })
-        
-      }else {
+
+      } else {
         this.filteredRest = []
       }
 
@@ -190,11 +192,11 @@ const app = new Vue({
   },
 
   computed: {
-    
+
 
     displayedDishes() {
       let dishes = this.user.dishes.filter((dish) => dish.visibility == true)
-      this.displayedDishesLength = dishes.length
+      this.displayedDishesLength = dishes.length()
       return this.paginate(dishes)
     },
   },
@@ -224,3 +226,7 @@ showHidePassword = () => {
   }
 }
 toggler.addEventListener('click', showHidePassword)
+
+
+
+

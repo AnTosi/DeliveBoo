@@ -161,75 +161,71 @@
                                     <div class="row">
 
                                         {{-- PRODOTTI CARRELLO --}}
-                                        <div v-for="product in cart" class="card mb-3">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between flex-wrap">
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <div v-if="product.image == null">
-                                                            {{-- <img :src="'storage/' + product.image " class="rounded-circle"
-                                                                alt="Shopping item"
-                                                                style=" width: 55px; height: 55px; object-fit: cover;"> --}}
+                                        <form action="{{ route('orders.showOrder') }}" method="post">
+                                            @csrf
+                                            <div v-if="cart.length > 0" class="cart_wrapper">
+                                                <div v-if="product.user_id == {{ json_encode($user->id) }}"
+                                                    v-for="(product,index) in cart" :key="index" class="card mb-3">
+                                                    <div class="card-body">
+                                                        <div class="d-flex flex-nowrap">
+                                                            <div class="d-flex flex-row align-items-center">
 
-
-                                                            <img class="rounded-circle"
-                                                                style="object-fit:cover; width:55px; height:55px"
-                                                                src="{{ asset('img/no-food-image.jpeg') }}" alt="">
-
-
+                                                                <div v-if="product.image == null">
+                                                                  <img class="rounded-circle"
+                                                                  style="object-fit:cover; width:55px; height:55px"
+                                                                  src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                                                                </div>
+                                                                <div v-else>
+                                                                    <img class="rounded-circle"
+                                                                        style="object-fit:cover; width:55px; height:55px"
+                                                                        :src="'storage/' + product.image " alt="">
+                                                                        </div>
+                                                                        <div class="ms-3">
+                                                                            <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
+                                                                            </h5>
+                                                                            <p class="small mb-0"></p>
+                                                                        </div>
+                                                                    </div>
+                                                            <div class="d-flex flex-row align-items-center">
+                                                                <div
+                                                                    class=" align-items-center justify-content-center d-flex box">
+                                                                    <input type="number" min="1"
+                                                                        oninput="validity.valid || (value = '');"
+                                                                        :name="'qty[' + product.id + ']'"
+                                                                        v-bind:id="product.id" value="1"
+                                                                        class="w-50 input-filed">
+                                                                </div>
+                                                                <div style="width: 80px;">
+                                                                    <h5 class="mb-0">@{{ product.price }} €</h5>
+                                                                </div>
+                                                                <a v-on:click="removeCart(product)"
+                                                                    style="color: #000000;"><i
+                                                                        class="fas ms-1 fa-trash-alt"></i></a>
+                                                            </div>
                                                         </div>
-                                                        <div v-else>
-                                                            <img class="rounded-circle"
-                                                                style="object-fit:cover; width:55px; height:55px"
-                                                                :src="'storage/' + product.image " alt="">
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
-                                                            </h5>
-                                                            <p class="small mb-0"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-row align-items-center">
-                                                        <div style="width: 50px;">
-                                                            <h5 class="fw-normal mb-0 ms-3"> 1 </h5>
-                                                        </div>
-                                                        <div style="width: 80px;">
-                                                            <h5 class="mb-0">@{{ product.price }} €</h5>
-                                                        </div>
-                                                        <a href="#!" v-on:click="removeCart(product)"
-                                                            style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        {{-- // PRODOTTI CARRELLO --}}
+                                            <div v-else>
+                                                <img src="https://cdn.discordapp.com/attachments/940183903816257559/945788459283542056/astronaut-grey-scale.png"
+                                                    alt="#">
+                                            </div>
+                                            {{-- // PRODOTTI CARRELLO --}}
 
-                                        <div class="flex-column">
+                                            <div class="flex-column">
+                                                <button type="submit" id="submit-button"
+                                                    class="btn text_secondary bg_secondary_smooth btn-block btn-lg">
+                                                    <div class="d-flex justify-content-between fw-bold">
+                                                        <span>Checkout
+                                                            <i class="fas fa-long-arrow-alt-right ms-2"></i>
+                                                        </span>
+                                                    </div>
+                                                </button>
 
-                                            <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Subtotal</p>
-                                                <p class="mb-2">€//</p>
                                             </div>
 
-                                            <div class="d-flex justify-content-between">
-                                                <p class="mb-2">Shipping</p>
-                                                <p class="mb-2">€2.50</p>
-                                            </div>
+                                        </form>
 
-                                            <div class="d-flex justify-content-between mb-4">
-                                                <p class="mb-2">Total(Incl. taxes)</p>
-                                                <p class="mb-2">//+2.50</p>
-                                            </div>
-
-                                            <button type="button" id="submit-button"
-                                                class="btn text_secondary bg_secondary_smooth btn-block btn-lg">
-                                                <div class="d-flex justify-content-between fw-bold">
-                                                    <span>$4818.00 Checkout
-                                                        <i class="fas fa-long-arrow-alt-right ms-2"></i>
-                                                    </span>
-                                                </div>
-                                            </button>
-
-                                        </div>
                                     </div>
 
                                 </div>
@@ -245,4 +241,5 @@
             {{-- / CART --}}
         </div>
     </div>
+
 @endsection

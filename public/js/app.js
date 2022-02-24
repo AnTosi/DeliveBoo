@@ -53661,7 +53661,8 @@ var app = new Vue({
       previousPage: null,
       lastPage: null,
       filteredRest: [],
-      filteredUsers: []
+      filteredUsers: [],
+      qty: 1
     };
   },
   methods: {
@@ -53682,7 +53683,6 @@ var app = new Vue({
 
       if (this.filterTags.length > 0) {
         axios.get('/api/tag/' + [this.filterTags]).then(function (r) {
-          console.log(r.data);
           _this.filteredUsers = r.data;
         });
       } else {
@@ -53690,30 +53690,6 @@ var app = new Vue({
       } // this.callApi()
 
     },
-    // callApi() {
-    //   let restQuery = `/api/users/?tags=${this.filterTags}`;
-    //   axios.get(restQuery)
-    //     .then((response) => {
-    //       this.filteredRest = response.data.data;
-    //       console.log(this.filteredRest);
-    //     })
-    // },
-
-    /* pagination */
-
-    /*  setPages() {
-      let numberOfPages = Math.ceil(this.displayedDishesLength / this.perPage)
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index)
-      }
-    },
-    paginate(dishes) {
-      let page = this.page
-      let perPage = this.perPage
-      let from = page * perPage - perPage
-      let to = page * perPage
-      return dishes.slice(from, to)
-    }, */
     addToCart: function addToCart(dish) {
       //localStorage.clear()
       if (localStorage.getItem('localDish') == null) {
@@ -53738,9 +53714,8 @@ var app = new Vue({
           this.cart.splice(index, 1);
           localStorage.setItem('localDish', JSON.stringify(this.cart));
         }
-      }
+      } //console.log(this.cart)
 
-      console.log(this.cart);
     },
     next: function next() {
       var _this2 = this;
@@ -53779,17 +53754,8 @@ var app = new Vue({
     filteredList: function filteredList() {
       var _this5 = this;
 
-      /* if (this.users) {
-        return this.users.filter((user) => {
-          return user.name
-            .toLowerCase()
-            .includes(this.searchInput.trim().toLowerCase())
-        })
-      } */
       if (this.searchInput) {
         axios.get('api/user/' + this.searchInput).then(function (r) {
-          console.log(r.data);
-
           if (!_this5.filteredRest.includes(r.data)) {
             _this5.filteredRest = r.data;
           }
@@ -53814,49 +53780,11 @@ var app = new Vue({
     }
   },
   computed: {
-    /* filteredUsers() {
-      let restaurants = []
-      if (this.users) {
-        restaurants = this.users
-      }
-      let filters = this.filterTags
-        filteredRestaurants = []
-        checkedFilters = []
-        if (restaurants) {
-        filters.forEach((filter) => {
-          for (let i = 0; i < restaurants.length; i++) {
-            const restaurant = restaurants[i]
-              if (restaurant.tags.some((tag) => tag.name === filter)) {
-              if (!filteredRestaurants.includes(restaurant)) {
-                filteredRestaurants.push(restaurant)
-              }
-            }
-          }
-        })
-          filters.forEach((filter) => {
-          for (let i = 0; i < filteredRestaurants.length; i++) {
-            const filteredRestaurant = filteredRestaurants[i]
-              if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
-              filteredRestaurants.splice(i, 1)
-            }
-          }
-        })
-          for (let i = 0; i < filteredRestaurants.length; i++) {
-          const filteredRestaurant = filteredRestaurants[i]
-            filters.forEach((filter) => {
-            if (!filteredRestaurant.tags.some((tag) => tag.name === filter)) {
-              filteredRestaurants.splice(i, 1)
-            }
-          })
-        }
-        return filteredRestaurants
-      }
-    }, */
     displayedDishes: function displayedDishes() {
       var dishes = this.user.dishes.filter(function (dish) {
         return dish.visibility == true;
       });
-      this.displayedDishesLength = dishes.length;
+      this.displayedDishesLength = dishes.length();
       return this.paginate(dishes);
     }
   },
@@ -54141,19 +54069,19 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\Users\matte\OneDrive\Desktop\dev\Site\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })
