@@ -19,9 +19,6 @@
                     <h1>Add your creation</h1>
                 </div>
                 {{-- form submit --}}
-                <div class="col-4 text-end">
-                    <button type="submit" class="btn btn-dark">Submit</button>
-                </div>
             </div>
             @csrf
 
@@ -117,6 +114,9 @@
 
             <div class="pt-3 pb-2 text-muted">
                 <p>All the fields with * are required</p>
+            </div>
+            <div class="col-4 submit text-end">
+                <button type="submit" class="btn btn-dark">Submit</button>
             </div>
 
         </form>
