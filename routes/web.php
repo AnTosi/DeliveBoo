@@ -32,11 +32,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
     Route::resource('orders', OrderController::class);
 
+
     Route::get('/statistics', function () {
         return view('statistics')->name('statistics');
     });
 });
 
+Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
+Route::get('/payment/pay', 'OrderController@create')->name('payment.pay');
 
 Route::get('/register', function () {
 
@@ -44,5 +47,10 @@ Route::get('/register', function () {
     return view('auth.register', compact('tags'));
 })->name('register');
 
-
 Route::get('/{user:slug}', 'HomeController@show')->name('restaurant.show');
+Route::post('/guest/order', 'OrderController@showOrder')->name('orders.showOrder');
+
+Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
+
+
+Route::get('/payment/make/{order}', 'OrderController@make')->name('payment.make');

@@ -11248,21 +11248,63 @@ textarea.form-control-lg {
   }
 }
 .bg_secondary {
-  background-color: #4F009E;
+  background-color: #4f009e !important;
+}
+
+.bg_secondary_smooth {
+  background-color: #ca8fca !important;
 }
 
 .text_primary {
-  color: #ffc144;
+  color: #ffc144 !important;
+}
+
+.text_secondary {
+  color: #4f009e !important;
+}
+
+.short_btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.wave {
+  margin-top: -1px;
 }
 
 .navbar {
   background-color: #ffc144;
+  height: 109.09px;
+  z-index: 10;
+}
+.navbar .navbar-brand {
+  -webkit-animation-name: logo;
+          animation-name: logo;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
 }
 .navbar .navbar-brand h1, .navbar .navbar-brand .h1 {
-  color: #4F009E;
+  color: #4f009e;
+}
+@-webkit-keyframes logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes logo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .navbar .nav-item a {
-  background-color: #4F009E;
+  background-color: #4f009e;
 }
 .navbar .collapse input {
   width: 50%;
@@ -11276,5 +11318,18 @@ textarea.form-control-lg {
 }
 .navbar .collapse .navbar-nav .dropdown-item {
   background-color: white !important;
-  color: #4F009E !important;
+  color: #4f009e !important;
+}
+
+footer {
+  height: 550px;
+  width: 100%;
+  background-color: #2e3333;
+}
+footer .container .row .col-3 {
+  margin-top: 30px;
+  width: 300px;
+  height: 450px;
+  background-color: #434848;
+  color: white;
 }

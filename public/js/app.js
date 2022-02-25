@@ -53621,6 +53621,9 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+var _require = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js"),
+    indexOf = _require.indexOf;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -53642,7 +53645,159 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {
+      users: null,
+      tag: '',
+      filterTags: [],
+      tags: null,
+      searchInput: '',
+      cart: [],
+      indexDish: [],
+      currentPage: 1,
+      displayedDishesLength: null,
+      localDishes: [],
+      previousPage: null,
+      lastPage: null,
+      filteredRest: [],
+      filteredUsers: [],
+      qty: 1
+    };
+  },
+  methods: {
+    tagHandler: function tagHandler(tag) {
+      var _this = this;
+
+      this.tag = tag.id;
+
+      if (!this.filterTags.includes(this.tag)) {
+        this.filterTags.push(this.tag);
+      } else {
+        var index = this.filterTags.indexOf(this.tag);
+
+        if (index > -1) {
+          this.filterTags.splice(index, 1);
+        }
+      }
+
+      if (this.filterTags.length > 0) {
+        axios.get('/api/tag/' + [this.filterTags]).then(function (r) {
+          _this.filteredUsers = r.data;
+        });
+      } else {
+        this.filteredUsers = 0;
+      } // this.callApi()
+
+    },
+    addToCart: function addToCart(dish) {
+      //localStorage.clear()
+      if (localStorage.getItem('localDish') == null) {
+        localStorage.setItem('localDish', '[]');
+      }
+
+      this.cart = JSON.parse(localStorage.getItem('localDish'));
+
+      if (localStorage.getItem('dish' + JSON.stringify(dish.id)) == null) {
+        localStorage.setItem('dish' + JSON.stringify(dish.id), JSON.stringify(dish));
+        var Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)));
+        this.cart.push(Dish);
+        localStorage.setItem('localDish', JSON.stringify(this.cart));
+      }
+    },
+    removeCart: function removeCart(dish) {
+      var Dish = JSON.parse(localStorage.getItem('dish' + JSON.stringify(dish.id)));
+
+      for (var index = 0; index < this.cart.length; index++) {
+        if (this.cart[index].id == Dish.id) {
+          localStorage.removeItem('dish' + JSON.stringify(dish.id));
+          this.cart.splice(index, 1);
+          localStorage.setItem('localDish', JSON.stringify(this.cart));
+        }
+      } //console.log(this.cart)
+
+    },
+    next: function next() {
+      var _this2 = this;
+
+      if (this.currentPage == this.lastPage) {
+        this.currentPage = 1;
+      } else {
+        this.currentPage++;
+      }
+
+      axios.get('/api/users?page=' + this.currentPage).then(function (r) {
+        _this2.users = r.data.data;
+      });
+    },
+    prev: function prev() {
+      var _this3 = this;
+
+      if (this.currentPage == 1) {
+        this.currentPage = this.lastPage;
+      } else {
+        this.currentPage--;
+      }
+
+      axios.get('/api/users?page=' + this.currentPage).then(function (r) {
+        _this3.users = r.data.data;
+      });
+    },
+    current: function current(page) {
+      var _this4 = this;
+
+      this.currentPage = page;
+      axios.get('/api/users?page=' + this.currentPage).then(function (r) {
+        _this4.users = r.data.data;
+      });
+    },
+    filteredList: function filteredList() {
+      var _this5 = this;
+
+      if (this.searchInput) {
+        axios.get('api/user/' + this.searchInput).then(function (r) {
+          if (!_this5.filteredRest.includes(r.data)) {
+            _this5.filteredRest = r.data;
+          }
+        });
+      } else {
+        this.filteredRest = 0;
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this6 = this;
+
+    axios.get('/api/users?page=1').then(function (r) {
+      _this6.users = r.data.data;
+      _this6.currentPage = r.data.meta.current_page;
+      _this6.previousPage = r.data.meta.from;
+      _this6.lastPage = r.data.meta.last_page;
+    });
+
+    if (localStorage.localDish) {
+      this.cart = JSON.parse(localStorage.localDish);
+    }
+  },
+  computed: {
+    displayedDishes: function displayedDishes() {
+      var dishes = this.user.dishes.filter(function (dish) {
+        return dish.visibility == true;
+      });
+      this.displayedDishesLength = dishes.length();
+      return this.paginate(dishes);
+    }
+  },
+  watch: {
+    dishes: function dishes() {
+      this.setPages();
+    }
+  },
+  filters: {
+    trimWords: function trimWords(value) {
+      return value.split(' ').splice(0, 20).join(' ') + '...';
+    }
+  }
 });
 var password = document.getElementById('password');
 var toggler = document.getElementById('toggler');
@@ -53885,6 +54040,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/restaurant_show.scss":
+/*!*********************************************!*\
+  !*** ./resources/sass/restaurant_show.scss ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/statistics.scss":
 /*!****************************************!*\
   !*** ./resources/sass/statistics.scss ***!
@@ -53897,24 +54063,25 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/common.scss ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/home.scss ./resources/sass/dashboard.scss ./resources/sass/dishes.scss ./resources/sass/orders.scss ./resources/sass/create.scss ./resources/sass/register.scss ./resources/sass/login.scss ./resources/sass/statistics.scss ***!
-  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/common.scss ./resources/sass/app.scss ./resources/sass/admin.scss ./resources/sass/home.scss ./resources/sass/dashboard.scss ./resources/sass/restaurant_show.scss ./resources/sass/dishes.scss ./resources/sass/orders.scss ./resources/sass/create.scss ./resources/sass/register.scss ./resources/sass/login.scss ./resources/sass/statistics.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/common.scss */"./resources/sass/common.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/admin.scss */"./resources/sass/admin.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/home.scss */"./resources/sass/home.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/dishes.scss */"./resources/sass/dishes.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/orders.scss */"./resources/sass/orders.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/create.scss */"./resources/sass/create.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/register.scss */"./resources/sass/register.scss");
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/login.scss */"./resources/sass/login.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/DeliveBoo/resources/sass/statistics.scss */"./resources/sass/statistics.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\home.scss */"./resources/sass/home.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\restaurant_show.scss */"./resources/sass/restaurant_show.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\dishes.scss */"./resources/sass/dishes.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\orders.scss */"./resources/sass/orders.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\create.scss */"./resources/sass/create.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\register.scss */"./resources/sass/register.scss");
+__webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\login.scss */"./resources/sass/login.scss");
+module.exports = __webpack_require__(/*! C:\Users\Andrea\Documents\Boolean Careers\progetto_finale\DeliveBoo\resources\sass\statistics.scss */"./resources/sass/statistics.scss");
 
 
 /***/ })

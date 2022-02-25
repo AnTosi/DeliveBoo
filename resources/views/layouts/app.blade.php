@@ -11,9 +11,11 @@
     <title> DeliveBoo | @yield('page-title', 'Homepage') </title>
 
     <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -32,10 +34,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light">
+        <nav class="navbar navbar-expand-md navbar-light sticky-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <object data="{{ asset('img/logo-deliveboo.svg') }}" width="200"></object>
+                    <img src="{{ asset('img/logo-deliveboo.svg') }}" width="200">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -46,7 +48,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <input type="text" placeholder="Search">
+                    <input v-on:keyup.enter='filteredList' v-model="searchInput" type="text" placeholder="Search">
                     <!-- Left Side Of Navbar -->
 
 
@@ -55,12 +57,12 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link btn rounded-pill px-3 text-white me-4"
+                                <a class="nav-link btn rounded-pill fw-bold px-3 text-white me-4"
                                     href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link btn rounded-pill px-3 text-white"
+                                    <a class="nav-link btn fw-bold rounded-pill px-3 text-white"
                                         href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
@@ -78,7 +80,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -97,15 +99,67 @@
         <main class="pb-4">
             @yield('content')
         </main>
+        <footer>
+            <div class="container">
+                <div class="row justify-content-between d-flex">
+                    <div class="col-3">
+                        <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                        <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                        <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                    <div class="col-3">
+                        <h3>Scopri Deliveboo</h3>
+                        <p>Investitori</p>
+                        <p>Chi siamo</p>
+                        <p>Ristoranti</p>
+                        <p>Altro</p>
+                        <p>Pressroom</p>
+                        <p>Il nostro blog</p>
+                        <p>Programmazione</p>
+                        <p>Design</p>
+                        <p>Lavora con noi</p>
+                        <p>Diventa nostro partenr</p>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
     </div>
+    @yield('custom-js')
 </body>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-
-        $('select').selectpicker();
-
-    });
-</script>
 
 </html>
