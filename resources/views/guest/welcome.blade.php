@@ -33,6 +33,16 @@
 
     <div class="container mb-5">
         <h2 class="my-5 fs-1">Restaurants</h2>
+
+        <div v-show="searchInput != '' && filteredRest == 0">
+            <p class="fs-1">
+                Sorry, no restaurant to show whit this name (Be sure to press 'enter' to send your research)
+            </p>
+            <p class="fs-1">
+                other results:
+            </p>
+        </div>
+
         <div v-if="filteredRest.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in filteredRest" :key="user.id">
                 <div class="col h-100 px-3">
@@ -60,39 +70,40 @@
             </div>
         </div>
 
-
-        <div v-else-if="filterTags.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
-            <div v-for="user in filteredUsers" :key="user.id">
-                <div class="col h-100 px-3">
-                    <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
-                        :href="user.slug">
-                        <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
-                            <img class="card-img-top img-fluid" style="border-radius: 1rem;"
-                                :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <p><span class="capitalize fs-3 text-black"> @{{ user.name }}</span></p>
-                                </h5>
-                                <p class="text-decoration-none mb-1">
-                                    @{{ user.address }}
-                                </p>
-                                <p class="mb-0">
-                                    <span v-for="tag in user.tags" :key="tag.id">
-                                        @{{ tag.name }}
-                                    </span>
-                                </p>
+        <div v-else-if="filterTags.length > 0">
+            <div v-if="filteredUsers.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+                <div v-for="user in filteredUsers" :key="user.id">
+                    <div class="col h-100 px-3">
+                        <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
+                            :href="user.slug">
+                            <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
+                                <img class="card-img-top img-fluid" style="border-radius: 1rem;"
+                                    :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <p><span class="capitalize fs-3 text-black"> @{{ user.name }}</span></p>
+                                    </h5>
+                                    <p class="text-decoration-none mb-1">
+                                        @{{ user.address }}
+                                    </p>
+                                    <p class="mb-0">
+                                        <span v-for="tag in user.tags" :key="tag.id">
+                                            @{{ tag.name }}
+                                        </span>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
+            </div>
+            <div v-else>
+                <p>
+                    Sorry, there are no restaurants in this tipology :(
+                </p>
             </div>
         </div>
 
-        {{-- <div v-else-if="filterTags.length > 0 && filteredRest.length == 0" class="">
-            <p>
-                Sorry, we have no restaurant with the selected tipology.
-            </p>
-        </div> --}}
 
         <div v-else class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in users" :key="user.id">
@@ -126,7 +137,6 @@
 
         <div v-else>
             <div class="text-center mt-5">
-
                 <p class="fs-1">Loading</p>
                 <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66"
                     xmlns="http://www.w3.org/2000/svg">
@@ -134,10 +144,10 @@
                         r="30"></circle>
                 </svg>
             </div>
-
         </div>
 
-        <div v-if="filteredUsers == 0 && filteredRest == 0" class="d-flex justify-content-center mt-5">
+        <div v-if="filteredUsers == 0 && filterTags.length == 0 && filteredRest == 0"
+            class="d-flex justify-content-center mt-5">
             <button class="btn btn-outline-dark me-1" v-on:click="prev" v-show="currentPage != 1">
                 Prev
             </button>
