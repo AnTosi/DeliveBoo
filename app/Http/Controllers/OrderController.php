@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
-
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -65,6 +65,7 @@ class OrderController extends Controller
         $order->customer_name = $val_data['customer_name'];
         $order->email = $val_data['email'];
         $order->address = $val_data['address'];
+        $order->data = Carbon::now();
         $order->dish_price = $val_data['dish_price'];
         $order->total_price = $val_data['total_price'];
         $order->user_id = $val_data['user_id'];
@@ -87,14 +88,14 @@ class OrderController extends Controller
                 # code...
                 if ($key == $dish->id) {
                     # code...
-                    $dish->orders()->attach($order,
+                    $dish->orders()->attach(
+                        $order,
                         ['order_id' => $order->id, 'quantity' => $value]
                     );
                 }
             }
-
         }
-        
+
         /* $dish->orders()->attach($order, ['order_id' => $order->id, 'quantity' => $qty]); */
 
         $token = $gateway->ClientToken()->generate();
