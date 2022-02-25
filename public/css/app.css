@@ -11305,6 +11305,7 @@ textarea.form-control-lg {
 }
 .navbar .nav-item a {
   background-color: #4f009e;
+  margin-left: 1rem;
 }
 .navbar .collapse {
   justify-content: space-between;
@@ -11341,6 +11342,21 @@ textarea.form-control-lg {
   background-color: #ca8fca !important;
 }
 
+.payPage {
+  background-image: url(https://www.unaparolabuonapertutti.it/wp-content/uploads/2018/02/donuts.jpg);
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.payPage .order {
+  height: 100%;
+  width: 100%;
+}
+.payPage .col {
+  width: 700px;
+  margin-left: 466px;
+}
+
 footer {
   height: 550px;
   width: 100%;
@@ -11361,8 +11377,8 @@ footer .container .row .col-3 {
     height: calc(100vh - 92px);
     display: flex;
     flex-direction: column;
-    padding: 0 1rem;
-    margin: 0 -1rem;
+    padding: 0 2rem;
+    margin: 0 -2rem;
   }
   .navbar .navbar-collapse.show .searchBar {
     width: 100%;
@@ -11373,6 +11389,9 @@ footer .container .row .col-3 {
   .navbar .navbar-collapse.show .navbar-nav .nav-item {
     width: 100%;
     margin: 0.5rem 0;
+  }
+  .navbar .navbar-collapse.show .navbar-nav .nav-item a {
+    margin-left: 0;
   }
   .navbar .navbar-collapse.show .navbar-nav .nav-item .dropdown-menu {
     margin-bottom: 0.5rem;

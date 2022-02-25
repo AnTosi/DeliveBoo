@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="payPage"></div>
     <div class="container">
-        <div class="row mt-5 row-cols-2">
+        <div class="row mt-5 row-cols-1 row-cols-lg-2">
             <div class="col d-flex flex-column justify-content-center">
+                <h1><strong>You are about to pay at the restaurant:</strong> <span
+                        class="fs-1">{{ $restaurant->name }}</span></h1>
 
-                <span class="fs-1">{{ $restaurant->name }}</span>
 
-                <span class="fs-2">{{ $order->customer_name }}</span>
-                <span class="fs-3">{{ $order->address }}</span>
-                <span class="fs-3">{{ $order->email }}</span>
-                <span class="fs-3" id="total_price">{{ $order->total_price }}</span>
+                <span class="fs-2"><strong>The name of the order is:</strong>{{ $order->customer_name }}</span>
+                <span class="fs-3"><strong>Located in via:</strong> {{ $order->address }}</span>
+                <span class="fs-3"><strong>E-mail:</strong> {{ $order->email }}</span>
+                <span class="fs-3" id="total_price"><strong>Price:</strong> {{ $order->total_price }}€</span>
 
 
             </div>
@@ -19,7 +21,8 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div id="dropin-container"></div>
-                        <button id="submit-button">Request payment method</button>
+                        <button id="submit-button" class="btn bg_secondary_smooth text_secondary fw-bold">Request payment
+                            method</button>
                     </div>
                 </div>
             </div>
