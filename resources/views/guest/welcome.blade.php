@@ -61,7 +61,7 @@
         </div>
 
 
-        <div v-else-if="filteredUsers.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+        <div v-else-if="filterTags.length > 0" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in filteredUsers" :key="user.id">
                 <div class="col h-100 px-3">
                     <a class=" text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
@@ -87,6 +87,12 @@
                 </div>
             </div>
         </div>
+
+        {{-- <div v-else-if="filterTags.length > 0 && filteredRest.length == 0" class="">
+            <p>
+                Sorry, we have no restaurant with the selected tipology.
+            </p>
+        </div> --}}
 
         <div v-else class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <div v-for="user in users" :key="user.id">
