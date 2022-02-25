@@ -13,8 +13,13 @@
                             <div class="col d-flex justify-content-center">
                                 <div class="card border-0 text-start shadow-lg"
                                     style="width: 268px; height:100%; padding: 0;border-radius: 1rem;">
-                                    <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
-                                        class="card-img-top" src="{{ asset('Storage/' . $piatto->image) }}" alt="#">
+                                    @if ($piatto->image == null)
+                                        <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
+                                            class="card-img-top" src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                                    @else
+                                        <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
+                                            class="card-img-top" src="{{ asset('Storage/' . $piatto->image) }}" alt="">
+                                    @endif
                                     <div class="card-body">
                                         <h4 class="card-title mb-3">{{ $piatto->name }}</h4>
                                         <p class="card-text">Quantity: {{ $qty }}</p>
@@ -74,7 +79,8 @@
                     </div>
 
                     <div class="d-flex justify-content-center mt-3">
-                        <button type="submit"> Proceed to payment</button>
+                        <button class="btn bg_secondary_smooth text_secondary fw-bold" type="submit"> Proceed to
+                            payment</button>
                     </div>
 
                 </form>

@@ -73,3 +73,17 @@ footer {
         }
     }
 }
+
+@media (max-width: 1400px) {
+    footer {
+        height: 100%;
+        .container {
+            margin: auto;
+            width: 80%;
+            .col-3 {
+                align-items: center;
+                text-align: center;
+            }
+        }
+    }
+}
