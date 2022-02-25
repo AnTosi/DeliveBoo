@@ -153,6 +153,9 @@
             <div class="pt-3 pb-2 text-muted">
                 <p>All the fields with * are required</p>
             </div>
+            <div class="col-4 submit my-3">
+                <button type="submit" class="btn btn-dark">Submit</button>
+            </div>
 
         </form>
     </div>
