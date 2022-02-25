@@ -13,8 +13,8 @@
             <path class="st0" fill="#ffc144" fill-opacity="1"
                 d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H-8.5z" />
         </svg>
-        <img width="100%" height="200" style="filter: blur(20px); object-fit:cover"
-            src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}" alt="...">
+        <img class="cover-bg" src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}"
+            alt="...">
     </div>
 
     <div class="container info_cart">
@@ -83,38 +83,38 @@
 
                                 </div>
                                 <!-- <div class="info_wrap pt-4 pb-2 px-5 bg-white shadow-lg ">
-                                        <button data-bs-toggle="modal" data-bs-target="#show-{{ $dish->slug }}"
-                                            class="border-0 bg-white col-9">
-                                            <div class="row justify-content-between align-items-center">
-                                                <div class="col-4">
-                                                    @if ($dish->image == null)
+                                                <button data-bs-toggle="modal" data-bs-target="#show-{{ $dish->slug }}"
+                                                    class="border-0 bg-white col-9">
+                                                    <div class="row justify-content-between align-items-center">
+                                                        <div class="col-4">
+                                                            @if ($dish->image == null)
     <img class="rounded-circle"
-                                                            style="object-fit:cover; width:75px; height:75px"
-                                                            src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                                                                    style="object-fit:cover; width:75px; height:75px"
+                                                                    src="{{ asset('img/no-food-image.jpeg') }}" alt="">
 @else
     <img class="rounded-circle"
-                                                            style="object-fit:cover; width:75px; height:75px"
-                                                            src="{{ asset('storage/' . $dish->image) }}" alt="">
+                                                                    style="object-fit:cover; width:75px; height:75px"
+                                                                    src="{{ asset('storage/' . $dish->image) }}" alt="">
     @endif
-                                                </div>
-                                                <div class="col-8">
-                                                    <h1 class="fs-3 fw-bold text-start"> {{ $dish->name }}</h1>
-                                                </div>
-                                            </div>
-                                            {{-- Image and dish name --}}
-                                        </button>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <h1 class="fs-3 fw-bold text-start"> {{ $dish->name }}</h1>
+                                                        </div>
+                                                    </div>
+                                                    {{-- Image and dish name --}}
+                                                </button>
 
-                                        <div class="row justify-content-between align-items-center bg-white">
-                                            <div class="col-6 mt-4">
-                                                <h4>€ {{ $dish->price }}</h4>
-                                            </div>
-                                            <div v-on:click="addToCart({{ json_encode($dish) }})"
-                                                class="col-2 d-flex justify-content-center align-items-center add_to_cart">
-                                                <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
-                                            </div>
-                                        </div>
-                                        {{-- Price and Add to cart --}}
-                                    </div> -->
+                                                <div class="row justify-content-between align-items-center bg-white">
+                                                    <div class="col-6 mt-4">
+                                                        <h4>€ {{ $dish->price }}</h4>
+                                                    </div>
+                                                    <div v-on:click="addToCart({{ json_encode($dish) }})"
+                                                        class="col-2 d-flex justify-content-center align-items-center add_to_cart">
+                                                        <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
+                                                    </div>
+                                                </div>
+                                                {{-- Price and Add to cart --}}
+                                            </div> -->
                             </div>
 
                             <!-- Modal -->
@@ -177,7 +177,7 @@
 
             </div>
             {{-- CART --}}
-            <div class="col">
+            <div class="col-md-4 col-12">
                 <section class="bg-white" style="border-radius: 1rem">
 
                     <div class="row d-flex justify-content-center align-items-center">

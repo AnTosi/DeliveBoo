@@ -169,3 +169,7 @@ svg {
 .rest_card .card-title p {
   margin-bottom: 0;
 }
+
+.tag_card {
+  max-width: 200px;
+}

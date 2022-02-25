@@ -11306,8 +11306,16 @@ textarea.form-control-lg {
 .navbar .nav-item a {
   background-color: #4f009e;
 }
-.navbar .collapse input {
+.navbar .collapse {
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.navbar .collapse .searchBar {
+  margin: 0 auto;
   width: 50%;
+}
+.navbar .collapse .searchBar input {
+  width: 100%;
   border-radius: 25px;
   border: none;
   margin: auto;
@@ -11315,10 +11323,22 @@ textarea.form-control-lg {
 }
 .navbar .collapse .navbar-nav {
   width: 200px;
+  justify-content: flex-end;
+}
+.navbar .collapse .navbar-nav .dropdown-menu {
+  border: none;
+  background-color: transparent !important;
+  padding: 0 !important;
 }
 .navbar .collapse .navbar-nav .dropdown-item {
   background-color: white !important;
   color: #4f009e !important;
+  border-radius: 25px;
+  margin: 0.5rem 0;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+}
+.navbar .collapse .navbar-nav .dropdown-item:hover {
+  background-color: #ca8fca !important;
 }
 
 footer {
@@ -11332,4 +11352,54 @@ footer .container .row .col-3 {
   height: 450px;
   background-color: #434848;
   color: white;
+}
+
+@media (max-width: 767.98px) {
+  .navbar .navbar-collapse.show {
+    background-color: #ffc144;
+    width: 100Vh;
+    height: calc(100vh - 92px);
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin: 0 -1rem;
+  }
+  .navbar .navbar-collapse.show .searchBar {
+    width: 100%;
+  }
+  .navbar .navbar-collapse.show .navbar-nav {
+    width: 100%;
+  }
+  .navbar .navbar-collapse.show .navbar-nav .nav-item {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  .navbar .navbar-collapse.show .navbar-nav .nav-item .dropdown-menu {
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    border: none;
+  }
+  .navbar .navbar-collapse.show .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+    background-color: transparent !important;
+    color: #4f009e !important;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: none;
+  }
+  .navbar .navbar-collapse.show .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+    background-color: #ca8fca !important;
+  }
+}
+@media (max-width: 1400px) {
+  footer {
+    height: 100%;
+  }
+  footer .container {
+    margin: auto;
+    width: 80%;
+  }
+  footer .container .col-3 {
+    align-items: center;
+    text-align: center;
+  }
 }

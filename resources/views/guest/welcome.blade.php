@@ -9,11 +9,11 @@
         <div
             class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 mx-auto container-fluid my-auto pt-3  justify-content-center flex-wrap g-3">
             @foreach ($tags as $tag)
-                <div class="col justify-content-center d-flex ">
+                <div class="col justify-content-center d-flex">
                     <a href="#" class="tags_link text-black text-decoration-none text-center">
-                        <div class="card rounded-pill" v-on:click="tagHandler({{ json_encode($tag) }})"
+                        <div class="card rounded-pill tag_card" v-on:click="tagHandler({{ json_encode($tag) }})"
                             :class=" filterTags.includes({{ json_encode($tag->id) }}) ? 'active' : '' ">
-                            <div class="card-body">
+                            <div class="card-body py-2">
                                 <h5 class="card-title mb-0">
                                     <span> {{ $tag->name }} </span>
                                 </h5>
