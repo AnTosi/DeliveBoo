@@ -42,6 +42,8 @@
                             aria-describedby="helpName">
                         <small id="helpName" class="text-muted">Name</small>
                     </div>
+                    <input type="text" hidden name="piatti" value="{{ json_encode($piatti) }}">
+                    <input type="text" hidden name="ordini" value="{{ json_encode($listaOrdine) }}">
                     <input hidden type="number" value="{{ $restaurant->id }}" name="user_id">
                     <div class="form-group">
                         <label for="email" class="form-label fs-4">Write your e-mail</label>

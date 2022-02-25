@@ -46,6 +46,10 @@ class OrderController extends Controller
 
     public function pay(Request $request, Gateway $gateway)
     {
+        $piatti = json_decode($request['piatti']);
+
+        $orders_quantity = json_decode($request['ordini']);
+
 
         $val_data = $request->validate([
             'customer_name' => ['required'],
@@ -67,6 +71,31 @@ class OrderController extends Controller
         $order->save();
 
         $restaurant = User::find($request['user_id']);
+
+        $dishes = [];
+
+        foreach ($piatti as $piatto) {
+            # code...
+            $dish = Dish::find($piatto->id);
+
+            $dishes[] = $dish;
+        }
+
+        foreach ($dishes as $dish) {
+            # code...
+            foreach ($orders_quantity as $key => $value) {
+                # code...
+                if ($key == $dish->id) {
+                    # code...
+                    $dish->orders()->attach($order,
+                        ['order_id' => $order->id, 'quantity' => $value]
+                    );
+                }
+            }
+
+        }
+        
+        /* $dish->orders()->attach($order, ['order_id' => $order->id, 'quantity' => $qty]); */
 
         $token = $gateway->ClientToken()->generate();
 

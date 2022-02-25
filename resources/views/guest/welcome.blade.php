@@ -36,7 +36,7 @@
 
         <div v-show="searchInput != '' && filteredRest == 0">
             <p class="fs-1">
-                Sorry, no restaurant to show whit this name (Be sure to press 'enter' to send your research)
+                Sorry, no restaurant to show with this name (Be sure to press 'enter' to send your research)
             </p>
             <p class="fs-1">
                 other results:
