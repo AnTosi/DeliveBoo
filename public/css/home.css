@@ -321,3 +321,11 @@ h2 {
     transform: rotate(450deg);
   }
 }
+.message .rest-btn {
+  background-color: white;
+  color: #4f009e;
+  border: 1px solid #4f009e;
+}
+.message .rest-btn:hover {
+  background-color: #ca8fca;
+}

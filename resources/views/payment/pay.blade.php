@@ -4,22 +4,22 @@
     <div class="payPage"></div>
     <div class="container">
         <div class="row mt-5 row-cols-1 row-cols-lg-2">
-            <div class="col d-flex flex-column justify-content-center">
+            <div class="col d-flex flex-column justify-content-center text-center">
                 <h1><strong>You are about to pay at the restaurant:</strong> <span
                         class="fs-1">{{ $restaurant->name }}</span></h1>
 
 
-                <span class="fs-2"><strong>The name of the order is:</strong>{{ $order->customer_name }}</span>
-                <span class="fs-3"><strong>Located in via:</strong> {{ $order->address }}</span>
-                <span class="fs-3"><strong>E-mail:</strong> {{ $order->email }}</span>
-                <span class="fs-3" id="total_price"><strong>Price:</strong> {{ $order->total_price }}€</span>
+                <span class="text-muted"><strong>Delivery to: </strong>{{ $order->customer_name }}</span>
+                <span class="text-muted"><strong>Address: </strong> {{ $order->address }}</span>
+                <span class="text-muted"><strong>E-mail:</strong> {{ $order->email }}</span>
+                <span class="text-muted" id="total_price"><strong>Price: </strong> €{{ $order->total_price }}</span>
 
 
             </div>
 
             <div class="col">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-md-offset-2 text-center">
                         <div id="dropin-container"></div>
                         <button id="submit-button" class="btn bg_secondary_smooth text_secondary fw-bold">Request payment
                             method</button>
@@ -57,9 +57,10 @@
                         payload
                     }, function(response) {
                         if (response.success) {
-                            alert('Payment successfull!');
+                            //alert('Payment successfull!');
+                            location.replace("http://127.0.0.1:8000/payment/successful");
                         } else {
-                            alert('Payment failed');
+                            location.replace("http://127.0.0.1:8000/payment/failed");
                         }
                     }, 'json');
                 });
