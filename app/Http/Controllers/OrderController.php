@@ -6,13 +6,13 @@ use App\Models\Dish;
 use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
-use Braintree;
+use Braintree\Gateway;
 
 
 
 class OrderController extends Controller
 {
-    //
+
     public function showOrder(Request $request)
     {
 
@@ -44,24 +44,9 @@ class OrderController extends Controller
         return view('guest.restaurant.order', compact('piatti', 'listaOrdine', 'prezzo_totale', 'restaurant'));
     }
 
-    public function pay(Request $request)
+    public function pay(Request $request, Gateway $gateway)
     {
-        # code...
-        $gateway = new \Braintree\Gateway([
-            'environment' => 'sandbox',
-            'merchantId' => 'd6w59t89p77r3whk',
-            'publicKey' => 'r4kg59c6ftzcsvs2',
-            'privateKey' => 'decfa4484e30f7d017c8c6bf182d8e23',
-        ]);
 
-        $token = $gateway->ClientToken()->generate();
-
-        return view('payment.pay', compact('token'));
-    }
-
-    public function create(Request $request)
-    {
-        # code...
         $val_data = $request->validate([
             'customer_name' => ['required'],
             'email' => ['required'],
@@ -71,16 +56,54 @@ class OrderController extends Controller
             'user_id' => ['required'],
 
         ]);
+        $order = new Order;
+
+        $order->customer_name = $val_data['customer_name'];
+        $order->email = $val_data['email'];
+        $order->address = $val_data['address'];
+        $order->dish_price = $val_data['dish_price'];
+        $order->total_price = $val_data['total_price'];
+        $order->user_id = $val_data['user_id'];
+        $order->save();
+
+        $restaurant = User::find($request['user_id']);
+
+        $token = $gateway->ClientToken()->generate();
 
 
-        $order = Order::create([
-            'customer_name' => $val_data['customer_name'],
-            'email' => $val_data['email'],
-            'address' => $val_data['address'],
-            'dish_price' => $val_data['dish_price'],
-            'total_price' => $val_data['total_price'],
-            'user_id' => $val_data['user_id'],
-        ]);
-        return redirect()->route('payment.pay', compact('order'));
+        return view('payment.pay', compact('order', 'token', 'restaurant'));
+    }
+
+    public function make(Request $request, Gateway $gateway, Order $order)
+    {
+        # code...
+        {
+            $payload = $request->input('payload', false);
+            $nonce = $payload['nonce'];
+
+
+            $status = $gateway->transaction()->sale([
+                'amount' => '10',
+                'paymentMethodNonce' => $nonce,
+                'options' => [
+                    'submitForSettlement' => true,
+                ],
+            ]);
+
+            // if ($status->success) {
+            //     $transaction = $status->transaction;
+
+            //     return redirect()->route('guest.restaurant.order')->with('message', "Transazione avvenuta con successo! L'ID della transazione è: $transaction->id");
+            // } else {
+            //     $errorString = "";
+
+            //     foreach ($status->errors->deepAll() as $error) {
+            //         $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
+            //     }
+
+            //     return back()->withErrors('Transazione fallita! Il motivo è: ' . $status->message);
+            // }
+            return response()->json($status);
+        }
     }
 }
