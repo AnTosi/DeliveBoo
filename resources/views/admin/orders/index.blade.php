@@ -23,6 +23,7 @@
             <tr>
                 <th class="text-center" scope="col">Date</th>
                 <th class="text-center" scope="col">Customer Name</th>
+                <th class="text-center" scope="col">Email</th>
                 <th class="text-center" scope="col">Address</th>
                 <th class="text-center" scope="col">Total Price</th>
                 <th class="text-center" scope="col">Dishes</th>
@@ -36,9 +37,11 @@
 
                     <td class="text-center align-middle">{{ $order->customer_name }}</td>
 
-                    <td class="text-center align-middle updated">{{ $order->address }}</td>
+                    <td class="text-center align-middle">{{ $order->email }}</td>
 
-                    <td class="text-center align-middle created">{{ $order->total_price }}€</td>
+                    <td class="text-center align-middle ">{{ $order->address }}</td>
+
+                    <td class="text-center align-middle ">{{ $order->total_price }}€</td>
 
                     <td class="text-center align-middle">
                         <div class="dropdown">
