@@ -33,6 +33,12 @@ img.cover-bg{
             height: fit-content;
         }
         .dish {
+            .info{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                height: 100%;
+            }
             .add_to_cart {
                 border-radius: 50%;
                 width: 30px;

@@ -29,6 +29,12 @@ img.cover-bg {
   height: -moz-fit-content;
   height: fit-content;
 }
+.info_cart .restaurant_aside .dish .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
 .info_cart .restaurant_aside .dish .add_to_cart {
   border-radius: 50%;
   width: 30px;

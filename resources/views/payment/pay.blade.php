@@ -5,14 +5,15 @@
     <div class="container">
         <div class="row mt-5 row-cols-1 row-cols-lg-2">
             <div class="col d-flex flex-column justify-content-center text-center">
-                <h1><strong>You are about to pay at the restaurant:</strong> <span
-                        class="fs-1">{{ $restaurant->name }}</span></h1>
+                <h1><strong>Confirm your order and proceed to checkout</strong></h1>
 
 
-                <span class="text-muted"><strong>Delivery to: </strong>{{ $order->customer_name }}</span>
-                <span class="text-muted"><strong>Address: </strong> {{ $order->address }}</span>
-                <span class="text-muted"><strong>E-mail:</strong> {{ $order->email }}</span>
-                <span class="text-muted" id="total_price"><strong>Price: </strong> €{{ $order->total_price }}</span>
+                <span class="text-muted fs-4"><strong>Restaurant name: </strong>{{ $restaurant->name }}</span>
+                <span class="text-muted fs-4"><strong>Delivery to: </strong>{{ $order->customer_name }}</span>
+                <span class="text-muted fs-4"><strong>Address: </strong> {{ $order->address }}</span>
+                <span class="text-muted fs-4"><strong>E-mail:</strong> {{ $order->email }}</span>
+                <span class="text-muted fs-4" id="total_price"><strong>Total price: </strong>
+                    €{{ $order->total_price }}</span>
 
 
             </div>
