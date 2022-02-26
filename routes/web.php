@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/payment/successful', 'OrderController@success');
+Route::get('/payment/failed', 'OrderController@failed');
+
 
 Route::get('/checkout', function () {
     return view('checkout')->name('checkout');

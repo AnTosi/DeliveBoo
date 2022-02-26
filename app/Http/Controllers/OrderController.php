@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Braintree\Gateway;
-
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -25,18 +25,24 @@ class OrderController extends Controller
 
         $restaurant = null;
 
-        foreach ($listaOrdine as $id => $qty) {
-            $dish = Dish::find($id);
+        if ($listaOrdine) {
 
-            $restaurant = User::find($dish->user_id);
+            foreach ($listaOrdine as $id => $qty) {
+                $dish = Dish::find($id);
 
-            $prezzo_piatto[] = $dish->price * $qty;
+                $restaurant = User::find($dish->user_id);
 
-            $piatti[] = $dish;
+                $prezzo_piatto[] = $dish->price * $qty;
+
+                $piatti[] = $dish;
+            }
         }
 
-        foreach ($prezzo_piatto as $prezzo) {
-            $prezzo_totale += $prezzo;
+        if ($prezzo_piatto) {
+
+            foreach ($prezzo_piatto as $prezzo) {
+                $prezzo_totale += $prezzo;
+            }
         }
 
         // dd($prezzo_totale);
@@ -46,6 +52,10 @@ class OrderController extends Controller
 
     public function pay(Request $request, Gateway $gateway)
     {
+        $piatti = json_decode($request['piatti']);
+
+        $orders_quantity = json_decode($request['ordini']);
+
 
         $val_data = $request->validate([
             'customer_name' => ['required'],
@@ -61,12 +71,38 @@ class OrderController extends Controller
         $order->customer_name = $val_data['customer_name'];
         $order->email = $val_data['email'];
         $order->address = $val_data['address'];
+        $order->data = Carbon::now();
         $order->dish_price = $val_data['dish_price'];
         $order->total_price = $val_data['total_price'];
         $order->user_id = $val_data['user_id'];
         $order->save();
 
         $restaurant = User::find($request['user_id']);
+
+        $dishes = [];
+
+        foreach ($piatti as $piatto) {
+            # code...
+            $dish = Dish::find($piatto->id);
+
+            $dishes[] = $dish;
+        }
+
+        foreach ($dishes as $dish) {
+            # code...
+            foreach ($orders_quantity as $key => $value) {
+                # code...
+                if ($key == $dish->id) {
+                    # code...
+                    $dish->orders()->attach(
+                        $order,
+                        ['order_id' => $order->id, 'quantity' => $value]
+                    );
+                }
+            }
+        }
+
+        /* $dish->orders()->attach($order, ['order_id' => $order->id, 'quantity' => $qty]); */
 
         $token = $gateway->ClientToken()->generate();
 
@@ -105,5 +141,15 @@ class OrderController extends Controller
             // }
             return response()->json($status);
         }
+    }
+
+    public function success()
+    {
+        return view('guest.successfulPayment')->with('message', 'Your payment has been completed successfully!');
+    }
+
+    public function failed()
+    {
+        return view('guest.failedPayment')->with('message', 'Your payment failed!');
     }
 }

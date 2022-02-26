@@ -34,6 +34,7 @@
     .nav-item {
         a {
             background-color: $brand-color-secondary;
+            margin-left: 1rem;
         }
     }
     .collapse {
@@ -77,6 +78,21 @@
     }
 }
 
+.payPage {
+    background-image: url(https://www.unaparolabuonapertutti.it/wp-content/uploads/2018/02/donuts.jpg);
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .order {
+        height: 100%;
+        width: 100%;
+    }
+    .col {
+        width: 700px;
+        margin-left: 466px;
+    }
+}
+
 footer {
     height: 550px;
     width: 100%;
@@ -104,8 +120,8 @@ footer {
             height: calc(100vh - 92px);
             display: flex;
             flex-direction: column;
-            padding: 0 1rem;
-            margin: 0 -1rem;
+            padding: 0 2rem;
+            margin: 0 -2rem;
 
             .searchBar{
                 width: 100%
@@ -115,6 +131,10 @@ footer {
                 .nav-item{
                     width: 100%;
                     margin: .5rem 0;
+
+                    a{
+                        margin-left: 0;
+                    }
 
                     .dropdown-menu{
                         margin-bottom: .5rem;
@@ -137,6 +157,7 @@ footer {
             }
         }
     }
+
 }
 
 @media (max-width: 1400px) {
