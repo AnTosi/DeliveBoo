@@ -7,10 +7,22 @@ svg {
     margin-top: -1px;
 }
 
+img.cover-bg{
+    width: 100%;
+    height: 300px;
+    filter: blur(5px);
+    object-fit: cover;
+    position: relative;
+    bottom: 100px;
+    z-index: -100;
+}
+
 .info_cart {
     max-width: 1800px !important;
     position: relative;
-    bottom: 60px;
+    bottom: 140px;
+    margin: 0 0 -120px 0;
+    
     .restaurant_aside {
         .info_wrap,
         .dish,
@@ -21,6 +33,12 @@ svg {
             height: fit-content;
         }
         .dish {
+            .info{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                height: 100%;
+            }
             .add_to_cart {
                 border-radius: 50%;
                 width: 30px;

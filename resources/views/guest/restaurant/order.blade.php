@@ -6,7 +6,7 @@
             <h1 class="text-center">
                 Checkout:
             </h1>
-            <div class="row py-5 row-cols-3 justify-content-evenly g-3">
+            <div class="row py-5 row-cols-1 row-cols-lg-3 justify-content-evenly g-3">
 
                 @if ($listaOrdine)
                     @foreach ($listaOrdine as $id => $qty)
@@ -34,7 +34,6 @@
                         @endforeach
                     @endforeach
                 @endif
-
 
             </div>
             <div class="mb-3 d-flex flex-row justify-content-center">

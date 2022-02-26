@@ -142,4 +142,14 @@ class OrderController extends Controller
             return response()->json($status);
         }
     }
+
+    public function success()
+    {
+        return view('guest.successfulPayment')->with('message', 'Your payment has been completed successfully!');
+    }
+
+    public function failed()
+    {
+        return view('guest.failedPayment')->with('message', 'Your payment failed!');
+    }
 }

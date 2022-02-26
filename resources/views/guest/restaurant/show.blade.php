@@ -13,8 +13,8 @@
             <path class="st0" fill="#ffc144" fill-opacity="1"
                 d="M-8.5,0.29l48,21.53c48,21.69,144,64.5,240,81.87s192,8.48,288-8.6c96-17.25,192-43.09,288-40.95c96,2.3,192,32.19,288,43.09s192,2.02,240-2.14l48-4.32V0.29h-48c-48,0-144,0-240,0s-192,0-288,0s-192,0-288,0s-192,0-288,0s-192,0-240,0H-8.5z" />
         </svg>
-        <img width="100%" height="200" style="filter: blur(20px); object-fit:cover"
-            src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}" alt="...">
+        <img class="cover-bg" src="{{ asset('storage/restaurant_image/' . $user->id . '/' . $user->image) }}"
+            alt="...">
     </div>
 
     <div class="container info_cart">
@@ -70,19 +70,18 @@
                                             @endif
 
                                         </div>
-                                        <div class="col-7 text-start">
+                                        <div class="info col-7 ms-4 text-start">
                                             <h1 class="fs-3 fw-bold"> {{ $dish->name }}</h1>
                                             <h4>€ {{ $dish->price }}</h4>
                                         </div>
                                     </button>
 
                                     <div v-on:click="addToCart({{ json_encode($dish) }})"
-                                        class="col-2 d-flex justify-content-center align-items-center add_to_cart align-self-end ms-auto">
+                                        class="col-2 d-flex justify-content-center align-items-center add_to_cart align-self-end ms-auto mb-4">
                                         <a class="btn fs-3 fw-bold text_secondary pe-auto">+</a>
                                     </div>
 
                                 </div>
-
                             </div>
 
                             <!-- Modal -->
@@ -145,7 +144,7 @@
 
             </div>
             {{-- CART --}}
-            <div class="col">
+            <div class="col-md-4 col-12">
                 <section class="bg-white" style="border-radius: 1rem">
 
                     <div class="row d-flex justify-content-center align-items-center">
@@ -176,20 +175,20 @@
                                                                         style="object-fit:cover; width:55px; height:55px"
                                                                         :src="'storage/' + product.image " alt="">
                                                                 </div>
+                                                            </div>
+                                                            <div class="d-flex flex-column align-items-center">
                                                                 <div class="ms-3">
-                                                                    <h5 class="m-0">@{{ product.name.trim().substring(0, 15) }}...
-                                                                    </h5>
-                                                                    <p class="small mb-0"></p>
+                                                                    <small class="m-0">@{{ product.name.trim().substring(0, 15) }}...
+                                                                    </small>
                                                                 </div>
+                                                                <input type="number" min="1"
+                                                                    oninput="validity.valid || (value = '');"
+                                                                    :name="'qty[' + product.id + ']'" v-bind:id="product.id"
+                                                                    value="1" class="w-50 input-filed">
                                                             </div>
                                                             <div class="d-flex flex-row align-items-center">
                                                                 <div
                                                                     class=" align-items-center justify-content-center d-flex box">
-                                                                    <input type="number" min="1"
-                                                                        oninput="validity.valid || (value = '');"
-                                                                        :name="'qty[' + product.id + ']'"
-                                                                        v-bind:id="product.id" value="1"
-                                                                        class="w-50 input-filed">
                                                                 </div>
                                                                 <div style="width: 80px;">
                                                                     <h5 class="mb-0">@{{ product.price }} €</h5>

@@ -2,10 +2,22 @@
   margin-top: -1px;
 }
 
+img.cover-bg {
+  width: 100%;
+  height: 300px;
+  filter: blur(5px);
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+  bottom: 100px;
+  z-index: -100;
+}
+
 .info_cart {
   max-width: 1800px !important;
   position: relative;
-  bottom: 60px;
+  bottom: 140px;
+  margin: 0 0 -120px 0;
 }
 .info_cart .restaurant_aside .info_wrap,
 .info_cart .restaurant_aside .dish,
@@ -16,6 +28,12 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+.info_cart .restaurant_aside .dish .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
 }
 .info_cart .restaurant_aside .dish .add_to_cart {
   border-radius: 50%;

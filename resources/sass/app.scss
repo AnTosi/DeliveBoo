@@ -34,24 +34,62 @@
     .nav-item {
         a {
             background-color: $brand-color-secondary;
+            margin-left: 1rem;
         }
     }
     .collapse {
-        input {
-            width: 50%;
-            border-radius: 25px;
-            border: none;
-            margin: auto;
-            padding: 10px;
-        }
+
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .searchBar{
+                margin: 0 auto;
+                width: 50%;
+                input {
+                    width: 100%;
+                    border-radius: 25px;
+                    border: none;
+                    margin: auto;
+                    padding: 10px;
+                }
+            }
+
         .navbar-nav {
             width: 200px;
+            justify-content: flex-end;
 
+            .dropdown-menu{
+            border: none;
+            background-color: transparent !important;
+            padding: 0 !important;
+        }
             .dropdown-item {
                 background-color: white !important;
                 color: $brand-color-secondary !important;
+                border-radius: 25px;
+                margin: 0.5rem 0;
+                box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 50%);
+
+                &:hover{
+                    background-color: #ca8fca !important;
+                }
             }
         }
+    }
+}
+
+.payPage {
+    background-image: url(https://www.unaparolabuonapertutti.it/wp-content/uploads/2018/02/donuts.jpg);
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .order {
+        height: 100%;
+        width: 100%;
+    }
+    .col {
+        width: 700px;
+        margin-left: 466px;
     }
 }
 
@@ -72,6 +110,54 @@ footer {
             }
         }
     }
+}
+
+@media (max-width: 767.98px) {
+    .navbar{
+        .navbar-collapse.show{
+            background-color: $brand-color-primary;
+            width: 100Vh;
+            height: calc(100vh - 92px);
+            display: flex;
+            flex-direction: column;
+            padding: 0 2rem;
+            margin: 0 -2rem;
+
+            .searchBar{
+                width: 100%
+            }
+            .navbar-nav{
+                width: 100%;
+                .nav-item{
+                    width: 100%;
+                    margin: .5rem 0;
+
+                    a{
+                        margin-left: 0;
+                    }
+
+                    .dropdown-menu{
+                        margin-bottom: .5rem;
+                        background-color: transparent;
+                        border: none;
+
+                        .dropdown-item {
+                            background-color: transparent !important;
+                            color: $brand-color-secondary !important;
+                            border-radius: 25px;
+                            text-align: center;
+                            box-shadow: none;
+            
+                            &:hover{
+                                background-color: #ca8fca !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 @media (max-width: 1400px) {
