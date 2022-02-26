@@ -119,7 +119,7 @@
                                                 Close
                                             </button>
                                             <button type="button" class="btn bg_secondary_smooth text_secondary fw-bold"
-                                                v-on:click="addToCart({{ json_encode($dish) }})">
+                                                v-on:click="addToCart({{ json_encode($dish) }})" data-bs-dismiss="modal">
                                                 <span>Add to Cart</span>
                                             </button>
                                         </div>
