@@ -34,8 +34,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
 
     Route::get('/statistics', function () {
-        return view('statistics')->name('statistics');
-    });
+        return view('admin/statistics');
+    })->name('statistics');
 });
 
 Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');
