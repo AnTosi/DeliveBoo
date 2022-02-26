@@ -64,7 +64,7 @@
             </p>
         </div>
 
-        <div v-if="filteredRest.length > 0" class="gutter row row-cols-md-2 row-cols-lg-3"">
+        <div v-if="filteredRest.length > 0" class="gutter row row-cols-md-2 row-cols-lg-3">
 
             <div v-for="user in filteredRest" :key="user.id">
                 <div class="col h-100 px-3">
@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div v-else-if="filterTags.length > 0">
             <div v-if="filteredUsers.length > 0" class="gutter row row-cols-1 row-cols-md-2 row-cols-lg-3">
                 <div v-for="user in filteredUsers" :key="user.id">
@@ -102,21 +102,21 @@
                         <a class="text-decoration-none text-black text-center border-0 bg-transparent h-100 w-100"
                             :href="user.slug">
                             <div class="rest_card card border-0 shadow-lg" aria-hidden="true">
-                              <div class="img_wrapper">
-                                  <img class="card-img-top"
-                                      :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
-                                  <h5 class="card-title capitalize text-white">
-                                      @{{ user.name }}
-                                      {{-- <p><span class="capitalize fs-2 text-white"> </span></p> --}}
-                                  </h5>
-                              </div>
+                                <div class="img_wrapper">
+                                    <img class="card-img-top"
+                                        :src="'/storage/restaurant_logo' + '/' + user.id + '/' + user.logo " alt="">
+                                    <h5 class="card-title capitalize text-white">
+                                        @{{ user.name }}
+                                        {{-- <p><span class="capitalize fs-2 text-white"> </span></p> --}}
+                                    </h5>
+                                </div>
 
-                              <div class="card_body">
-                                  <span v-for="tag in user.tags" :key="tag.id">
-                                      @{{ tag.name }}
-                                  </span>
-                              </div>
-                          </div>
+                                <div class="card_body">
+                                    <span v-for="tag in user.tags" :key="tag.id">
+                                        @{{ tag.name }}
+                                    </span>
+                                </div>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                 </p>
             </div>
         </div>
-        
+
         <div v-else class="gutter row row-cols-1 row-cols-md-2 row-cols-lg-3">
             <div v-for="user in users" :key="user.id">
                 <div class="col h-100 px-3">
