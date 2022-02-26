@@ -73,7 +73,7 @@
 
                                             @foreach ($order->dishes as $dish)
                                                 <div>{{ $dish->name }}</div>
-                                                <div>{{ $dish->quantity }}AAAA</div>
+                                                <div>{{ $dish->pivot->quantity }}</div>
                                             @endforeach
 
                                         </div>
