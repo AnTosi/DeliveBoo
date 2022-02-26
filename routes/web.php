@@ -37,7 +37,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 
 
     Route::get('/statistics', function () {
-        return view('statistics');
+        return view('admin/statistics');
     })->name('statistics');
 });
 
