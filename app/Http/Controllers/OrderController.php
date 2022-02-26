@@ -25,18 +25,24 @@ class OrderController extends Controller
 
         $restaurant = null;
 
-        foreach ($listaOrdine as $id => $qty) {
-            $dish = Dish::find($id);
+        if ($listaOrdine) {
 
-            $restaurant = User::find($dish->user_id);
+            foreach ($listaOrdine as $id => $qty) {
+                $dish = Dish::find($id);
 
-            $prezzo_piatto[] = $dish->price * $qty;
+                $restaurant = User::find($dish->user_id);
 
-            $piatti[] = $dish;
+                $prezzo_piatto[] = $dish->price * $qty;
+
+                $piatti[] = $dish;
+            }
         }
 
-        foreach ($prezzo_piatto as $prezzo) {
-            $prezzo_totale += $prezzo;
+        if ($prezzo_piatto) {
+
+            foreach ($prezzo_piatto as $prezzo) {
+                $prezzo_totale += $prezzo;
+            }
         }
 
         // dd($prezzo_totale);
