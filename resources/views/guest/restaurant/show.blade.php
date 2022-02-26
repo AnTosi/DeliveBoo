@@ -202,13 +202,14 @@
                                                 </div>
                                             </div>
                                             <div v-else>
+                                                <h5 class="pb-3">Your cart is empty</h5>
                                                 <img src="https://cdn.discordapp.com/attachments/940183903816257559/945788459283542056/astronaut-grey-scale.png"
                                                     alt="#">
                                             </div>
                                             {{-- // PRODOTTI CARRELLO --}}
 
                                             <div class="flex-column">
-                                                <button type="submit" id="submit-button"
+                                                <button v-show="cart.length > 0" type="submit" id="submit-button"
                                                     class="btn text_secondary bg_secondary_smooth btn-block btn-lg">
                                                     <div class="d-flex justify-content-between fw-bold">
                                                         <span>Checkout
