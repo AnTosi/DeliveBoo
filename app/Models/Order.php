@@ -10,11 +10,13 @@ class Order extends Model
 
     protected $fillable = ['email', 'address', 'customer_name', 'dish_price', 'total_price', 'user_id'];
 
-    public function dishes() {
-        return $this->belongsToMany('App\Models\Dish');
+    public function dishes()
+    {
+        return $this->belongsToMany('App\Models\Dish')->withPivot('quantity');
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
-    }    
+    }
 }

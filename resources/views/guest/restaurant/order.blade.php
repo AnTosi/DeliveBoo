@@ -7,29 +7,34 @@
                 Checkout:
             </h1>
             <div class="row py-5 row-cols-1 row-cols-lg-3 justify-content-evenly g-3">
-                @foreach ($listaOrdine as $id => $qty)
-                    @foreach ($piatti as $piatto)
-                        @if ($id == $piatto->id)
-                            <div class="col d-flex justify-content-center">
-                                <div class="card border-0 text-start shadow-lg"
-                                    style="width: 268px; height:100%; padding: 0;border-radius: 1rem;">
-                                    @if ($piatto->image == null)
-                                        <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
-                                            class="card-img-top" src="{{ asset('img/no-food-image.jpeg') }}" alt="">
-                                    @else
-                                        <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
-                                            class="card-img-top" src="{{ asset('Storage/' . $piatto->image) }}" alt="">
-                                    @endif
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-3">{{ $piatto->name }}</h4>
-                                        <p class="card-text">Quantity: {{ $qty }}</p>
-                                        <p class="card-text">Total dish price: {{ $piatto->price * $qty }} € </p>
+
+                @if ($listaOrdine)
+                    @foreach ($listaOrdine as $id => $qty)
+                        @foreach ($piatti as $piatto)
+                            @if ($id == $piatto->id)
+                                <div class="col d-flex justify-content-center">
+                                    <div class="card border-0 text-start shadow-lg"
+                                        style="width: 268px; height:100%; padding: 0;border-radius: 1rem;">
+                                        @if ($piatto->image == null)
+                                            <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
+                                                class="card-img-top" src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                                        @else
+                                            <img style="width: 100%;height: 100%;object-fit: cover;border-radius: 1rem;"
+                                                class="card-img-top" src="{{ asset('Storage/' . $piatto->image) }}"
+                                                alt="">
+                                        @endif
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-3">{{ $piatto->name }}</h4>
+                                            <p class="card-text">Quantity: {{ $qty }}</p>
+                                            <p class="card-text">Total dish price: {{ $piatto->price * $qty }} € </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        @endforeach
                     @endforeach
-                @endforeach
+                @endif
+
             </div>
             <div class="mb-3 d-flex flex-row justify-content-center">
                 <form method="post" action="{{ route('payment.pay') }}">
@@ -42,6 +47,8 @@
                             aria-describedby="helpName">
                         <small id="helpName" class="text-muted">Name</small>
                     </div>
+                    <input type="text" hidden name="piatti" value="{{ json_encode($piatti) }}">
+                    <input type="text" hidden name="ordini" value="{{ json_encode($listaOrdine) }}">
                     <input hidden type="number" value="{{ $restaurant->id }}" name="user_id">
                     <div class="form-group">
                         <label for="email" class="form-label fs-4">Write your e-mail</label>
