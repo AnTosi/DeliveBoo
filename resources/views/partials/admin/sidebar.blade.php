@@ -18,14 +18,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.orders.index') }}">
+                <a class="nav-link {{ Route::currentRouteName() === 'admin.orders.index' ? 'active shadow rounded' : '' }}"
+                    href="{{ route('admin.orders.index') }}">
                     <i class="fas fa-shopping-bag fa-lg fa-fw"></i>
                     Orders
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link {{ Route::currentRouteName() === 'admin.statistics' ? 'active shadow rounded' : '' }}"
+                    href="{{ route('admin.statistics') }}">
                     <i class="fas fa-chart-line fa-lg fa-fw"></i>
                     Statistics
                 </a>
