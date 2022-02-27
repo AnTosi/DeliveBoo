@@ -16,12 +16,17 @@
         'April',
         'May',
         'June',
+        'July',
+        'September',
+        'October',
+        'November',
+        'December'
     ];
 
     const data = {
         labels: labels,
         datasets: [{
-            label: 'My First dataset',
+            label: 'Monthly sales',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: [0, 10, 5, 2, 20, 30, 45],
