@@ -12,7 +12,7 @@ class Order extends Model
 
     public function dishes()
     {
-        return $this->belongsToMany('App\Models\Dish')->withPivot('quantity');
+        return $this->belongsToMany('App\Models\Dish')->withPivot('quantity')->withTimestamps();
     }
 
     public function user()
