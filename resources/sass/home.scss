@@ -135,7 +135,7 @@ h2{
     .nav-scroller{
 
         .tags-scroller{
-            padding-left: 1rem;
+            padding-left: .5rem;
         }
     }
     
@@ -194,6 +194,12 @@ h2{
 
 }
 @media (min-width: 768px) {
+    .nav-scroller{
+
+        .tags-scroller{
+            padding-left: 1rem;
+        }
+    }
     .col{
         display: flex;
         justify-content: center;
@@ -246,6 +252,16 @@ h2{
         }
     }
 
+}
+
+@media (min-width: 1400px) {
+    .nav-scroller{
+
+        .tags-scroller{
+            justify-content: center;
+            padding-left: 0;
+        }
+    }
 }
 
 
