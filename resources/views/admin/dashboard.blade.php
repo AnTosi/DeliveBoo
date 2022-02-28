@@ -38,26 +38,13 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-8 mb-4">
                 <div class="card">
                     <div class="card-body text-center py-4">
                         <h2 class="card-title">Orders</h2>
                         <p class="card-text lead">View your orders</p>
                     </div>
-                    <a name="" id="" class="btn btn-dark" href="#" role="button">
-                        View
-
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center py-4">
-                        <h2 class="card-title">Statistics</h2>
-                        <p class="card-text lead">View statistics</p>
-                    </div>
-                    <a name="" id="" class="btn btn-dark" href="#" role="button">
+                    <a name="" id="" class="btn btn-dark" href="{{ route('admin.orders.index') }}" role="button">
                         View
 
                     </a>

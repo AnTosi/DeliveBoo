@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/payment/successful', 'OrderController@success');
+Route::get('/payment/failed', 'OrderController@failed');
+
 
 Route::get('/checkout', function () {
     return view('checkout')->name('checkout');
@@ -33,9 +36,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
     Route::resource('orders', OrderController::class);
 
 
-    Route::get('/statistics', function () {
-        return view('statistics')->name('statistics');
-    });
+    Route::get('/statistics', 'StatisticController@index')->name('statistics');
 });
 
 Route::post('/payment/pay', 'OrderController@pay')->name('payment.pay');

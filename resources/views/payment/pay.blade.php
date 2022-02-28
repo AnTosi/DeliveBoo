@@ -1,25 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="payPage"></div>
     <div class="container">
-        <div class="row mt-5 row-cols-2">
-            <div class="col d-flex flex-column justify-content-center">
+        <div class="row mt-3 mb-5 row-cols-1 row-cols-lg-2">
+            <div class="col d-flex flex-column justify-content-center text-center">
+                <h1><strong>Confirm your order <br>and proceed to checkout</strong></h1>
 
-                <span class="fs-1">{{ $restaurant->name }}</span>
 
-                <span class="fs-2">{{ $order->customer_name }}</span>
-                <span class="fs-3">{{ $order->address }}</span>
-                <span class="fs-3">{{ $order->email }}</span>
-                <span class="fs-3" id="total_price">{{ $order->total_price }}</span>
+                <span class="text-muted fs-4"><strong>Restaurant name: </strong>{{ $restaurant->name }}</span>
+                <span class="text-muted fs-4"><strong>Delivery to: </strong>{{ $order->customer_name }}</span>
+                <span class="text-muted fs-4"><strong>Address: </strong> {{ $order->address }}</span>
+                <span class="text-muted fs-4"><strong>E-mail:</strong> {{ $order->email }}</span>
+                <span class="text-muted fs-4" id="total_price"><strong>Total price: </strong>
+                    €{{ $order->total_price }}</span>
 
 
             </div>
 
             <div class="col">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-md-offset-2 text-center">
                         <div id="dropin-container"></div>
-                        <button id="submit-button">Request payment method</button>
+                        <button id="submit-button" class="btn bg_secondary_smooth text_secondary fw-bold">Request payment
+                            method</button>
                     </div>
                 </div>
             </div>
@@ -54,9 +58,10 @@
                         payload
                     }, function(response) {
                         if (response.success) {
-                            alert('Payment successfull!');
+                            //alert('Payment successfull!');
+                            location.replace("http://127.0.0.1:8000/payment/successful");
                         } else {
-                            alert('Payment failed');
+                            location.replace("http://127.0.0.1:8000/payment/failed");
                         }
                     }, 'json');
                 });
