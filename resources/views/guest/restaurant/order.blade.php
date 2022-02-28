@@ -10,37 +10,46 @@
             <h1 class="text-center">
                 Checkout:
             </h1>
-            <div class="row pb-5 row-cols-1 row-cols-lg-3 justify-content-evenly g-3">
+            <div class="row pb-5 row-cols-1 row-cols-lg-2 justify-content-evenly g-3">
 
-                @if ($listaOrdine)
-                    @foreach ($listaOrdine as $id => $qty)
-                        @foreach ($piatti as $piatto)
-                            @if ($id == $piatto->id)
-                                <div class="col dish">
-                                    <div class="info_wrap p-4 bg-white shadow-lg d-flex"
-                                        style="height:150px; border-radius:1rem">
-                                        <div class="col-4 text-start">
-                                            @if ($piatto->image == null)
-                                                <img class="rounded-circle" style="object-fit:cover; width:90px; height:90px"
-                                                    src="{{ asset('img/no-food-image.jpeg') }}" alt="">
-                                            @else
-                                                <img class="rounded-circle" style="object-fit:cover; width:90px; height:90px"
-                                                    src="{{ asset('Storage/' . $piatto->image) }}" alt="">
-                                            @endif
+                <div class="col col-lg-8">
+                    <div class="row row-cols-1 row-cols-lg-2 g-3">
+                        @if ($listaOrdine)
+                            @foreach ($listaOrdine as $id => $qty)
+                                @foreach ($piatti as $piatto)
+                                    @if ($id == $piatto->id)
+                                        <div class="col col-lg-6 dish">
+                                            <div class="info_wrap p-4 bg-white shadow-lg d-flex"
+                                                style="height:150px; border-radius:1rem">
+                                                <div class="col-4 text-start">
+                                                    @if ($piatto->image == null)
+                                                        <img class="rounded-circle"
+                                                            style="object-fit:cover; width:90px; height:90px"
+                                                            src="{{ asset('img/no-food-image.jpeg') }}" alt="">
+                                                    @else
+                                                        <img class="rounded-circle"
+                                                            style="object-fit:cover; width:90px; height:90px"
+                                                            src="{{ asset('Storage/' . $piatto->image) }}" alt="">
+                                                    @endif
+                                                </div>
+                                                <div class="info col-8 ms-4 text-start">
+                                                    <h5 class="card-title mb-3">{{ $piatto->name }}</h5>
+                                                    <p class="card-text">Quantity: {{ $qty }}</p>
+                                                    <p class="card-text">Total dish price:
+                                                        {{ $piatto->price * $qty }} €
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="info col-8 ms-4 text-start">
-                                            <h5 class="card-title mb-3">{{ $piatto->name }}</h5>
-                                            <p class="card-text">Quantity: {{ $qty }}</p>
-                                            <p class="card-text">Total dish price: {{ $piatto->price * $qty }} € </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endforeach
-                @endif
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
 
-                <div class="mb-3 d-flex flex-row justify-content-center">
+
+                <div class="col col-lg-4 mb-3 d-flex flex-row justify-content-center">
                     <form method="post" action="{{ route('payment.pay') }}">
                         @csrf
 

@@ -11344,7 +11344,8 @@ textarea.form-control-lg {
 
 .payPage {
   background-image: url(https://www.unaparolabuonapertutti.it/wp-content/uploads/2018/02/donuts.jpg);
-  height: 200px;
+  height: 150px;
+  filter: blur(5px);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -11357,6 +11358,11 @@ textarea.form-control-lg {
   margin-left: 466px;
 }
 
+@media (min-width: 992px) {
+  .payPage {
+    height: 200px;
+  }
+}
 footer {
   width: 100%;
   background-color: #2e3333;
