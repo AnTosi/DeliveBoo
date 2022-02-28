@@ -136,7 +136,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -161,7 +161,7 @@
                 <div class="row justify-content-between text-white">
                     <div class="col-6">
                         <h3>Discover Deliveboo</h3>
-                        <p>Investers</p>
+                        <p>Investors</p>
                         <p>About us</p>
                         <p>Restaurants</p>
                         <p>Other</p>
