@@ -11,11 +11,6 @@
         <div class="col-6">
             <h1>Orders</h1>
         </div>
-        <div class="col-6 text-end">
-            <a name="" id="" class="btn btn-dark" href="{{ route('admin.orders.create') }}" role="button">
-                Add Order
-            </a>
-        </div>
     </div>
 
     <table class="table table-responsive-md table-striped">
