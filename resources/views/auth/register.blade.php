@@ -168,7 +168,7 @@
 
                 {{-- Categories tags types --}}
 
-                <div class="form-group row justify-content-center ms-2">
+                <div class="form-group row pt-4 justify-content-center ms-2">
                     <div class="col-8 col-sm-5">
                         <label for="tags" class="form-label fs-4 text-md-right">Restaurant tags*</label>
                         <select class="selectpicker @error('tags') is-invalid @enderror d-block" multiple

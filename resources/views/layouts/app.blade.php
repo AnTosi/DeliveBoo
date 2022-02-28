@@ -156,8 +156,8 @@
         <main class="pb-4">
             @yield('content')
         </main>
-        <footer>
-            <div class="container">
+        <footer class="pt-5">
+            <div class="container ">
                 <div class="row justify-content-between text-white">
                     <div class="col-6">
                         <h3>Discover Deliveboo</h3>
