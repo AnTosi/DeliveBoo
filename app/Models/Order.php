@@ -8,11 +8,15 @@ class Order extends Model
 {
     //
 
-    public function dishes() {
-        return $this->belongsToMany('App\Models\Dish');
+    protected $fillable = ['email', 'address', 'customer_name', 'dish_price', 'total_price', 'user_id'];
+
+    public function dishes()
+    {
+        return $this->belongsToMany('App\Models\Dish')->withPivot('quantity')->withTimestamps();
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
-    }    
+    }
 }

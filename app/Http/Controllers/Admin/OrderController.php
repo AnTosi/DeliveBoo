@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -15,6 +17,10 @@ class OrderController extends Controller
      */
     public function index()
     {
+
+        $user = User::find(Auth::id());
+        $orders = $user->orders()->orderByDesc('data')->paginate(12);
+        return view('admin.orders.index', compact('orders'));
     }
 
     /**
@@ -26,6 +32,12 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         //
+    }
+
+    public function store(Request $request)
+    {
+        //
+        ddd($request->all());
     }
 
     /**

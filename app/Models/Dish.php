@@ -20,6 +20,6 @@ class Dish extends Model
 
     public function orders()
     {
-        return $this->belongsTo('App\Models\Order');
+        return $this->belongsToMany('App\Models\Order')->withPivot('quantity')->withTimestamps();
     }
 }

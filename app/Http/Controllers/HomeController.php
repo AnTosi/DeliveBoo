@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dish;
 use App\Models\Tag;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,6 +29,9 @@ class HomeController extends Controller
      */
     public function show(User $user)
     {
-        return view('guest.restaurant.show', compact('user'));
+
+        $dishes = $user->dishes()->where('visibility', '=', true)->paginate(6);
+
+        return view('guest.restaurant.show', compact('user', 'dishes'));
     }
 }

@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/admin.js') }}" defer></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,19 +27,19 @@
 <body>
     <div id="app">
         <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-            <a href="{{route('home')}}" class="navbar-brand col-md-3 col-lg-2 me-0 px-3">DeliveBoo</a>
+            <a href="{{ route('home') }}" class="navbar-brand bg-transparent col-md-3 col-lg-2 me-0 px-3">DeliveBoo</a>
 
             <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-nav">
+            {{-- <div class="navbar-nav text-center px-4">
 
                 <div class="text-white">{{ Auth::user()->name }}</div>
 
                 <div class="logout text-white" aria-labelledby="navbarDropdown">
-                    <a class="" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
@@ -47,35 +47,14 @@
                         @csrf
                     </form>
                 </div>
-                </li>
+                
 
-            </div>
+            </div> --}}
         </header>
 
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                    <div class="position-sticky pt-3">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="{{ route('admin.dashboard') }}">
-                                    <i class="fas fa-tachometer-alt fa-lg fa-fw text-black"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                    href="{{ route('admin.dishes.index') }}">
-                                    <i class="fas fa-tachometer-alt fa-lg fa-fw text-black"></i>
-                                    Dishes
-                                </a>
-                            </li>
-
-                        </ul>
-
-                    </div>
-                </nav>
+                @include('partials.admin.sidebar')
 
                 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                     @yield('content')
@@ -84,6 +63,8 @@
         </div>
 
     </div>
+
 </body>
+
 
 </html>

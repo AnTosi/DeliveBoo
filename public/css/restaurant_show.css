@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);svg {
+  margin-top: -1px;
+}
+
+img.cover-bg {
+  width: 100%;
+  height: 300px;
+  filter: blur(5px);
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: relative;
+  bottom: 100px;
+  z-index: -100;
+}
+
+.info_cart {
+  max-width: 1800px !important;
+  position: relative;
+  bottom: 140px;
+  margin: 0 0 -120px 0;
+}
+.info_cart .restaurant_aside .info_wrap,
+.info_cart .restaurant_aside .dish,
+.info_cart .restaurant_aside .modal-content {
+  border-radius: 1rem;
+}
+.info_cart .restaurant_aside .restaurant_info {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.info_cart .restaurant_aside .dish .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.info_cart .restaurant_aside .dish .add_to_cart {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #ca8fca;
+}
+.info_cart .restaurant_aside .modal-body .row .col:nth-child(2),
+.info_cart .restaurant_aside .modal-body .row .col:last-child {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.info_cart .restaurant_aside .modal-body .row img {
+  width: 468px;
+}
+.info_cart .page-item.active .page-link {
+  z-index: 3;
+  color: #4f009e;
+  font-weight: bold;
+  background-color: #ca8fca;
+  border: none;
+}
+
+.fa-trash-alt {
+  cursor: pointer;
+}
