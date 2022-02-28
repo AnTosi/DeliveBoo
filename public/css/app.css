@@ -11358,16 +11358,8 @@ textarea.form-control-lg {
 }
 
 footer {
-  height: 550px;
   width: 100%;
   background-color: #2e3333;
-}
-footer .container .row .col-3 {
-  margin-top: 30px;
-  width: 300px;
-  height: 450px;
-  background-color: #434848;
-  color: white;
 }
 
 @media (max-width: 767.98px) {
