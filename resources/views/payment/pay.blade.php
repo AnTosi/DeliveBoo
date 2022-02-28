@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row mt-5 row-cols-1 row-cols-lg-2">
             <div class="col d-flex flex-column justify-content-center text-center">
-                <h1><strong>Confirm your order and proceed to checkout</strong></h1>
+                <h1><strong>Confirm your order <br>and proceed to checkout</strong></h1>
 
 
                 <span class="text-muted fs-4"><strong>Restaurant name: </strong>{{ $restaurant->name }}</span>
