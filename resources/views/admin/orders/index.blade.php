@@ -73,8 +73,8 @@
 
                                             @foreach ($order->dishes as $dish)
                                                 <div class="py-2">
-                                                    <div>Dish: {{ $dish->name }}</div>
-                                                    <div>Servings: {{ $dish->pivot->quantity }}</div>
+                                                    <div>Dish:  <span class="fs-4">{{ $dish->name }}</span> </div>
+                                                    <div>Servings:  <span class="fs-4">{{ $dish->pivot->quantity }}</span> </div>
                                                 </div>
                                             @endforeach
 

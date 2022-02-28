@@ -158,58 +158,22 @@
         </main>
         <footer>
             <div class="container">
-                <div class="row justify-content-between d-flex">
-                    <div class="col-3">
-                        <h3>Scopri Deliveboo</h3>
-                        <p>Investitori</p>
-                        <p>Chi siamo</p>
-                        <p>Ristoranti</p>
-                        <p>Altro</p>
+                <div class="row justify-content-between text-white">
+                    <div class="col-6">
+                        <h3>Discover Deliveboo</h3>
+                        <p>Investers</p>
+                        <p>About us</p>
+                        <p>Restaurants</p>
+                        <p>Other</p>
                         <p>Pressroom</p>
-                        <p>Il nostro blog</p>
-                        <p>Programmazione</p>
-                        <p>Design</p>
-                        <p>Lavora con noi</p>
-                        <p>Diventa nostro partenr</p>
                     </div>
-                    <div class="col-3">
-                        <h3>Scopri Deliveboo</h3>
-                        <p>Investitori</p>
-                        <p>Chi siamo</p>
-                        <p>Ristoranti</p>
-                        <p>Altro</p>
+                    <div class="col-6">
+                        <h3>Discover Deliveboo</h3>
+                        <p>Investers</p>
+                        <p>About us</p>
+                        <p>Restaurants</p>
+                        <p>Other</p>
                         <p>Pressroom</p>
-                        <p>Il nostro blog</p>
-                        <p>Programmazione</p>
-                        <p>Design</p>
-                        <p>Lavora con noi</p>
-                        <p>Diventa nostro partenr</p>
-                    </div>
-                    <div class="col-3">
-                        <h3>Scopri Deliveboo</h3>
-                        <p>Investitori</p>
-                        <p>Chi siamo</p>
-                        <p>Ristoranti</p>
-                        <p>Altro</p>
-                        <p>Pressroom</p>
-                        <p>Il nostro blog</p>
-                        <p>Programmazione</p>
-                        <p>Design</p>
-                        <p>Lavora con noi</p>
-                        <p>Diventa nostro partenr</p>
-                    </div>
-                    <div class="col-3">
-                        <h3>Scopri Deliveboo</h3>
-                        <p>Investitori</p>
-                        <p>Chi siamo</p>
-                        <p>Ristoranti</p>
-                        <p>Altro</p>
-                        <p>Pressroom</p>
-                        <p>Il nostro blog</p>
-                        <p>Programmazione</p>
-                        <p>Design</p>
-                        <p>Lavora con noi</p>
-                        <p>Diventa nostro partenr</p>
                     </div>
                 </div>
 

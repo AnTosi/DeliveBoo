@@ -24,14 +24,6 @@
                     Orders
                 </a>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() === 'admin.statistics' ? 'active shadow rounded' : '' }}"
-                    href="{{ route('admin.statistics') }}">
-                    <i class="fas fa-chart-line fa-lg fa-fw"></i>
-                    Statistics
-                </a>
-            </li>
         </ul>
         <div class="dropdown mt-auto p-3">
             <hr>
