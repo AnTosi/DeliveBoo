@@ -59,3 +59,7 @@ img.cover-bg {
   background-color: #ca8fca;
   border: none;
 }
+
+.fa-trash-alt {
+  cursor: pointer;
+}

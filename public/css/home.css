@@ -135,7 +135,7 @@ h2 {
 
 @media (max-width: 767.98px) {
   .nav-scroller .tags-scroller {
-    padding-left: 1rem;
+    padding-left: 0.5rem;
   }
 
   .col {
@@ -185,6 +185,10 @@ h2 {
   }
 }
 @media (min-width: 768px) {
+  .nav-scroller .tags-scroller {
+    padding-left: 1rem;
+  }
+
   .col {
     display: flex;
     justify-content: center;
@@ -229,6 +233,12 @@ h2 {
   .col .rest_card .card_body {
     overflow: hidden;
     margin: auto;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-scroller .tags-scroller {
+    justify-content: center;
+    padding-left: 0;
   }
 }
 .spinner {

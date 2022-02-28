@@ -44,7 +44,7 @@
                         <h2 class="card-title">Orders</h2>
                         <p class="card-text lead">View your orders</p>
                     </div>
-                    <a name="" id="" class="btn btn-dark" href="#" role="button">
+                    <a name="" id="" class="btn btn-dark" href="{{ route('admin.orders.index') }}" role="button">
                         View
 
                     </a>

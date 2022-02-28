@@ -19,7 +19,7 @@
 
     <div class="container info_cart">
         <div class="row g-3 flex-md-nowrap flex-wrap">
-            <div class="col-md-8 col-12 restaurant_aside">
+            <div class="col-md-7 col-lg-8 col-12 restaurant_aside">
 
                 {{-- Restaurant info --}}
                 <div class="info_wrap restaurant_info pt-5 pb-2 px-5 shadow-lg mb-5 bg-body ">
@@ -94,10 +94,10 @@
                                                 <div class="col-12 text-capitalize fs-1">{{ $dish->name }}</div>
                                                 <div class="col-12">
                                                     @if ($dish->image == null)
-                                                        <img style="height: 200px; object-fit: contain"
+                                                        <img style="height: 200px; max-width:100%; object-fit: contain"
                                                             src="{{ asset('img/no-food-image.jpeg') }}" alt="">
                                                     @else
-                                                        <img style="height: 200px; object-fit: contain"
+                                                        <img style="height: 200px; max-width:100%; object-fit: contain"
                                                             src="{{ asset('storage/' . $dish->image) }}" alt="">
                                                     @endif
                                                 </div>
@@ -144,7 +144,7 @@
 
             </div>
             {{-- CART --}}
-            <div class="col-md-4 col-12">
+            <div class="col-md-5 col-lg-4 col-12">
                 <section class="bg-white" style="border-radius: 1rem">
 
                     <div class="row d-flex justify-content-center align-items-center">
@@ -161,7 +161,8 @@
                                                 <div v-if="product.user_id == {{ json_encode($user->id) }}"
                                                     v-for="(product,index) in cart" :key="index" class="card mb-3">
                                                     <div class="card-body">
-                                                        <div class="d-flex flex-nowrap">
+                                                        <div
+                                                            class="d-flex flex-nowrap justify-content-around align-items-center">
                                                             <div class="d-flex flex-row align-items-center">
 
                                                                 <div v-if="product.image == null">
@@ -186,10 +187,9 @@
                                                                     :name="'qty[' + product.id + ']'" v-bind:id="product.id"
                                                                     value="1" class="w-50 input-filed">
                                                             </div>
-                                                            <div class="d-flex flex-row align-items-center">
-                                                                <div
-                                                                    class=" align-items-center justify-content-center d-flex box">
-                                                                </div>
+                                                            <div
+                                                                class="d-flex flex-column align-items-center justify-content-center text-center">
+
                                                                 <div style="width: 80px;">
                                                                     <h5 class="mb-0">@{{ product.price }} €</h5>
                                                                 </div>
