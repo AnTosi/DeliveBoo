@@ -53,7 +53,7 @@
 
     <div class="container mb-5">
 
-        <h2 class="mt-4 fs-1">Restaurants</h2>
+        <h2 class="my-5 fs-1">Restaurants</h2>
 
         <div v-show="searchInput != '' && filteredRest == 0">
             <p class="fs-1">
