@@ -136,7 +136,7 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -167,13 +167,11 @@
                         <p>Other</p>
                         <p>Pressroom</p>
                     </div>
-                    <div class="col-6">
-                        <h3>Discover Deliveboo</h3>
-                        <p>Investers</p>
-                        <p>About us</p>
-                        <p>Restaurants</p>
-                        <p>Other</p>
-                        <p>Pressroom</p>
+                    <div class="col-6 d-flex flex-column justify-content-end">
+
+                        <img src="{{ asset('img/logo-deliveboo-footer.svg') }}" class="w-50 mb-3" alt="">
+
+                        <img src="{{ asset('img/Appstore.svg') }}" class="w-50 mb-3" alt="">
                     </div>
                 </div>
 
