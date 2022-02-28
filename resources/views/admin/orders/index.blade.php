@@ -62,18 +62,20 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">{{ $order->customer_name }}</h5>
+                                            <h5 class="modal-title">Customer: {{ $order->customer_name }}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close">
                                             </button>
                                         </div>
                                         <div class="modal-body text-start">
 
-                                            <p>Order:</p>
+                                            <p>Order id: {{ $order->id }}</p>
 
                                             @foreach ($order->dishes as $dish)
-                                                <div>{{ $dish->name }}</div>
-                                                <div>{{ $dish->pivot->quantity }}</div>
+                                                <div class="py-2">
+                                                    <div>Dish: {{ $dish->name }}</div>
+                                                    <div>Servings: {{ $dish->pivot->quantity }}</div>
+                                                </div>
                                             @endforeach
 
                                         </div>
