@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/restaurant_show.css') }}">
 @endsection
 
+@section('page-title','Restaurant')
+
+
 
 @section('content')
     <div class="container-fliud">

@@ -131,7 +131,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item shadow-lg" href="{{ route('admin.dashboard') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
                                         Dashboard
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('page-title','Dishes')
+
 @section('content')
     @if (session('message'))
         <div class="alert alert-success mt-2">

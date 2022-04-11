@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 
+@section('page-title','Dish')
+
+
 @section('content')
     <div class="container">
         <div class="back mt-3">

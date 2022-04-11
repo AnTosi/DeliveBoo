@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="{{ asset('css/orders.css') }}">
 @endsection
 
+@section('page-title','Order')
+
 @section('content')
     <div class="div">
         <div class="container py-5">

@@ -3,6 +3,11 @@
 @section('custom-css')
     <link rel="stylesheet" href="{{ 'css/create.css' }}">
 @endsection
+
+
+@section('page-title','Edit')
+
+
 @section('content')
     <div class="container lg-sm pt-3">
 
